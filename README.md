@@ -9,6 +9,11 @@ to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
 
+## Links
+
+- [Assignment](https://github.com/ChiliLabs/test-tasks/blob/master/ios_developer.md)
+- [API Documentation](https://developers.giphy.com/docs/api/endpoint/)
+
 ## Author
 
 [@JansPavlovs 👨‍💻](https://twitter.com/JansPavlovs)
