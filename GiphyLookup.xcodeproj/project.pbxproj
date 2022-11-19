@@ -253,17 +253,9 @@
 		B717BE7D2929089400BC3544 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				B717BE7E292908E400BC3544 /* Common */,
 				B717BE8429290C1A00BC3544 /* Giphy */,
 			);
 			path = Presentation;
-			sourceTree = "<group>";
-		};
-		B717BE7E292908E400BC3544 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Common;
 			sourceTree = "<group>";
 		};
 		B717BE7F292908F100BC3544 /* Reusable */ = {
