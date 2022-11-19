@@ -31,8 +31,27 @@ final class GiphyCollectionViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
+    }
+}
+
+private extension GiphyCollectionViewController {
+    func setup() {
+        setupCollectionView()
+        setupSearchController()
+    }
+
+    func setupCollectionView() {
         collectionView.contentInset = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
         collectionView.register(cellType: GiphyCollectionViewCell.self)
+    }
+
+    func setupSearchController() {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search GIPHY"
+        navigationItem.searchController = searchController
     }
 }
 
@@ -52,6 +71,14 @@ extension GiphyCollectionViewController {
         cell.accessibilityValue = item.title
         cell.contentView.backgroundColor = .random
         return cell
+    }
+}
+
+// MARK: UISearchResultsUpdating
+
+extension GiphyCollectionViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        print("isActive: \(searchController.isActive), text: \(String(describing: searchController.searchBar.text))")
     }
 }
 
