@@ -15,6 +15,7 @@ final class PinterestCollectionViewLayout: UICollectionViewLayout {
 
     private var cache: [UICollectionViewLayoutAttributes] = []
 
+    private var contentViewHeight: CGFloat = .zero
     private var contentViewWidth: CGFloat {
         guard let collectionView else {
             return .zero
@@ -25,7 +26,7 @@ final class PinterestCollectionViewLayout: UICollectionViewLayout {
     }
 
     override var collectionViewContentSize: CGSize {
-        CGSize(width: contentViewWidth, height: contentViewWidth)
+        CGSize(width: contentViewWidth, height: contentViewHeight)
     }
 
     override func prepare() {
@@ -47,6 +48,7 @@ final class PinterestCollectionViewLayout: UICollectionViewLayout {
             attributes.frame = frame.insetBy(dx: padding, dy: padding)
             cache.append(attributes)
 
+            contentViewHeight = max(contentViewHeight, frame.maxY)
             offsets[column].y += columnViewHeight
             column = column < (numberOfColumns - 1) ? (column + 1) : 0
         }
