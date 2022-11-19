@@ -14,6 +14,14 @@
 		B717BE322928026D00BC3544 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B717BE302928026D00BC3544 /* LaunchScreen.storyboard */; };
 		B717BE57292805B300BC3544 /* AppSceneDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE56292805B300BC3544 /* AppSceneDelegateTests.swift */; };
 		B717BE5A2928067400BC3544 /* UIWindowSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE592928067400BC3544 /* UIWindowSpy.swift */; };
+		B717BE612928D17500BC3544 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE602928D17500BC3544 /* HTTPClient.swift */; };
+		B717BE632928D1CA00BC3544 /* HTTPClient+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE622928D1CA00BC3544 /* HTTPClient+Combine.swift */; };
+		B717BE662928D2CB00BC3544 /* HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE652928D2CB00BC3544 /* HTTPStatusCode.swift */; };
+		B717BE682928D2EF00BC3544 /* HTTPStatusCode+HTTPURLResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE672928D2EF00BC3544 /* HTTPStatusCode+HTTPURLResponse.swift */; };
+		B717BE6D2928D82800BC3544 /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE6C2928D82800BC3544 /* URLSessionHTTPClient.swift */; };
+		B717BE702928DB6D00BC3544 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE6F2928DB6D00BC3544 /* XCTestCase+MemoryLeakTracking.swift */; };
+		B717BE782928DD2900BC3544 /* URLProtocolStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE772928DD2900BC3544 /* URLProtocolStub.swift */; };
+		B717BE7A2928DF4100BC3544 /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE792928DF4100BC3544 /* URLSessionHTTPClientTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +53,14 @@
 		B717BE382928026D00BC3544 /* GiphyLookupApplicationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GiphyLookupApplicationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B717BE56292805B300BC3544 /* AppSceneDelegateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSceneDelegateTests.swift; sourceTree = "<group>"; };
 		B717BE592928067400BC3544 /* UIWindowSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIWindowSpy.swift; sourceTree = "<group>"; };
+		B717BE602928D17500BC3544 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		B717BE622928D1CA00BC3544 /* HTTPClient+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPClient+Combine.swift"; sourceTree = "<group>"; };
+		B717BE652928D2CB00BC3544 /* HTTPStatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPStatusCode.swift; sourceTree = "<group>"; };
+		B717BE672928D2EF00BC3544 /* HTTPStatusCode+HTTPURLResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPStatusCode+HTTPURLResponse.swift"; sourceTree = "<group>"; };
+		B717BE6C2928D82800BC3544 /* URLSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClient.swift; sourceTree = "<group>"; };
+		B717BE6F2928DB6D00BC3544 /* XCTestCase+MemoryLeakTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+MemoryLeakTracking.swift"; sourceTree = "<group>"; };
+		B717BE772928DD2900BC3544 /* URLProtocolStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolStub.swift; sourceTree = "<group>"; };
+		B717BE792928DF4100BC3544 /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +121,7 @@
 		B717BE092928022A00BC3544 /* GiphyLookup */ = {
 			isa = PBXGroup;
 			children = (
+				B717BE5E2928D14800BC3544 /* Networking */,
 			);
 			path = GiphyLookup;
 			sourceTree = "<group>";
@@ -112,6 +129,8 @@
 		B717BE132928022B00BC3544 /* GiphyLookupTests */ = {
 			isa = PBXGroup;
 			children = (
+				B717BE6E2928DB5A00BC3544 /* Extensions */,
+				B717BE712928DC5E00BC3544 /* Networking */,
 			);
 			path = GiphyLookupTests;
 			sourceTree = "<group>";
@@ -169,6 +188,51 @@
 			path = "Test Doubles";
 			sourceTree = "<group>";
 		};
+		B717BE5E2928D14800BC3544 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				B717BE6B2928D76100BC3544 /* HTTP */,
+				B717BE6C2928D82800BC3544 /* URLSessionHTTPClient.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		B717BE6B2928D76100BC3544 /* HTTP */ = {
+			isa = PBXGroup;
+			children = (
+				B717BE602928D17500BC3544 /* HTTPClient.swift */,
+				B717BE622928D1CA00BC3544 /* HTTPClient+Combine.swift */,
+				B717BE652928D2CB00BC3544 /* HTTPStatusCode.swift */,
+				B717BE672928D2EF00BC3544 /* HTTPStatusCode+HTTPURLResponse.swift */,
+			);
+			path = HTTP;
+			sourceTree = "<group>";
+		};
+		B717BE6E2928DB5A00BC3544 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B717BE6F2928DB6D00BC3544 /* XCTestCase+MemoryLeakTracking.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B717BE712928DC5E00BC3544 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				B717BE762928DD1000BC3544 /* Test Doubles */,
+				B717BE792928DF4100BC3544 /* URLSessionHTTPClientTests.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		B717BE762928DD1000BC3544 /* Test Doubles */ = {
+			isa = PBXGroup;
+			children = (
+				B717BE772928DD2900BC3544 /* URLProtocolStub.swift */,
+			);
+			path = "Test Doubles";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -207,6 +271,8 @@
 				B717BE0B2928022B00BC3544 /* Sources */,
 				B717BE0C2928022B00BC3544 /* Frameworks */,
 				B717BE0D2928022B00BC3544 /* Resources */,
+				B717BE692928D36900BC3544 /* Run Linter */,
+				B717BE6A2928D36A00BC3544 /* Run Formatter */,
 			);
 			buildRules = (
 			);
@@ -270,6 +336,7 @@
 					};
 					B717BE0E2928022B00BC3544 = {
 						CreatedOnToolsVersion = 14.1;
+						LastSwiftMigration = 1410;
 					};
 					B717BE222928026C00BC3544 = {
 						CreatedOnToolsVersion = 14.1;
@@ -374,6 +441,44 @@
 			shellPath = /bin/sh;
 			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which mint > /dev/null; then\n  xcrun --sdk macosx mint run SwiftFormat SwiftFormat .\nelse\n  echo \"warning: Linter not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
+		B717BE692928D36900BC3544 /* Run Linter */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Linter";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which mint > /dev/null; then\n  xcrun --sdk macosx mint run swiftlint@0.49.1 swiftlint\nelse\n  echo \"warning: Linter not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		B717BE6A2928D36A00BC3544 /* Run Formatter */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Formatter";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which mint > /dev/null; then\n  xcrun --sdk macosx mint run SwiftFormat SwiftFormat .\nelse\n  echo \"warning: Linter not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -381,6 +486,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B717BE662928D2CB00BC3544 /* HTTPStatusCode.swift in Sources */,
+				B717BE632928D1CA00BC3544 /* HTTPClient+Combine.swift in Sources */,
+				B717BE612928D17500BC3544 /* HTTPClient.swift in Sources */,
+				B717BE6D2928D82800BC3544 /* URLSessionHTTPClient.swift in Sources */,
+				B717BE682928D2EF00BC3544 /* HTTPStatusCode+HTTPURLResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,6 +498,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B717BE702928DB6D00BC3544 /* XCTestCase+MemoryLeakTracking.swift in Sources */,
+				B717BE782928DD2900BC3544 /* URLProtocolStub.swift in Sources */,
+				B717BE7A2928DF4100BC3544 /* URLSessionHTTPClientTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -579,6 +692,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -607,6 +721,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_TREAT_WARNINGS_AS_ERRORS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -615,14 +730,21 @@
 		B717BE1D2928022B00BC3544 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JPE45M57J4;
 				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.nspavlo.GiphyLookupTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -631,10 +753,16 @@
 		B717BE1E2928022B00BC3544 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = JPE45M57J4;
 				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.nspavlo.GiphyLookupTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

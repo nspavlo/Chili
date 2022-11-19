@@ -1,3 +1,9 @@
+identifier_name:
+    excluded:
+        - id
+        - ok
+        - x
+        - y
 custom_rules:
     empty_line_after_guard: # from https://github.com/brandenr/swiftlintconfig
         name: 'Empty Line After Guard'
