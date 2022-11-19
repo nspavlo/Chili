@@ -14,6 +14,11 @@
 		B717BE322928026D00BC3544 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B717BE302928026D00BC3544 /* LaunchScreen.storyboard */; };
 		B717BE57292805B300BC3544 /* AppSceneDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE56292805B300BC3544 /* AppSceneDelegateTests.swift */; };
 		B717BE5A2928067400BC3544 /* UIWindowSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE592928067400BC3544 /* UIWindowSpy.swift */; };
+		B717BE612928D17500BC3544 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE602928D17500BC3544 /* HTTPClient.swift */; };
+		B717BE632928D1CA00BC3544 /* HTTPClient+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE622928D1CA00BC3544 /* HTTPClient+Combine.swift */; };
+		B717BE662928D2CB00BC3544 /* HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE652928D2CB00BC3544 /* HTTPStatusCode.swift */; };
+		B717BE682928D2EF00BC3544 /* HTTPStatusCode+HTTPURLResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE672928D2EF00BC3544 /* HTTPStatusCode+HTTPURLResponse.swift */; };
+		B717BE6D2928D82800BC3544 /* URLSession+HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE6C2928D82800BC3544 /* URLSession+HTTPClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +50,11 @@
 		B717BE382928026D00BC3544 /* GiphyLookupApplicationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GiphyLookupApplicationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B717BE56292805B300BC3544 /* AppSceneDelegateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSceneDelegateTests.swift; sourceTree = "<group>"; };
 		B717BE592928067400BC3544 /* UIWindowSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIWindowSpy.swift; sourceTree = "<group>"; };
+		B717BE602928D17500BC3544 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		B717BE622928D1CA00BC3544 /* HTTPClient+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPClient+Combine.swift"; sourceTree = "<group>"; };
+		B717BE652928D2CB00BC3544 /* HTTPStatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPStatusCode.swift; sourceTree = "<group>"; };
+		B717BE672928D2EF00BC3544 /* HTTPStatusCode+HTTPURLResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPStatusCode+HTTPURLResponse.swift"; sourceTree = "<group>"; };
+		B717BE6C2928D82800BC3544 /* URLSession+HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+HTTPClient.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +115,7 @@
 		B717BE092928022A00BC3544 /* GiphyLookup */ = {
 			isa = PBXGroup;
 			children = (
+				B717BE5E2928D14800BC3544 /* Networking */,
 			);
 			path = GiphyLookup;
 			sourceTree = "<group>";
@@ -167,6 +178,26 @@
 				B717BE592928067400BC3544 /* UIWindowSpy.swift */,
 			);
 			path = "Test Doubles";
+			sourceTree = "<group>";
+		};
+		B717BE5E2928D14800BC3544 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				B717BE6B2928D76100BC3544 /* HTTP */,
+				B717BE6C2928D82800BC3544 /* URLSession+HTTPClient.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		B717BE6B2928D76100BC3544 /* HTTP */ = {
+			isa = PBXGroup;
+			children = (
+				B717BE602928D17500BC3544 /* HTTPClient.swift */,
+				B717BE622928D1CA00BC3544 /* HTTPClient+Combine.swift */,
+				B717BE652928D2CB00BC3544 /* HTTPStatusCode.swift */,
+				B717BE672928D2EF00BC3544 /* HTTPStatusCode+HTTPURLResponse.swift */,
+			);
+			path = HTTP;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -421,6 +452,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B717BE662928D2CB00BC3544 /* HTTPStatusCode.swift in Sources */,
+				B717BE632928D1CA00BC3544 /* HTTPClient+Combine.swift in Sources */,
+				B717BE612928D17500BC3544 /* HTTPClient.swift in Sources */,
+				B717BE6D2928D82800BC3544 /* URLSession+HTTPClient.swift in Sources */,
+				B717BE682928D2EF00BC3544 /* HTTPStatusCode+HTTPURLResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
