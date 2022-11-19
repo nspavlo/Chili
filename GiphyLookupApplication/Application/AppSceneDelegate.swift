@@ -33,8 +33,9 @@ extension AppSceneDelegate {
             ],
             collectionViewLayout: collectionViewLayout
         )
-        viewController.title = "Giphy Lookup"
+        viewController.title = "Trending 🔥"
         collectionViewLayout.delegate = viewController
+        navigationController.navigationBar.prefersLargeTitles = true
         navigationController.setViewControllers([viewController], animated: false)
     }
 }
