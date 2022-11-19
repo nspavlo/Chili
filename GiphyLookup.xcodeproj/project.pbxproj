@@ -18,9 +18,10 @@
 		B717BE632928D1CA00BC3544 /* HTTPClient+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE622928D1CA00BC3544 /* HTTPClient+Combine.swift */; };
 		B717BE662928D2CB00BC3544 /* HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE652928D2CB00BC3544 /* HTTPStatusCode.swift */; };
 		B717BE682928D2EF00BC3544 /* HTTPStatusCode+HTTPURLResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE672928D2EF00BC3544 /* HTTPStatusCode+HTTPURLResponse.swift */; };
-		B717BE6D2928D82800BC3544 /* URLSession+HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE6C2928D82800BC3544 /* URLSession+HTTPClient.swift */; };
+		B717BE6D2928D82800BC3544 /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE6C2928D82800BC3544 /* URLSessionHTTPClient.swift */; };
 		B717BE702928DB6D00BC3544 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE6F2928DB6D00BC3544 /* XCTestCase+MemoryLeakTracking.swift */; };
 		B717BE782928DD2900BC3544 /* URLProtocolStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE772928DD2900BC3544 /* URLProtocolStub.swift */; };
+		B717BE7A2928DF4100BC3544 /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE792928DF4100BC3544 /* URLSessionHTTPClientTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,9 +57,10 @@
 		B717BE622928D1CA00BC3544 /* HTTPClient+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPClient+Combine.swift"; sourceTree = "<group>"; };
 		B717BE652928D2CB00BC3544 /* HTTPStatusCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPStatusCode.swift; sourceTree = "<group>"; };
 		B717BE672928D2EF00BC3544 /* HTTPStatusCode+HTTPURLResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HTTPStatusCode+HTTPURLResponse.swift"; sourceTree = "<group>"; };
-		B717BE6C2928D82800BC3544 /* URLSession+HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+HTTPClient.swift"; sourceTree = "<group>"; };
+		B717BE6C2928D82800BC3544 /* URLSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClient.swift; sourceTree = "<group>"; };
 		B717BE6F2928DB6D00BC3544 /* XCTestCase+MemoryLeakTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+MemoryLeakTracking.swift"; sourceTree = "<group>"; };
 		B717BE772928DD2900BC3544 /* URLProtocolStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolStub.swift; sourceTree = "<group>"; };
+		B717BE792928DF4100BC3544 /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,7 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				B717BE6B2928D76100BC3544 /* HTTP */,
-				B717BE6C2928D82800BC3544 /* URLSession+HTTPClient.swift */,
+				B717BE6C2928D82800BC3544 /* URLSessionHTTPClient.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -218,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				B717BE762928DD1000BC3544 /* Test Doubles */,
+				B717BE792928DF4100BC3544 /* URLSessionHTTPClientTests.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -486,7 +489,7 @@
 				B717BE662928D2CB00BC3544 /* HTTPStatusCode.swift in Sources */,
 				B717BE632928D1CA00BC3544 /* HTTPClient+Combine.swift in Sources */,
 				B717BE612928D17500BC3544 /* HTTPClient.swift in Sources */,
-				B717BE6D2928D82800BC3544 /* URLSession+HTTPClient.swift in Sources */,
+				B717BE6D2928D82800BC3544 /* URLSessionHTTPClient.swift in Sources */,
 				B717BE682928D2EF00BC3544 /* HTTPStatusCode+HTTPURLResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -497,6 +500,7 @@
 			files = (
 				B717BE702928DB6D00BC3544 /* XCTestCase+MemoryLeakTracking.swift in Sources */,
 				B717BE782928DD2900BC3544 /* URLProtocolStub.swift in Sources */,
+				B717BE7A2928DF4100BC3544 /* URLSessionHTTPClientTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
