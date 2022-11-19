@@ -22,6 +22,8 @@
 		B717BE702928DB6D00BC3544 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE6F2928DB6D00BC3544 /* XCTestCase+MemoryLeakTracking.swift */; };
 		B717BE782928DD2900BC3544 /* URLProtocolStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE772928DD2900BC3544 /* URLProtocolStub.swift */; };
 		B717BE7A2928DF4100BC3544 /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE792928DF4100BC3544 /* URLSessionHTTPClientTests.swift */; };
+		B717BE812929090700BC3544 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE802929090700BC3544 /* Reusable.swift */; };
+		B717BE832929093500BC3544 /* UICollectionView+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE822929093500BC3544 /* UICollectionView+Reusable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,8 @@
 		B717BE6F2928DB6D00BC3544 /* XCTestCase+MemoryLeakTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+MemoryLeakTracking.swift"; sourceTree = "<group>"; };
 		B717BE772928DD2900BC3544 /* URLProtocolStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolStub.swift; sourceTree = "<group>"; };
 		B717BE792928DF4100BC3544 /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
+		B717BE802929090700BC3544 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
+		B717BE822929093500BC3544 /* UICollectionView+Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Reusable.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				B717BE532928035000BC3544 /* Application */,
+				B717BE7D2929089400BC3544 /* Presentation */,
 				B717BE542928041900BC3544 /* Resources */,
 			);
 			path = GiphyLookupApplication;
@@ -231,6 +236,31 @@
 				B717BE772928DD2900BC3544 /* URLProtocolStub.swift */,
 			);
 			path = "Test Doubles";
+			sourceTree = "<group>";
+		};
+		B717BE7D2929089400BC3544 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				B717BE7E292908E400BC3544 /* Common */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		B717BE7E292908E400BC3544 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				B717BE7F292908F100BC3544 /* Reusable */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		B717BE7F292908F100BC3544 /* Reusable */ = {
+			isa = PBXGroup;
+			children = (
+				B717BE802929090700BC3544 /* Reusable.swift */,
+				B717BE822929093500BC3544 /* UICollectionView+Reusable.swift */,
+			);
+			path = Reusable;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -508,6 +538,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B717BE812929090700BC3544 /* Reusable.swift in Sources */,
+				B717BE832929093500BC3544 /* UICollectionView+Reusable.swift in Sources */,
 				B717BE262928026C00BC3544 /* AppDelegate.swift in Sources */,
 				B717BE282928026C00BC3544 /* AppSceneDelegate.swift in Sources */,
 			);
