@@ -207,6 +207,8 @@
 				B717BE0B2928022B00BC3544 /* Sources */,
 				B717BE0C2928022B00BC3544 /* Frameworks */,
 				B717BE0D2928022B00BC3544 /* Resources */,
+				B717BE692928D36900BC3544 /* Run Linter */,
+				B717BE6A2928D36A00BC3544 /* Run Formatter */,
 			);
 			buildRules = (
 			);
@@ -356,6 +358,44 @@
 			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which mint > /dev/null; then\n  xcrun --sdk macosx mint run swiftlint@0.49.1 swiftlint\nelse\n  echo \"warning: Linter not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		B717BE5D29280A2300BC3544 /* Run Formatter */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Formatter";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which mint > /dev/null; then\n  xcrun --sdk macosx mint run SwiftFormat SwiftFormat .\nelse\n  echo \"warning: Linter not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		B717BE692928D36900BC3544 /* Run Linter */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Linter";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which mint > /dev/null; then\n  xcrun --sdk macosx mint run swiftlint@0.49.1 swiftlint\nelse\n  echo \"warning: Linter not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		B717BE6A2928D36A00BC3544 /* Run Formatter */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
