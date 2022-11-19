@@ -22,6 +22,14 @@
 		B717BE702928DB6D00BC3544 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE6F2928DB6D00BC3544 /* XCTestCase+MemoryLeakTracking.swift */; };
 		B717BE782928DD2900BC3544 /* URLProtocolStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE772928DD2900BC3544 /* URLProtocolStub.swift */; };
 		B717BE7A2928DF4100BC3544 /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE792928DF4100BC3544 /* URLSessionHTTPClientTests.swift */; };
+		B717BE812929090700BC3544 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE802929090700BC3544 /* Reusable.swift */; };
+		B717BE832929093500BC3544 /* UICollectionView+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE822929093500BC3544 /* UICollectionView+Reusable.swift */; };
+		B717BE8929290C8400BC3544 /* GiphyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE8829290C8400BC3544 /* GiphyCollectionViewCell.swift */; };
+		B717BE8B29290CA300BC3544 /* GiphyCollectionViewCell+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE8A29290CA300BC3544 /* GiphyCollectionViewCell+Reusable.swift */; };
+		B717BE8D29290E6200BC3544 /* GiphyCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE8C29290E6200BC3544 /* GiphyCollectionViewController.swift */; };
+		B717BE922929123700BC3544 /* GiphyListItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE912929123700BC3544 /* GiphyListItemViewModel.swift */; };
+		B717BE97292914CC00BC3544 /* PinterestCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE96292914CC00BC3544 /* PinterestCollectionViewLayout.swift */; };
+		B717BE99292914ED00BC3544 /* PinterestCollectionViewLayoutDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE98292914ED00BC3544 /* PinterestCollectionViewLayoutDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +69,14 @@
 		B717BE6F2928DB6D00BC3544 /* XCTestCase+MemoryLeakTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+MemoryLeakTracking.swift"; sourceTree = "<group>"; };
 		B717BE772928DD2900BC3544 /* URLProtocolStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolStub.swift; sourceTree = "<group>"; };
 		B717BE792928DF4100BC3544 /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
+		B717BE802929090700BC3544 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
+		B717BE822929093500BC3544 /* UICollectionView+Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Reusable.swift"; sourceTree = "<group>"; };
+		B717BE8829290C8400BC3544 /* GiphyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphyCollectionViewCell.swift; sourceTree = "<group>"; };
+		B717BE8A29290CA300BC3544 /* GiphyCollectionViewCell+Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GiphyCollectionViewCell+Reusable.swift"; sourceTree = "<group>"; };
+		B717BE8C29290E6200BC3544 /* GiphyCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphyCollectionViewController.swift; sourceTree = "<group>"; };
+		B717BE912929123700BC3544 /* GiphyListItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphyListItemViewModel.swift; sourceTree = "<group>"; };
+		B717BE96292914CC00BC3544 /* PinterestCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinterestCollectionViewLayout.swift; sourceTree = "<group>"; };
+		B717BE98292914ED00BC3544 /* PinterestCollectionViewLayoutDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinterestCollectionViewLayoutDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				B717BE532928035000BC3544 /* Application */,
+				B717BE7D2929089400BC3544 /* Presentation */,
 				B717BE542928041900BC3544 /* Resources */,
 			);
 			path = GiphyLookupApplication;
@@ -231,6 +248,77 @@
 				B717BE772928DD2900BC3544 /* URLProtocolStub.swift */,
 			);
 			path = "Test Doubles";
+			sourceTree = "<group>";
+		};
+		B717BE7D2929089400BC3544 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				B717BE7E292908E400BC3544 /* Common */,
+				B717BE8429290C1A00BC3544 /* Giphy */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		B717BE7E292908E400BC3544 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		B717BE7F292908F100BC3544 /* Reusable */ = {
+			isa = PBXGroup;
+			children = (
+				B717BE802929090700BC3544 /* Reusable.swift */,
+				B717BE822929093500BC3544 /* UICollectionView+Reusable.swift */,
+			);
+			path = Reusable;
+			sourceTree = "<group>";
+		};
+		B717BE8429290C1A00BC3544 /* Giphy */ = {
+			isa = PBXGroup;
+			children = (
+				B717BE8529290C2500BC3544 /* List */,
+			);
+			path = Giphy;
+			sourceTree = "<group>";
+		};
+		B717BE8529290C2500BC3544 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				B717BE8729290C7500BC3544 /* View */,
+				B717BE8E2929101500BC3544 /* ViewModel */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+		B717BE8729290C7500BC3544 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B717BE95292914BB00BC3544 /* Layout */,
+				B717BE7F292908F100BC3544 /* Reusable */,
+				B717BE8829290C8400BC3544 /* GiphyCollectionViewCell.swift */,
+				B717BE8A29290CA300BC3544 /* GiphyCollectionViewCell+Reusable.swift */,
+				B717BE8C29290E6200BC3544 /* GiphyCollectionViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B717BE8E2929101500BC3544 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				B717BE912929123700BC3544 /* GiphyListItemViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		B717BE95292914BB00BC3544 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				B717BE96292914CC00BC3544 /* PinterestCollectionViewLayout.swift */,
+				B717BE98292914ED00BC3544 /* PinterestCollectionViewLayoutDelegate.swift */,
+			);
+			path = Layout;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -508,8 +596,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B717BE812929090700BC3544 /* Reusable.swift in Sources */,
+				B717BE97292914CC00BC3544 /* PinterestCollectionViewLayout.swift in Sources */,
+				B717BE832929093500BC3544 /* UICollectionView+Reusable.swift in Sources */,
 				B717BE262928026C00BC3544 /* AppDelegate.swift in Sources */,
+				B717BE8D29290E6200BC3544 /* GiphyCollectionViewController.swift in Sources */,
 				B717BE282928026C00BC3544 /* AppSceneDelegate.swift in Sources */,
+				B717BE99292914ED00BC3544 /* PinterestCollectionViewLayoutDelegate.swift in Sources */,
+				B717BE8929290C8400BC3544 /* GiphyCollectionViewCell.swift in Sources */,
+				B717BE922929123700BC3544 /* GiphyListItemViewModel.swift in Sources */,
+				B717BE8B29290CA300BC3544 /* GiphyCollectionViewCell+Reusable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -687,6 +783,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.nspavlo.GiphyLookup;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -716,6 +813,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.nspavlo.GiphyLookup;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -740,6 +838,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.nspavlo.GiphyLookupTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -763,6 +862,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = me.nspavlo.GiphyLookupTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

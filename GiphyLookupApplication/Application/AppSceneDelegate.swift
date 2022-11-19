@@ -21,7 +21,22 @@ extension AppSceneDelegate {
         window?.makeKeyAndVisible()
     }
 
-    func setupAppFlowCoordinator(with _: UINavigationController) {}
+    func setupAppFlowCoordinator(with navigationController: UINavigationController) {
+        let collectionViewLayout = PinterestCollectionViewLayout()
+        let viewController = GiphyCollectionViewController(
+            items: [
+                .init(title: "1", height: 200, url: URL(string: "http://a-url.com")!),
+                .init(title: "2", height: 180, url: URL(string: "http://a-url.com")!),
+                .init(title: "3", height: 120, url: URL(string: "http://a-url.com")!),
+                .init(title: "4", height: 240, url: URL(string: "http://a-url.com")!),
+                .init(title: "5", height: 200, url: URL(string: "http://a-url.com")!),
+            ],
+            collectionViewLayout: collectionViewLayout
+        )
+        viewController.title = "Giphy Lookup"
+        collectionViewLayout.delegate = viewController
+        navigationController.setViewControllers([viewController], animated: false)
+    }
 }
 
 // MARK: UIWindowSceneDelegate

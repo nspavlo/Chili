@@ -4,6 +4,8 @@ identifier_name:
         - ok
         - x
         - y
+disabled_rules:
+        trailing_comma
 custom_rules:
     empty_line_after_guard: # from https://github.com/brandenr/swiftlintconfig
         name: 'Empty Line After Guard'

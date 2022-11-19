@@ -19,7 +19,7 @@ jobs:
       run: /usr/bin/xcodebuild -version
 
     - name: Test Framework
-      run: xcodebuild clean build test -project GiphyLookup.xcodeproj -scheme "GiphyLookup" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=YES
+      run: xcodebuild clean build test -project GiphyLookup.xcodeproj -scheme "GiphyLookup" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk macosx ONLY_ACTIVE_ARCH=YES
       
     - name: Test Application
       run: xcodebuild clean build test -project GiphyLookup.xcodeproj -scheme "GiphyLookupApplication" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 14,OS=16.1" ONLY_ACTIVE_ARCH=YES
