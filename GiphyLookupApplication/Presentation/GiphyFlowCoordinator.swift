@@ -27,7 +27,7 @@ extension GiphyFlowCoordinator: Coordinator {
     }
 
     func showTrendingList() {
-        let viewModel = GiphyListController(repository: giphyFlowFactory.createGiphyFetcher())
+        let viewModel = GiphyListController(giphyFetcher: giphyFlowFactory.createGiphyFetcher())
         let viewController = GiphyContainerViewController(viewModel: viewModel)
 
         navigationController.navigationBar.prefersLargeTitles = true

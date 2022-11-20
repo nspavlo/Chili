@@ -16,15 +16,15 @@ final class GiphyListController: GiphyListViewModelOutput {
     let searchBarPlaceholder: String = .searchBarPlaceholder
     var onStateChange: ((GiphyListViewModelState) -> Void)?
 
-    private let repository: GiphyFetchable
-    private var repositoryRequestCancellable: Cancellable?
+    private let giphyFetcher: GiphyFetchable
+    private var giphyFetcherCancellable: Cancellable?
     private var isSearchingActive = false
 
     private let currentQuerySubject = PassthroughSubject<String?, Never>()
     private var currentQuerySubjectCancelable: Cancellable?
 
-    init(repository: GiphyFetchable) {
-        self.repository = repository
+    init(giphyFetcher: GiphyFetchable) {
+        self.giphyFetcher = giphyFetcher
     }
 }
 
@@ -62,15 +62,15 @@ extension GiphyListController: GiphyListViewModelInput {
 
 private extension GiphyListController {
     func fetchTrendingList() {
-        repositoryRequestCancellable = fetch(from: repository.fetchTrendingList())
+        giphyFetcherCancellable = fetch(from: giphyFetcher.fetchTrendingList())
     }
 
     func fetchList(query: String, page: Int) {
-        repositoryRequestCancellable = fetch(from: repository.fetchList(query: query, page: page))
+        giphyFetcherCancellable = fetch(from: giphyFetcher.fetchList(query: query, page: page))
     }
 
-    func fetch(from publisher: GiphyFetchable.Publisher) -> AnyCancellable {
-        publisher
+    func fetch(from giphyFetcher: GiphyFetchable.Publisher) -> AnyCancellable {
+        giphyFetcher
             .receive(on: RunLoop.main)
             .sink { completion in
                 switch completion {
