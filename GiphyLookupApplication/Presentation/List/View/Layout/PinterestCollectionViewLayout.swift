@@ -42,6 +42,10 @@ final class PinterestCollectionViewLayout: UICollectionViewLayout {
             return
         }
 
+        guard collectionView.numberOfSections <= 1 else {
+            preconditionFailure("Current \(self) implementation can't render multi section layout")
+        }
+
         let columnViewWidth = contentViewWidth / CGFloat(numberOfColumns)
         var column = 0
 
