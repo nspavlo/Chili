@@ -31,8 +31,31 @@ final class GiphyCollectionViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
+    }
+}
+
+private extension GiphyCollectionViewController {
+    func setup() {
+        setupCollectionView()
+        setupSearchController()
+    }
+
+    func setupCollectionView() {
         collectionView.contentInset = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
         collectionView.register(cellType: GiphyCollectionViewCell.self)
+        collectionView.register(
+            supplementaryViewType: ActivityIndicatorCollectionReusableView.self,
+            ofKind: UICollectionView.elementKindSectionFooter
+        )
+    }
+
+    func setupSearchController() {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search GIPHY"
+        navigationItem.searchController = searchController
     }
 }
 
@@ -53,6 +76,44 @@ extension GiphyCollectionViewController {
         cell.contentView.backgroundColor = .random
         return cell
     }
+
+    override func collectionView(
+        _ collectionView: UICollectionView,
+        viewForSupplementaryElementOfKind kind: String,
+        at indexPath: IndexPath
+    ) -> UICollectionReusableView {
+        let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, for: indexPath)
+            as ActivityIndicatorCollectionReusableView
+        return view
+    }
+
+    override func collectionView(
+        _: UICollectionView,
+        willDisplaySupplementaryView view: UICollectionReusableView,
+        forElementKind _: String,
+        at _: IndexPath
+    ) {
+        if let view = view as? ActivityIndicatorCollectionReusableView {
+            view.startAnimating()
+        }
+    }
+
+    override func collectionView(
+        _: UICollectionView,
+        didEndDisplayingSupplementaryView view: UICollectionReusableView,
+        forElementOfKind _: String,
+        at _: IndexPath
+    ) {
+        if let view = view as? ActivityIndicatorCollectionReusableView {
+            view.stopAnimating()
+        }
+    }
+}
+
+// MARK: UISearchResultsUpdating
+
+extension GiphyCollectionViewController: UISearchResultsUpdating {
+    func updateSearchResults(for _: UISearchController) {}
 }
 
 // MARK: PinterestLayoutDelegate
@@ -61,6 +122,10 @@ extension GiphyCollectionViewController: PinterestCollectionViewLayoutDelegate {
     func collectionView(_: UICollectionView, heightForCellAtIndexPath indexPath: IndexPath) -> CGFloat {
         let item = items[indexPath.item]
         return CGFloat(item.height)
+    }
+
+    func collectionView(_: UICollectionView, heightForFooterAtIndexPath _: IndexPath) -> CGFloat {
+        44.0
     }
 }
 
