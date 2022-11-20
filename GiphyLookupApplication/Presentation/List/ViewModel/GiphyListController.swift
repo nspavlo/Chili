@@ -35,7 +35,7 @@ extension GiphyListController: GiphyListViewModelInput {
         fetchTrendingList()
 
         currentQuerySubjectCancelable = currentQuerySubject
-            .debounce(for: .seconds(0.3), scheduler: RunLoop.main)
+            .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
             .compactMap { $0 }
             .filter { !$0.isEmpty }
             .sink { query in
