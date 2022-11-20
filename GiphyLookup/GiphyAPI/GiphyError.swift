@@ -24,9 +24,9 @@ public enum GiphyError: Error {
 extension GiphyError: LocalizedError {
     public var errorDescription: String? {
         switch self {
-        case .parsing(underlayingError: let underlayingError):
+        case let .parsing(underlayingError: underlayingError):
             return underlayingError.localizedDescription
-        case .network(underlayingError: let underlayingError):
+        case let .network(underlayingError: underlayingError):
             return underlayingError.localizedDescription
         }
     }
