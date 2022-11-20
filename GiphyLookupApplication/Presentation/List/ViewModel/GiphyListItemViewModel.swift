@@ -15,6 +15,7 @@ typealias GiphyListItemViewModels = [GiphyListItemViewModel]
 
 struct GiphyListItemViewModel: Equatable {
     let title: String
+    let width: Int
     let height: Int
     let url: URL
 }

@@ -54,7 +54,8 @@ final class PinterestCollectionViewLayout: UICollectionViewLayout {
 
         for item in 0 ..< collectionView.numberOfItems(inSection: 0) {
             let indexPath = IndexPath(item: item, section: 0)
-            let heightForCell = delegate.collectionView(collectionView, heightForCellAtIndexPath: indexPath)
+            let aspectRatio = delegate.collectionView(collectionView, aspectRatioForCellAtIndexPath: indexPath)
+            let heightForCell = columnViewWidth * aspectRatio
 
             let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
             let frame = CGRect(origin: offsets[column], size: CGSize(width: columnViewWidth, height: heightForCell))
