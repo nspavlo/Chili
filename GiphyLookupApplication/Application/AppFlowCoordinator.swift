@@ -18,7 +18,6 @@ protocol Coordinator {
 final class AppFlowCoordinator {
     private let navigationController: UINavigationController
     private let appFlowFactory: AppFlowFactory
-    private var childCoordinator: Coordinator?
 
     init(navigationController: UINavigationController, appFlowFactory: AppFlowFactory) {
         self.navigationController = navigationController
@@ -33,6 +32,5 @@ extension AppFlowCoordinator: Coordinator {
         let giphyFlowFactory = appFlowFactory.makeGiphyFlowFactory()
         let coordinator = giphyFlowFactory.makeGiphyFlowCoordinator(with: navigationController)
         coordinator.start()
-        childCoordinator = coordinator
     }
 }

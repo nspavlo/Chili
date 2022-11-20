@@ -9,8 +9,6 @@ import Combine
 import Foundation
 import GiphyLookup
 
-// MARK: -
-
 // MARK: Initialization
 
 final class GiphyListController: GiphyListViewModelOutput {

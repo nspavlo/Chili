@@ -85,37 +85,3 @@ private extension GiphyContainerViewController {
 extension GiphyContainerViewController: UISearchResultsUpdating {
     func updateSearchResults(for _: UISearchController) {}
 }
-
-// MARK: -
-
-// MARK: UIViewController+Embed
-
-extension UIViewController {
-    func embed(_ child: UIViewController, in container: UIView) {
-        addChild(child)
-        child.view.frame = container.frame
-        container.addSubview(child.view)
-        child.didMove(toParent: self)
-    }
-
-    func remove() {
-        guard parent != nil else {
-            return
-        }
-
-        willMove(toParent: nil)
-        removeFromParent()
-        view.removeFromSuperview()
-    }
-
-    func replaceExisting(with child: UIViewController, in container: UIView) {
-        removeAllEmbedded()
-        embed(child, in: container)
-    }
-
-    func removeAllEmbedded() {
-        for child in children {
-            child.remove()
-        }
-    }
-}
