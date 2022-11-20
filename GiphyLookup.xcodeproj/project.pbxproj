@@ -32,6 +32,7 @@
 		B717BE99292914ED00BC3544 /* PinterestCollectionViewLayoutDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE98292914ED00BC3544 /* PinterestCollectionViewLayoutDelegate.swift */; };
 		B717BEA129294F3500BC3544 /* ActivityIndicatorCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BEA029294F3500BC3544 /* ActivityIndicatorCollectionReusableView.swift */; };
 		B717BEA329294F5200BC3544 /* ActivityIndicatorCollectionReusableView+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BEA229294F5200BC3544 /* ActivityIndicatorCollectionReusableView+Reusable.swift */; };
+		B717BEA5292A1C2400BC3544 /* ActivityIndicatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BEA4292A1C2400BC3544 /* ActivityIndicatorViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		B717BE98292914ED00BC3544 /* PinterestCollectionViewLayoutDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinterestCollectionViewLayoutDelegate.swift; sourceTree = "<group>"; };
 		B717BEA029294F3500BC3544 /* ActivityIndicatorCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorCollectionReusableView.swift; sourceTree = "<group>"; };
 		B717BEA229294F5200BC3544 /* ActivityIndicatorCollectionReusableView+Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ActivityIndicatorCollectionReusableView+Reusable.swift"; sourceTree = "<group>"; };
+		B717BEA4292A1C2400BC3544 /* ActivityIndicatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -287,6 +289,7 @@
 				B717BE7F292908F100BC3544 /* Reusable */,
 				B717BEA029294F3500BC3544 /* ActivityIndicatorCollectionReusableView.swift */,
 				B717BEA229294F5200BC3544 /* ActivityIndicatorCollectionReusableView+Reusable.swift */,
+				B717BEA4292A1C2400BC3544 /* ActivityIndicatorViewController.swift */,
 				B717BE8829290C8400BC3544 /* GiphyCollectionViewCell.swift */,
 				B717BE8A29290CA300BC3544 /* GiphyCollectionViewCell+Reusable.swift */,
 				B717BE8C29290E6200BC3544 /* GiphyCollectionViewController.swift */,
@@ -591,6 +594,7 @@
 				B717BE832929093500BC3544 /* UICollectionView+Reusable.swift in Sources */,
 				B717BEA329294F5200BC3544 /* ActivityIndicatorCollectionReusableView+Reusable.swift in Sources */,
 				B717BE262928026C00BC3544 /* AppDelegate.swift in Sources */,
+				B717BEA5292A1C2400BC3544 /* ActivityIndicatorViewController.swift in Sources */,
 				B717BE8D29290E6200BC3544 /* GiphyCollectionViewController.swift in Sources */,
 				B717BE282928026C00BC3544 /* AppSceneDelegate.swift in Sources */,
 				B717BE99292914ED00BC3544 /* PinterestCollectionViewLayoutDelegate.swift in Sources */,
