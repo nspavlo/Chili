@@ -36,7 +36,7 @@ final class GiphyContainerViewController: UIViewController {
     }
 }
 
-// MARK: Private Methods
+// MARK: Setup
 
 private extension GiphyContainerViewController {
     func setup() {
@@ -57,7 +57,11 @@ private extension GiphyContainerViewController {
         searchController.searchBar.placeholder = viewModel.searchBarPlaceholder
         navigationItem.searchController = searchController
     }
+}
 
+// MARK: Rendering
+
+private extension GiphyContainerViewController {
     func render(_ state: GiphyListViewModelState) {
         switch state {
         case .loading:
@@ -83,5 +87,11 @@ private extension GiphyContainerViewController {
 // MARK: UISearchResultsUpdating
 
 extension GiphyContainerViewController: UISearchResultsUpdating {
-    func updateSearchResults(for _: UISearchController) {}
+    func updateSearchResults(for searchController: UISearchController) {
+        if !searchController.isActive {
+            viewModel.dismissSearchQuery()
+        } else {
+            viewModel.searchQueryValueChanged(searchController.searchBar.text)
+        }
+    }
 }

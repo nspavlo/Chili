@@ -16,7 +16,11 @@ final class GiphyListController: GiphyListViewModelOutput {
     var onStateChange: ((GiphyListViewModelState) -> Void)?
 
     private let repository: GiphyFetchable
-    private var cancellable: Cancellable?
+    private var repositoryRequestCancellable: Cancellable?
+    private var isSearchingActive = false
+
+    private let currentQuerySubject = PassthroughSubject<String?, Never>()
+    private var currentQuerySubjectCancelable: Cancellable?
 
     init(repository: GiphyFetchable) {
         self.repository = repository
@@ -28,9 +32,44 @@ final class GiphyListController: GiphyListViewModelOutput {
 extension GiphyListController: GiphyListViewModelInput {
     func viewDidLoad() {
         onStateChange?(.loading)
+        fetchTrendingList()
 
-        cancellable = repository
-            .fetchTrendingList()
+        currentQuerySubjectCancelable = currentQuerySubject
+            .debounce(for: .seconds(0.3), scheduler: RunLoop.main)
+            .compactMap { $0 }
+            .filter { !$0.isEmpty }
+            .sink { query in
+                self.isSearchingActive = true
+                self.onStateChange?(.loading)
+                self.fetchList(query: query, page: 0)
+            }
+    }
+
+    func searchQueryValueChanged(_ query: String?) {
+        currentQuerySubject.send(query)
+    }
+
+    func dismissSearchQuery() {
+        if isSearchingActive {
+            isSearchingActive = false
+            fetchTrendingList()
+        }
+    }
+}
+
+// MARK: Private Methods
+
+private extension GiphyListController {
+    func fetchTrendingList() {
+        repositoryRequestCancellable = fetch(from: repository.fetchTrendingList())
+    }
+
+    func fetchList(query: String, page: Int) {
+        repositoryRequestCancellable = fetch(from: repository.fetchList(query: query, page: page))
+    }
+
+    func fetch(from publisher: GiphyFetchable.Publisher) -> AnyCancellable {
+        publisher
             .receive(on: RunLoop.main)
             .sink { completion in
                 switch completion {
