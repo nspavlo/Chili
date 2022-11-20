@@ -21,7 +21,11 @@ final class GiphyFlowFactory {
 // MARK: Factory Methods
 
 extension GiphyFlowFactory {
-    func makeGiphyFlowCoordinator(with navigationController: UINavigationController) -> GiphyFlowCoordinator {
+    func makeGiphyFlowCoordinator(with navigationController: UINavigationController) -> Coordinator {
         GiphyFlowCoordinator(navigationController: navigationController, giphyFlowFactory: self)
+    }
+
+    func createGiphyFetcher() -> GiphyFetchable {
+        GiphyFetcher(httpClient: httpClient)
     }
 }
