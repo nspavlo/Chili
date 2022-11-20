@@ -13,6 +13,7 @@ public struct GiphyResponse: Decodable {
             public let preview: Preview
         }
 
+        public let title: String
         public let images: Images
     }
 

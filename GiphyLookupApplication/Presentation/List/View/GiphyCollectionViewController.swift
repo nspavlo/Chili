@@ -72,8 +72,7 @@ extension GiphyCollectionViewController {
     ) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(for: indexPath) as GiphyCollectionViewCell
         let item = items[indexPath.item]
-        cell.accessibilityValue = item.title
-        cell.contentView.backgroundColor = .random
+        cell.configure(with: item)
         return cell
     }
 
@@ -119,22 +118,12 @@ extension GiphyCollectionViewController: UISearchResultsUpdating {
 // MARK: PinterestLayoutDelegate
 
 extension GiphyCollectionViewController: PinterestCollectionViewLayoutDelegate {
-    func collectionView(_: UICollectionView, heightForCellAtIndexPath indexPath: IndexPath) -> CGFloat {
+    func collectionView(_: UICollectionView, aspectRatioForCellAtIndexPath indexPath: IndexPath) -> CGFloat {
         let item = items[indexPath.item]
-        return CGFloat(item.height)
+        return CGFloat(item.height) / CGFloat(item.width)
     }
 
     func collectionView(_: UICollectionView, heightForFooterAtIndexPath _: IndexPath) -> CGFloat {
         44.0
-    }
-}
-
-// MARK: -
-
-// MARK: Debug Helpers
-
-private extension UIColor {
-    static var random: UIColor {
-        .init(hue: .random(in: 0 ... 1), saturation: 1, brightness: 1, alpha: 1)
     }
 }
