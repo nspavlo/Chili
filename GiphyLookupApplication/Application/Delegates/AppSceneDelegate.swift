@@ -11,6 +11,7 @@ import UIKit
 
 final class AppSceneDelegate: UIResponder {
     var window: UIWindow?
+    var coordinator: AppFlowCoordinator?
 }
 
 // MARK: Private Methods
@@ -22,21 +23,11 @@ extension AppSceneDelegate {
     }
 
     func setupAppFlowCoordinator(with navigationController: UINavigationController) {
-        let collectionViewLayout = PinterestCollectionViewLayout()
-        let viewController = GiphyCollectionViewController(
-            items: [
-                .init(title: "1", height: 200, url: URL(string: "http://a-url.com")!),
-                .init(title: "2", height: 180, url: URL(string: "http://a-url.com")!),
-                .init(title: "3", height: 120, url: URL(string: "http://a-url.com")!),
-                .init(title: "4", height: 240, url: URL(string: "http://a-url.com")!),
-                .init(title: "5", height: 200, url: URL(string: "http://a-url.com")!),
-            ],
-            collectionViewLayout: collectionViewLayout
+        coordinator = AppFlowCoordinator(
+            navigationController: navigationController,
+            appFlowFactory: AppFlowFactory()
         )
-        viewController.title = "Trending 🔥"
-        collectionViewLayout.delegate = viewController
-        navigationController.navigationBar.prefersLargeTitles = true
-        navigationController.setViewControllers([viewController], animated: false)
+        coordinator?.start()
     }
 }
 
