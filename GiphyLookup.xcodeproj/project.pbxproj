@@ -33,6 +33,12 @@
 		B717BEA129294F3500BC3544 /* ActivityIndicatorCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BEA029294F3500BC3544 /* ActivityIndicatorCollectionReusableView.swift */; };
 		B717BEA329294F5200BC3544 /* ActivityIndicatorCollectionReusableView+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BEA229294F5200BC3544 /* ActivityIndicatorCollectionReusableView+Reusable.swift */; };
 		B717BEA5292A1C2400BC3544 /* ActivityIndicatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BEA4292A1C2400BC3544 /* ActivityIndicatorViewController.swift */; };
+		B717BEA7292A1E0D00BC3544 /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BEA6292A1E0D00BC3544 /* AppFlowCoordinator.swift */; };
+		B717BEA9292A22F400BC3544 /* GiphyFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BEA8292A22F400BC3544 /* GiphyFlowCoordinator.swift */; };
+		B717BEAB292A24ED00BC3544 /* AppFlowFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BEAA292A24ED00BC3544 /* AppFlowFactory.swift */; };
+		B717BEAD292A256D00BC3544 /* GiphyFlowFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BEAC292A256D00BC3544 /* GiphyFlowFactory.swift */; };
+		B717BEB1292A277300BC3544 /* GiphyLookup.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B717BE072928022A00BC3544 /* GiphyLookup.framework */; };
+		B717BEB2292A277300BC3544 /* GiphyLookup.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B717BE072928022A00BC3544 /* GiphyLookup.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +56,28 @@
 			remoteGlobalIDString = B717BE222928026C00BC3544;
 			remoteInfo = GiphyLookupApplication;
 		};
+		B717BEB3292A277300BC3544 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B717BDFE2928022A00BC3544 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B717BE062928022A00BC3544;
+			remoteInfo = GiphyLookup;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B717BEB5292A277300BC3544 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				B717BEB2292A277300BC3544 /* GiphyLookup.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		B717BE072928022A00BC3544 /* GiphyLookup.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GiphyLookup.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -83,6 +110,10 @@
 		B717BEA029294F3500BC3544 /* ActivityIndicatorCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorCollectionReusableView.swift; sourceTree = "<group>"; };
 		B717BEA229294F5200BC3544 /* ActivityIndicatorCollectionReusableView+Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ActivityIndicatorCollectionReusableView+Reusable.swift"; sourceTree = "<group>"; };
 		B717BEA4292A1C2400BC3544 /* ActivityIndicatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorViewController.swift; sourceTree = "<group>"; };
+		B717BEA6292A1E0D00BC3544 /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
+		B717BEA8292A22F400BC3544 /* GiphyFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphyFlowCoordinator.swift; sourceTree = "<group>"; };
+		B717BEAA292A24ED00BC3544 /* AppFlowFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowFactory.swift; sourceTree = "<group>"; };
+		B717BEAC292A256D00BC3544 /* GiphyFlowFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphyFlowFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +136,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B717BEB1292A277300BC3544 /* GiphyLookup.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,6 +158,7 @@
 				B717BE3B2928026D00BC3544 /* GiphyLookupApplicationTests */,
 				B717BE132928022B00BC3544 /* GiphyLookupTests */,
 				B717BE082928022A00BC3544 /* Products */,
+				B717BEB0292A277300BC3544 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -178,8 +211,9 @@
 		B717BE532928035000BC3544 /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				B717BE252928026C00BC3544 /* AppDelegate.swift */,
-				B717BE272928026C00BC3544 /* AppSceneDelegate.swift */,
+				B717BEAE292A261C00BC3544 /* Delegates */,
+				B717BEA6292A1E0D00BC3544 /* AppFlowCoordinator.swift */,
+				B717BEAA292A24ED00BC3544 /* AppFlowFactory.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -260,6 +294,8 @@
 			isa = PBXGroup;
 			children = (
 				B717BE8529290C2500BC3544 /* List */,
+				B717BEA8292A22F400BC3544 /* GiphyFlowCoordinator.swift */,
+				B717BEAC292A256D00BC3544 /* GiphyFlowFactory.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -312,6 +348,22 @@
 				B717BE98292914ED00BC3544 /* PinterestCollectionViewLayoutDelegate.swift */,
 			);
 			path = Layout;
+			sourceTree = "<group>";
+		};
+		B717BEAE292A261C00BC3544 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				B717BE252928026C00BC3544 /* AppDelegate.swift */,
+				B717BE272928026C00BC3544 /* AppSceneDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		B717BEB0292A277300BC3544 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -372,10 +424,12 @@
 				B717BE1F2928026C00BC3544 /* Sources */,
 				B717BE202928026C00BC3544 /* Frameworks */,
 				B717BE212928026C00BC3544 /* Resources */,
+				B717BEB5292A277300BC3544 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				B717BEB4292A277300BC3544 /* PBXTargetDependency */,
 			);
 			name = GiphyLookupApplication;
 			productName = GiphyLookupApplication;
@@ -589,6 +643,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B717BEAB292A24ED00BC3544 /* AppFlowFactory.swift in Sources */,
+				B717BEA9292A22F400BC3544 /* GiphyFlowCoordinator.swift in Sources */,
+				B717BEAD292A256D00BC3544 /* GiphyFlowFactory.swift in Sources */,
 				B717BE812929090700BC3544 /* Reusable.swift in Sources */,
 				B717BE97292914CC00BC3544 /* PinterestCollectionViewLayout.swift in Sources */,
 				B717BE832929093500BC3544 /* UICollectionView+Reusable.swift in Sources */,
@@ -599,6 +656,7 @@
 				B717BE282928026C00BC3544 /* AppSceneDelegate.swift in Sources */,
 				B717BE99292914ED00BC3544 /* PinterestCollectionViewLayoutDelegate.swift in Sources */,
 				B717BE8929290C8400BC3544 /* GiphyCollectionViewCell.swift in Sources */,
+				B717BEA7292A1E0D00BC3544 /* AppFlowCoordinator.swift in Sources */,
 				B717BE922929123700BC3544 /* GiphyListItemViewModel.swift in Sources */,
 				B717BE8B29290CA300BC3544 /* GiphyCollectionViewCell+Reusable.swift in Sources */,
 				B717BEA129294F3500BC3544 /* ActivityIndicatorCollectionReusableView.swift in Sources */,
@@ -626,6 +684,11 @@
 			isa = PBXTargetDependency;
 			target = B717BE222928026C00BC3544 /* GiphyLookupApplication */;
 			targetProxy = B717BE392928026D00BC3544 /* PBXContainerItemProxy */;
+		};
+		B717BEB4292A277300BC3544 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B717BE062928022A00BC3544 /* GiphyLookup */;
+			targetProxy = B717BEB3292A277300BC3544 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
