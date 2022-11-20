@@ -12,7 +12,8 @@ import GiphyLookup
 // MARK: Initialization
 
 final class GiphyListController: GiphyListViewModelOutput {
-    let searchBarPlaceholder = "Search GIPHY"
+    let title: String = .trendingListTitle
+    let searchBarPlaceholder: String = .searchBarPlaceholder
     var onStateChange: ((GiphyListViewModelState) -> Void)?
 
     private let repository: GiphyFetchable
@@ -87,4 +88,13 @@ private extension GiphyListController {
                 self.onStateChange?(.result(.success(items)))
             }
     }
+}
+
+// MARK: Locale
+
+private typealias Locale = String
+
+private extension Locale {
+    static let trendingListTitle = "Trending 🔥"
+    static let searchBarPlaceholder = "Search GIPHY"
 }

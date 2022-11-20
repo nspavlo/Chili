@@ -23,6 +23,7 @@ enum GiphyListViewModelState {
 }
 
 protocol GiphyListViewModelOutput: AnyObject {
+    var title: String { get }
     var searchBarPlaceholder: String { get }
     var onStateChange: ((GiphyListViewModelState) -> Void)? { get set }
 }

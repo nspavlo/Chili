@@ -45,6 +45,7 @@ private extension GiphyContainerViewController {
     }
 
     func setupViewBindings() {
+        title = viewModel.title
         viewModel.onStateChange = { [weak self] state in
             self?.render(state)
         }

@@ -29,17 +29,8 @@ extension GiphyFlowCoordinator: Coordinator {
     func showTrendingList() {
         let viewModel = GiphyListController(repository: giphyFlowFactory.createGiphyFetcher())
         let viewController = GiphyContainerViewController(viewModel: viewModel)
-        viewController.title = .trendingListTitle
 
         navigationController.navigationBar.prefersLargeTitles = true
         navigationController.setViewControllers([viewController], animated: false)
     }
-}
-
-// MARK: Locale
-
-private typealias Locale = String
-
-private extension Locale {
-    static let trendingListTitle = "Trending 🔥"
 }
