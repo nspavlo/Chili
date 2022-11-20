@@ -7,16 +7,23 @@
 
 import GiphyLookup
 
+import Foundation
+
 // MARK: Initialization
 
 final class AppFlowFactory {
-    lazy var httpClient: HTTPClient = URLSessionHTTPClient(session: .shared)
+    private var session: URLSessionConfiguration {
+        let configuration: URLSessionConfiguration = .default
+        configuration.timeoutIntervalForRequest = 15
+        configuration.timeoutIntervalForResource = 15
+        return configuration
+    }
 }
 
 // MARK: Factory Methods
 
 extension AppFlowFactory {
     func makeGiphyFlowFactory() -> GiphyFlowFactory {
-        GiphyFlowFactory(httpClient: httpClient)
+        GiphyFlowFactory(httpClient: URLSessionHTTPClient(session: URLSession(configuration: session)))
     }
 }
