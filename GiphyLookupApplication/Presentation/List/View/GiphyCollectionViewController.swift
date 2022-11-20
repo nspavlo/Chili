@@ -10,10 +10,10 @@ import UIKit
 // MARK: Initialization
 
 final class GiphyCollectionViewController: UICollectionViewController {
-    private let items: GiphyListItemViewModels
+    private let viewModels: GiphyListItemViewModels
 
-    init(items: GiphyListItemViewModels, collectionViewLayout: UICollectionViewLayout) {
-        self.items = items
+    init(viewModels: GiphyListItemViewModels, collectionViewLayout: UICollectionViewLayout) {
+        self.viewModels = viewModels
         super.init(collectionViewLayout: collectionViewLayout)
     }
 
@@ -31,16 +31,11 @@ final class GiphyCollectionViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setup()
+        setupCollectionView()
     }
 }
 
 private extension GiphyCollectionViewController {
-    func setup() {
-        setupCollectionView()
-        setupSearchController()
-    }
-
     func setupCollectionView() {
         collectionView.contentInset = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
         collectionView.register(cellType: GiphyCollectionViewCell.self)
@@ -49,21 +44,13 @@ private extension GiphyCollectionViewController {
             ofKind: UICollectionView.elementKindSectionFooter
         )
     }
-
-    func setupSearchController() {
-        let searchController = UISearchController(searchResultsController: nil)
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search GIPHY"
-        navigationItem.searchController = searchController
-    }
 }
 
 // MARK: UICollectionViewDataSource
 
 extension GiphyCollectionViewController {
     override func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
-        items.count
+        viewModels.count
     }
 
     override func collectionView(
@@ -71,8 +58,8 @@ extension GiphyCollectionViewController {
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(for: indexPath) as GiphyCollectionViewCell
-        let item = items[indexPath.item]
-        cell.configure(with: item)
+        let viewModel = viewModels[indexPath.item]
+        cell.configure(with: viewModel)
         return cell
     }
 
@@ -81,9 +68,8 @@ extension GiphyCollectionViewController {
         viewForSupplementaryElementOfKind kind: String,
         at indexPath: IndexPath
     ) -> UICollectionReusableView {
-        let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, for: indexPath)
+        collectionView.dequeueReusableSupplementaryView(ofKind: kind, for: indexPath)
             as ActivityIndicatorCollectionReusableView
-        return view
     }
 
     override func collectionView(
@@ -109,18 +95,12 @@ extension GiphyCollectionViewController {
     }
 }
 
-// MARK: UISearchResultsUpdating
-
-extension GiphyCollectionViewController: UISearchResultsUpdating {
-    func updateSearchResults(for _: UISearchController) {}
-}
-
 // MARK: PinterestLayoutDelegate
 
 extension GiphyCollectionViewController: PinterestCollectionViewLayoutDelegate {
     func collectionView(_: UICollectionView, aspectRatioForCellAtIndexPath indexPath: IndexPath) -> CGFloat {
-        let item = items[indexPath.item]
-        return CGFloat(item.height) / CGFloat(item.width)
+        let viewModel = viewModels[indexPath.item]
+        return CGFloat(viewModel.height) / CGFloat(viewModel.width)
     }
 
     func collectionView(_: UICollectionView, heightForFooterAtIndexPath _: IndexPath) -> CGFloat {

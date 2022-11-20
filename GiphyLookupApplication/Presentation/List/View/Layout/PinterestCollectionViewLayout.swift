@@ -10,16 +10,16 @@ import UIKit
 final class PinterestCollectionViewLayout: UICollectionViewLayout {
     weak var delegate: PinterestCollectionViewLayoutDelegate?
 
-    private let numberOfColumns = 2
+    private let columnCount = 2
     private let padding: CGFloat = 2
 
-    private var itemAttributesCache: [UICollectionViewLayoutAttributes] = []
-    private var supplementaryViewAttributesCache: [UICollectionViewLayoutAttributes] = []
+    private var cellLayoutAttributes = [UICollectionViewLayoutAttributes]()
+    private var supplementaryViewLayoutAttributes = [UICollectionViewLayoutAttributes]()
+    private var columnHeights = [CGFloat]()
 
-    private var contentViewHeight: CGFloat = .zero
     private var contentViewWidth: CGFloat {
         guard let collectionView else {
-            return .zero
+            return 0
         }
 
         let contentInset = collectionView.contentInset
@@ -27,7 +27,7 @@ final class PinterestCollectionViewLayout: UICollectionViewLayout {
     }
 
     override var collectionViewContentSize: CGSize {
-        CGSize(width: contentViewWidth, height: contentViewHeight)
+        CGSize(width: contentViewWidth, height: columnHeights[0])
     }
 
     override func prepare() {
@@ -36,8 +36,8 @@ final class PinterestCollectionViewLayout: UICollectionViewLayout {
         guard
             let collectionView,
             let delegate,
-            itemAttributesCache.isEmpty,
-            supplementaryViewAttributesCache.isEmpty
+            cellLayoutAttributes.isEmpty,
+            supplementaryViewLayoutAttributes.isEmpty
         else {
             return
         }
@@ -46,24 +46,27 @@ final class PinterestCollectionViewLayout: UICollectionViewLayout {
             preconditionFailure("Current \(self) implementation can't render multi section layout")
         }
 
-        let columnViewWidth = contentViewWidth / CGFloat(numberOfColumns)
-        var column = 0
+        for _ in 0 ..< columnCount {
+            columnHeights.append(0)
+        }
 
-        var offsets: [CGPoint] = (0 ..< numberOfColumns)
-            .map { CGPoint(x: CGFloat($0) * columnViewWidth, y: 0) }
+        let columnWidth = contentViewWidth / CGFloat(columnCount)
+        var offsets: [CGPoint] = (0 ..< columnCount)
+            .map { CGPoint(x: CGFloat($0) * columnWidth, y: 0) }
 
         for item in 0 ..< collectionView.numberOfItems(inSection: 0) {
+            let columnIndex = shortestColumnIndex()
             let indexPath = IndexPath(item: item, section: 0)
             let aspectRatio = delegate.collectionView(collectionView, aspectRatioForCellAtIndexPath: indexPath)
-            let heightForCell = columnViewWidth * aspectRatio
+            let cellHeight = columnWidth * aspectRatio
 
             let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
-            let frame = CGRect(origin: offsets[column], size: CGSize(width: columnViewWidth, height: heightForCell))
+            let frame = CGRect(origin: offsets[columnIndex], size: CGSize(width: columnWidth, height: cellHeight))
             attributes.frame = frame.insetBy(dx: padding, dy: padding)
-            itemAttributesCache.append(attributes)
+            cellLayoutAttributes.append(attributes)
 
-            offsets[column].y += heightForCell
-            column = column < (numberOfColumns - 1) ? (column + 1) : 0
+            offsets[columnIndex].y += cellHeight
+            columnHeights[columnIndex] = attributes.frame.maxY + padding
         }
 
         let footerIndexPath = IndexPath(item: 0, section: 0)
@@ -72,38 +75,41 @@ final class PinterestCollectionViewLayout: UICollectionViewLayout {
             with: footerIndexPath
         )
 
-        let heightForFooter = delegate.collectionView(collectionView, heightForFooterAtIndexPath: footerIndexPath)
+        let footerHeight = delegate.collectionView(collectionView, heightForFooterAtIndexPath: footerIndexPath)
         let longestColumnVerticalPosition: CGFloat = offsets.map(\.y).max() ?? 0.0
-        let frame = CGRect(x: 0.0, y: longestColumnVerticalPosition, width: contentViewWidth, height: heightForFooter)
+        let frame = CGRect(x: 0.0, y: longestColumnVerticalPosition, width: contentViewWidth, height: footerHeight)
         attributes.frame = frame.insetBy(dx: padding, dy: padding)
-        supplementaryViewAttributesCache.append(attributes)
-        contentViewHeight = max(contentViewHeight, frame.maxY)
+        supplementaryViewLayoutAttributes.append(attributes)
+        columnHeights[0] = attributes.frame.maxY + padding
     }
 
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         var visibleLayoutAttributes: [UICollectionViewLayoutAttributes] = []
 
-        for attributes in itemAttributesCache where attributes.frame.intersects(rect) {
+        for attributes in cellLayoutAttributes where attributes.frame.intersects(rect) {
             visibleLayoutAttributes.append(attributes)
         }
 
-        for attributes in supplementaryViewAttributesCache where attributes.frame.intersects(rect) {
+        for attributes in supplementaryViewLayoutAttributes where attributes.frame.intersects(rect) {
             visibleLayoutAttributes.append(attributes)
         }
 
         return visibleLayoutAttributes
     }
+}
 
-    override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        itemAttributesCache[indexPath.item]
-    }
+// MARK: Private Methods
 
-    override func layoutAttributesForSupplementaryView(
-        ofKind elementKind: String,
-        at indexPath: IndexPath
-    ) -> UICollectionViewLayoutAttributes? {
-        guard elementKind == UICollectionView.elementKindSectionFooter else { return nil }
+private extension PinterestCollectionViewLayout {
+    func shortestColumnIndex() -> Int {
+        var index = 0
+        var shortestHeight = CGFLOAT_MAX
 
-        return supplementaryViewAttributesCache[indexPath.section]
+        for (idx, height) in columnHeights.enumerated() where height < shortestHeight {
+            shortestHeight = height
+            index = idx
+        }
+
+        return index
     }
 }

@@ -19,6 +19,7 @@ final class AppSceneDelegate: UIResponder {
 extension AppSceneDelegate {
     func setupMainWindow(with navigationController: UINavigationController) {
         window?.rootViewController = navigationController
+        window?.backgroundColor = .systemBackground
         window?.makeKeyAndVisible()
     }
 
