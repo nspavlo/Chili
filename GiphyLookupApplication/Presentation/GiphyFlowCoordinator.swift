@@ -26,20 +26,44 @@ extension GiphyFlowCoordinator: Coordinator {
     func start() {
         showTrendingSearchList()
     }
+}
 
+// MARK: Private Methods
+
+private extension GiphyFlowCoordinator {
     func showTrendingSearchList() {
         let viewModel = GiphyListController(
             giphyFetcher: giphyFlowFactory.createGiphyFetcher(),
-            actions: GiphyListViewModelActions(showGiphyDetails: showGiphyDetails(giphy:))
+            actions: GiphyListViewModelActions(showDetails: showDetails(for:), showError: showErrorAlert(_:))
         )
-        let viewController = GiphySearchContainerViewController(viewModel: viewModel)
+
+        let collectionViewLayout = PinterestCollectionViewLayout()
+        let collectionViewController = GiphyCollectionViewController(
+            viewModel: viewModel,
+            collectionViewLayout: collectionViewLayout
+        )
+        collectionViewLayout.delegate = collectionViewController
+
+        let searchContainerViewController = GiphySearchContainerViewController(
+            viewModel: viewModel,
+            childViewController: collectionViewController
+        )
 
         navigationController.navigationBar.prefersLargeTitles = true
-        navigationController.setViewControllers([viewController], animated: false)
+        navigationController.setViewControllers([searchContainerViewController], animated: false)
     }
 
-    func showGiphyDetails(giphy: GIF) {
+    func showDetails(for giphy: GIF) {
         let viewController = GiphyDetailsViewController(url: giphy.images.original.url)
         navigationController.pushViewController(viewController, animated: true)
+    }
+
+    func showErrorAlert(_ error: Error) {
+        let viewController = UIAlertController(
+            title: "Error",
+            message: error.localizedDescription,
+            preferredStyle: .alert
+        )
+        navigationController.present(viewController, animated: true)
     }
 }

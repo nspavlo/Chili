@@ -5,30 +5,22 @@
 //  Created by Jans Pavlovs on 20/11/2022.
 //
 
-import Foundation
-
-// MARK: ViewModel Input
+// MARK: Input
 
 protocol GiphyListViewModelInput {
     func onAppear()
-    func didLoadNextPage()
+    func startPrefetch(at indexes: [Int])
+    func stopPrefetch(at indexes: [Int])
     func didSelectItem(at index: Int)
-
-    func updateSearchQuery(_ query: String?)
-    func dismissSearchQuery()
 }
 
-// MARK: ViewModel Output
-
-enum GiphyListViewModelState {
-    case loading
-    case result(Result<GiphyListItemViewModels, Error>)
-}
+// MARK: Output
 
 protocol GiphyListViewModelOutput: AnyObject {
-    var title: String { get }
-    var searchBarPlaceholder: String { get }
-    var onStateChange: ((GiphyListViewModelState) -> Void)? { get set }
+    var onLoadingStateChange: ((Bool) -> Void)? { get set }
+    var onListChange: (() -> Void)? { get set }
+
+    var items: GiphyListItemViewModels { get }
 }
 
 typealias GiphyListViewModel = GiphyListViewModelInput & GiphyListViewModelOutput

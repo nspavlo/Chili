@@ -9,31 +9,47 @@ import Combine
 import Foundation
 import GiphyLookup
 
+import Nuke
+
 // MARK: Actions
 
 final class GiphyListViewModelActions {
-    let showGiphyDetails: (GIF) -> Void
+    let showDetails: (GIF) -> Void
+    let showError: (Error) -> Void
 
-    init(showGiphyDetails: @escaping (GIF) -> Void) {
-        self.showGiphyDetails = showGiphyDetails
+    init(showDetails: @escaping (GIF) -> Void, showError: @escaping (Error) -> Void) {
+        self.showDetails = showDetails
+        self.showError = showError
     }
 }
 
 // MARK: Initialization
 
 final class GiphyListController: GiphyListViewModelOutput {
-    let title: String = .trendingListTitle
-    let searchBarPlaceholder: String = .searchBarPlaceholder
-    var onStateChange: ((GiphyListViewModelState) -> Void)?
+    var onLoadingStateChange: ((Bool) -> Void)?
+    var onListChange: (() -> Void)?
+
+    var items: GiphyListItemViewModels {
+        response?.data.map { data in
+            let preview = data.images.fixedWidth
+            return .init(
+                title: data.title,
+                width: preview.width.rawValue,
+                height: preview.height.rawValue,
+                url: preview.url
+            )
+        } ?? []
+    }
 
     private let giphyFetcher: GiphyFetchable
-    private var giphyFetcherCancellable: Cancellable?
+    private var giphyFetcherCancellable: Combine.Cancellable?
     private let actions: GiphyListViewModelActions
     private var response: GiphyResponse?
-    private var isSearchingActive = false
 
     private let currentQuerySubject = PassthroughSubject<SearchQuery, Never>()
-    private var currentQuerySubjectCancelable: Cancellable?
+    private var currentQuerySubjectCancelable: Combine.Cancellable?
+
+    private let prefetcher = ImagePrefetcher()
 
     init(giphyFetcher: GiphyFetchable, actions: GiphyListViewModelActions) {
         self.giphyFetcher = giphyFetcher
@@ -45,40 +61,31 @@ final class GiphyListController: GiphyListViewModelOutput {
 
 extension GiphyListController: GiphyListViewModelInput {
     func onAppear() {
-        onStateChange?(.loading)
         fetchTrendingList()
 
         currentQuerySubjectCancelable = currentQuerySubject
             .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
             .sink { query in
-                self.isSearchingActive = true
-                self.onStateChange?(.loading)
+                self.onLoadingStateChange?(true)
                 self.fetchList(query: query)
             }
     }
 
-    func updateSearchQuery(_ query: String?) {
-        guard let searchQuery = SearchQuery(query) else {
-            return
-        }
-
-        currentQuerySubject.send(searchQuery)
+    func startPrefetch(at indexes: [Int]) {
+        let urls = indexes.map { items[$0].url }
+        prefetcher.startPrefetching(with: urls)
     }
 
-    func dismissSearchQuery() {
-        if isSearchingActive {
-            isSearchingActive = false
-            fetchTrendingList()
-        }
+    func stopPrefetch(at indexes: [Int]) {
+        let urls = indexes.map { items[$0].url }
+        prefetcher.stopPrefetching(with: urls)
     }
 
     func didSelectItem(at index: Int) {
         if let item = response?.data[index] {
-            actions.showGiphyDetails(item)
+            actions.showDetails(item)
         }
     }
-
-    func didLoadNextPage() {}
 }
 
 // MARK: Private Methods
@@ -96,26 +103,38 @@ private extension GiphyListController {
         giphyFetcher
             .receive(on: RunLoop.main)
             .sink { completion in
+                self.onLoadingStateChange?(false)
+
                 switch completion {
                 case .finished:
                     break
                 case let .failure(error):
-                    self.onStateChange?(.result(.failure(error)))
+                    self.actions.showError(error)
                 }
             }
             receiveValue: { response in
-                let items: GiphyListItemViewModels = response.data.map { data in
-                    let preview = data.images.fixedWidth
-                    return .init(
-                        title: data.title,
-                        width: preview.width.rawValue,
-                        height: preview.height.rawValue,
-                        url: preview.url
-                    )
-                }
                 self.response = response
-                self.onStateChange?(.result(.success(items)))
+                self.onListChange?()
             }
+    }
+}
+
+// MARK: GiphySearchViewModel
+
+extension GiphyListController: GiphySearchViewModel {
+    var title: String { .trendingListTitle }
+    var searchBarPlaceholder: String { .searchBarPlaceholder }
+
+    func updateSearchQuery(_ query: String?) {
+        guard let query = SearchQuery(query) else {
+            return
+        }
+
+        currentQuerySubject.send(query)
+    }
+
+    func dismissSearchQuery() {
+        fetchTrendingList()
     }
 }
 
