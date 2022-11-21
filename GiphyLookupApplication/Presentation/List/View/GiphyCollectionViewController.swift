@@ -82,9 +82,7 @@ private extension GiphyCollectionViewController {
 
 private extension GiphyCollectionViewController {
     @objc func handleControlValueChanged(_ sender: UIRefreshControl) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
-            sender.endRefreshing()
-        }
+        viewModel.didRequestDataUpdate()
     }
 }
 

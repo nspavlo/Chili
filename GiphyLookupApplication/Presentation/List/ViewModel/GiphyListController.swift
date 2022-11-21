@@ -81,6 +81,10 @@ extension GiphyListController: GiphyListViewModelInput {
         prefetcher.stopPrefetching(with: urls)
     }
 
+    func didRequestDataUpdate() {
+        fetchTrendingList()
+    }
+
     func didSelectItem(at index: Int) {
         if let item = response?.data[index] {
             actions.showDetails(item)
