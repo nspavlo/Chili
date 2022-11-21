@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import GiphyLookup
 
 // MARK: ViewModel Input
 
