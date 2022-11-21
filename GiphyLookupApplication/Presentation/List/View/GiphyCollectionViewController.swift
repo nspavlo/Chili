@@ -40,7 +40,7 @@ final class GiphyCollectionViewController: UICollectionViewController {
 
 private extension GiphyCollectionViewController {
     func setupCollectionView() {
-        collectionView.contentInset = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
+        collectionView.contentInset = UIEdgeInsets(inset: 2)
         collectionView.register(cellType: GiphyCollectionViewCell.self)
         collectionView.register(
             supplementaryViewType: ActivityIndicatorCollectionReusableView.self,

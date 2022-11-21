@@ -51,6 +51,7 @@
 		B717BEE0292A91C900BC3544 /* UIViewController+Embed.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BEDF292A91C900BC3544 /* UIViewController+Embed.swift */; };
 		B717BEE5292B5E0B00BC3544 /* GiphyDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BEE4292B5E0B00BC3544 /* GiphyDetailsViewController.swift */; };
 		B717BEE7292B6ED400BC3544 /* GiphySearchQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BEE6292B6ED400BC3544 /* GiphySearchQuery.swift */; };
+		B717BEE9292B7AD200BC3544 /* UIEdgeInsets+Inset.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BEE8292B7AD200BC3544 /* UIEdgeInsets+Inset.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,6 +139,7 @@
 		B717BEDF292A91C900BC3544 /* UIViewController+Embed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Embed.swift"; sourceTree = "<group>"; };
 		B717BEE4292B5E0B00BC3544 /* GiphyDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphyDetailsViewController.swift; sourceTree = "<group>"; };
 		B717BEE6292B6ED400BC3544 /* GiphySearchQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphySearchQuery.swift; sourceTree = "<group>"; };
+		B717BEE8292B7AD200BC3544 /* UIEdgeInsets+Inset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIEdgeInsets+Inset.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -413,6 +415,7 @@
 			isa = PBXGroup;
 			children = (
 				B717BE7F292908F100BC3544 /* Reusable */,
+				B717BEE8292B7AD200BC3544 /* UIEdgeInsets+Inset.swift */,
 				B717BEDF292A91C900BC3544 /* UIViewController+Embed.swift */,
 			);
 			path = Extensions;
@@ -733,6 +736,7 @@
 				B717BE812929090700BC3544 /* Reusable.swift in Sources */,
 				B717BEE5292B5E0B00BC3544 /* GiphyDetailsViewController.swift in Sources */,
 				B717BEDD292A902400BC3544 /* GiphyListViewModel.swift in Sources */,
+				B717BEE9292B7AD200BC3544 /* UIEdgeInsets+Inset.swift in Sources */,
 				B717BE97292914CC00BC3544 /* PinterestCollectionViewLayout.swift in Sources */,
 				B717BE832929093500BC3544 /* UICollectionView+Reusable.swift in Sources */,
 				B717BED6292A7F1100BC3544 /* GiphySearchContainerViewController.swift in Sources */,
