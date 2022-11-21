@@ -5,6 +5,7 @@
 //  Created by Jans Pavlovs on 19/11/2022.
 //
 
+import Nuke
 import UIKit
 
 // MARK: Initialization
@@ -14,6 +15,7 @@ final class GiphyCollectionViewController: UICollectionViewController {
     var didLoadNextPage: (() -> Void)?
 
     private let viewModels: GiphyListItemViewModels
+    private let prefetcher = ImagePrefetcher()
 
     init(viewModels: GiphyListItemViewModels, collectionViewLayout: UICollectionViewLayout) {
         self.viewModels = viewModels
@@ -41,6 +43,8 @@ final class GiphyCollectionViewController: UICollectionViewController {
 private extension GiphyCollectionViewController {
     func setupCollectionView() {
         collectionView.contentInset = UIEdgeInsets(inset: 2)
+        collectionView.isPrefetchingEnabled = true
+        collectionView.prefetchDataSource = self
         collectionView.register(cellType: GiphyCollectionViewCell.self)
         collectionView.register(
             supplementaryViewType: ActivityIndicatorCollectionReusableView.self,
@@ -100,6 +104,18 @@ extension GiphyCollectionViewController {
         if let view = view as? ActivityIndicatorCollectionReusableView {
             view.stopAnimating()
         }
+    }
+}
+
+extension GiphyCollectionViewController: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        let urls = indexPaths.map { viewModels[$0.row].url }
+        prefetcher.startPrefetching(with: urls)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
+        let urls = indexPaths.map { viewModels[$0.row].url }
+        prefetcher.stopPrefetching(with: urls)
     }
 }
 
