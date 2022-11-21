@@ -7,40 +7,47 @@
 
 import Foundation
 
-// MARK: Endpoints
+// MARK: Initialization
 
-enum GiphyEndpoint {
-    static let scheme = "https"
-    static let host = "api.giphy.com"
-    static let path = "/v1/gifs"
-    static let key = "D1OIHpdq1qe36SHbpl0hgwQxT1jOluZm"
+struct GiphyEndpoint {
+    let path: String
+    let queryItems: [URLQueryItem]
+}
+
+// MARK: Available Endpoints
+
+extension GiphyEndpoint {
+    private static let key = "D1OIHpdq1qe36SHbpl0hgwQxT1jOluZm"
+
+    static var trending: Self {
+        GiphyEndpoint(
+            path: "/trending",
+            queryItems: [
+                URLQueryItem(name: "api_key", value: GiphyEndpoint.key),
+            ]
+        )
+    }
+
+    static func search(for query: SearchQuery) -> Self {
+        GiphyEndpoint(
+            path: "/search",
+            queryItems: [
+                URLQueryItem(name: "q", value: query.value),
+                URLQueryItem(name: "api_key", value: GiphyEndpoint.key),
+            ]
+        )
+    }
 }
 
 // MARK: Factory Methods
 
 extension GiphyEndpoint {
-    static func makeEndpointComponents(with path: String) -> URLComponents {
+    var url: URL? {
         var components = URLComponents()
-        components.scheme = GiphyEndpoint.scheme
-        components.host = GiphyEndpoint.host
-        components.path = GiphyEndpoint.path + path
-        return components
-    }
-
-    static func makeTrendingListComponents() -> URLComponents {
-        var components = makeEndpointComponents(with: "/trending")
-        components.queryItems = [
-            URLQueryItem(name: "api_key", value: GiphyEndpoint.key),
-        ]
-        return components
-    }
-
-    static func makeQueryListComponents(query: String, page _: Int) -> URLComponents {
-        var components = makeEndpointComponents(with: "/search")
-        components.queryItems = [
-            URLQueryItem(name: "q", value: query),
-            URLQueryItem(name: "api_key", value: GiphyEndpoint.key),
-        ]
-        return components
+        components.scheme = "https"
+        components.host = "api.giphy.com"
+        components.path = "/v1/gifs" + path
+        components.queryItems = queryItems
+        return components.url
     }
 }

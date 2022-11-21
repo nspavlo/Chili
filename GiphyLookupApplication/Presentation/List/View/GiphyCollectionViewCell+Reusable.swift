@@ -5,6 +5,6 @@
 //  Created by Jans Pavlovs on 19/11/2022.
 //
 
-import Foundation
+import Reusable
 
 extension GiphyCollectionViewCell: Reusable {}

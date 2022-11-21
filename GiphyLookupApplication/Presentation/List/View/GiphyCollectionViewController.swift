@@ -5,12 +5,17 @@
 //  Created by Jans Pavlovs on 19/11/2022.
 //
 
+import Nuke
 import UIKit
 
 // MARK: Initialization
 
 final class GiphyCollectionViewController: UICollectionViewController {
+    var didSelectItem: ((Int) -> Void)?
+    var didLoadNextPage: (() -> Void)?
+
     private let viewModels: GiphyListItemViewModels
+    private let prefetcher = ImagePrefetcher()
 
     init(viewModels: GiphyListItemViewModels, collectionViewLayout: UICollectionViewLayout) {
         self.viewModels = viewModels
@@ -37,7 +42,9 @@ final class GiphyCollectionViewController: UICollectionViewController {
 
 private extension GiphyCollectionViewController {
     func setupCollectionView() {
-        collectionView.contentInset = UIEdgeInsets(top: 2, left: 2, bottom: 2, right: 2)
+        collectionView.contentInset = UIEdgeInsets(inset: 2)
+        collectionView.isPrefetchingEnabled = true
+        collectionView.prefetchDataSource = self
         collectionView.register(cellType: GiphyCollectionViewCell.self)
         collectionView.register(
             supplementaryViewType: ActivityIndicatorCollectionReusableView.self,
@@ -60,6 +67,11 @@ extension GiphyCollectionViewController {
         let cell = collectionView.dequeueReusableCell(for: indexPath) as GiphyCollectionViewCell
         let viewModel = viewModels[indexPath.item]
         cell.configure(with: viewModel)
+
+        if indexPath.row == viewModels.count - 1 {
+            didLoadNextPage?()
+        }
+
         return cell
     }
 
@@ -92,6 +104,28 @@ extension GiphyCollectionViewController {
         if let view = view as? ActivityIndicatorCollectionReusableView {
             view.stopAnimating()
         }
+    }
+}
+
+// MARK: UICollectionViewDataSourcePrefetching
+
+extension GiphyCollectionViewController: UICollectionViewDataSourcePrefetching {
+    func collectionView(_: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        let urls = indexPaths.map { viewModels[$0.row].url }
+        prefetcher.startPrefetching(with: urls)
+    }
+
+    func collectionView(_: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
+        let urls = indexPaths.map { viewModels[$0.row].url }
+        prefetcher.stopPrefetching(with: urls)
+    }
+}
+
+// MARK: UICollectionViewDelegate
+
+extension GiphyCollectionViewController {
+    override func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        didSelectItem?(indexPath.row)
     }
 }
 

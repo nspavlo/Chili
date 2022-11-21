@@ -5,6 +5,7 @@
 //  Created by Jans Pavlovs on 20/11/2022.
 //
 
+import GiphyLookup
 import UIKit
 
 // MARK: Initialization
@@ -23,14 +24,22 @@ final class GiphyFlowCoordinator {
 
 extension GiphyFlowCoordinator: Coordinator {
     func start() {
-        showTrendingList()
+        showTrendingSearchList()
     }
 
-    func showTrendingList() {
-        let viewModel = GiphyListController(giphyFetcher: giphyFlowFactory.createGiphyFetcher())
-        let viewController = GiphyContainerViewController(viewModel: viewModel)
+    func showTrendingSearchList() {
+        let viewModel = GiphyListController(
+            giphyFetcher: giphyFlowFactory.createGiphyFetcher(),
+            actions: GiphyListViewModelActions(showGiphyDetails: showGiphyDetails(giphy:))
+        )
+        let viewController = GiphySearchContainerViewController(viewModel: viewModel)
 
         navigationController.navigationBar.prefersLargeTitles = true
         navigationController.setViewControllers([viewController], animated: false)
+    }
+
+    func showGiphyDetails(giphy: GIF) {
+        let viewController = GiphyDetailsViewController(url: giphy.images.original.url)
+        navigationController.pushViewController(viewController, animated: true)
     }
 }

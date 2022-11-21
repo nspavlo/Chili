@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: Initialization
 
-final class GiphyContainerViewController: UIViewController {
+final class GiphySearchContainerViewController: UIViewController {
     private let viewModel: GiphyListViewModel
 
     init(viewModel: GiphyListViewModel) {
@@ -32,13 +32,13 @@ final class GiphyContainerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        viewModel.viewDidLoad()
+        viewModel.onAppear()
     }
 }
 
 // MARK: Setup
 
-private extension GiphyContainerViewController {
+private extension GiphySearchContainerViewController {
     func setup() {
         setupViewBindings()
         setupSearchController()
@@ -62,11 +62,23 @@ private extension GiphyContainerViewController {
 
 // MARK: Rendering
 
-private extension GiphyContainerViewController {
+private extension GiphySearchContainerViewController {
     func render(_ state: GiphyListViewModelState) {
         switch state {
         case .loading:
-            let viewController = ActivityIndicatorViewController()
+            let viewController = GiphyCollectionViewController(
+                viewModels: [],
+                collectionViewLayout: UICollectionViewFlowLayout()
+            )
+
+            let refreshControl = UIRefreshControl()
+            refreshControl.addTarget(self, action: #selector(test(_:)), for: .valueChanged)
+            viewController.collectionView.refreshControl = refreshControl
+
+            DispatchQueue.main.async {
+                refreshControl.beginRefreshing()
+            }
+
             replaceExisting(with: viewController, in: view)
 
         case let .result(.success(viewModels)):
@@ -76,6 +88,12 @@ private extension GiphyContainerViewController {
                 collectionViewLayout: collectionViewLayout
             )
             collectionViewLayout.delegate = viewController
+
+            let refreshControl = UIRefreshControl()
+            refreshControl.addTarget(self, action: #selector(test), for: .valueChanged)
+            viewController.collectionView.refreshControl = refreshControl
+            viewController.didSelectItem = viewModel.didSelectItem(at:)
+            viewController.didLoadNextPage = viewModel.didLoadNextPage
             replaceExisting(with: viewController, in: view)
 
         case let .result(.failure(error)):
@@ -85,14 +103,22 @@ private extension GiphyContainerViewController {
     }
 }
 
+extension GiphySearchContainerViewController {
+    @objc func test(_ sender: UIRefreshControl) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
+            sender.endRefreshing()
+        }
+    }
+}
+
 // MARK: UISearchResultsUpdating
 
-extension GiphyContainerViewController: UISearchResultsUpdating {
+extension GiphySearchContainerViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         if !searchController.isActive {
             viewModel.dismissSearchQuery()
         } else {
-            viewModel.searchQueryValueChanged(searchController.searchBar.text)
+            viewModel.updateSearchQuery(searchController.searchBar.text)
         }
     }
 }

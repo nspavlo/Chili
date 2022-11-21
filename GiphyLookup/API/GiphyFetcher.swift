@@ -21,9 +21,9 @@ public final class GiphyFetcher {
 // MARK: Private Methods
 
 private extension GiphyFetcher {
-    func fetch<T>(with components: URLComponents) -> AnyPublisher<T, GiphyError> where T: Decodable {
-        guard let url = components.url else {
-            preconditionFailure("Unable to construct a valid URL with given components: \(components)")
+    func fetch<T>(with endpoint: GiphyEndpoint) -> AnyPublisher<T, GiphyError> where T: Decodable {
+        guard let url = endpoint.url else {
+            preconditionFailure("Unable to construct a valid URL for given endpoint: \(endpoint)")
         }
 
         return httpClient
@@ -37,11 +37,11 @@ private extension GiphyFetcher {
 // MARK: GiphyFetchable
 
 extension GiphyFetcher: GiphyFetchable {
-    public func fetchList(query: String, page: Int) -> GiphyFetchable.Publisher {
-        fetch(with: GiphyEndpoint.makeQueryListComponents(query: query, page: page))
+    public func fetchList(query: SearchQuery) -> GiphyFetchable.Publisher {
+        fetch(with: .search(for: query))
     }
 
     public func fetchTrendingList() -> GiphyFetchable.Publisher {
-        fetch(with: GiphyEndpoint.makeTrendingListComponents())
+        fetch(with: .trending)
     }
 }
