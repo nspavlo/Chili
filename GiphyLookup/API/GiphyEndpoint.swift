@@ -28,7 +28,7 @@ extension GiphyEndpoint {
         )
     }
 
-    static func search(for query: SearchQuery) -> Self {
+    static func search(for query: GiphySearchQuery) -> Self {
         GiphyEndpoint(
             path: "/search",
             queryItems: [

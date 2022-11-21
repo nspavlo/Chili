@@ -51,6 +51,7 @@
 		B717BEDD292A902400BC3544 /* GiphyListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BEDC292A902400BC3544 /* GiphyListViewModel.swift */; };
 		B717BEE0292A91C900BC3544 /* UIViewController+Embed.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BEDF292A91C900BC3544 /* UIViewController+Embed.swift */; };
 		B717BEE5292B5E0B00BC3544 /* GiphyDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BEE4292B5E0B00BC3544 /* GiphyDetailsViewController.swift */; };
+		B717BEE7292B6ED400BC3544 /* GiphySearchQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BEE6292B6ED400BC3544 /* GiphySearchQuery.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,6 +139,7 @@
 		B717BEDC292A902400BC3544 /* GiphyListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphyListViewModel.swift; sourceTree = "<group>"; };
 		B717BEDF292A91C900BC3544 /* UIViewController+Embed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Embed.swift"; sourceTree = "<group>"; };
 		B717BEE4292B5E0B00BC3544 /* GiphyDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphyDetailsViewController.swift; sourceTree = "<group>"; };
+		B717BEE6292B6ED400BC3544 /* GiphySearchQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphySearchQuery.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -394,6 +396,7 @@
 				B717BEC1292A4F4B00BC3544 /* GiphyFetchable+Decode.swift */,
 				B717BEBF292A4ED600BC3544 /* GiphyFetcher.swift */,
 				B717BEBB292A34A700BC3544 /* GiphyResponse.swift */,
+				B717BEE6292B6ED400BC3544 /* GiphySearchQuery.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -703,6 +706,7 @@
 				B717BE612928D17500BC3544 /* HTTPClient.swift in Sources */,
 				B717BEC4292A506500BC3544 /* GiphyEndpoint.swift in Sources */,
 				B717BE6D2928D82800BC3544 /* URLSessionHTTPClient.swift in Sources */,
+				B717BEE7292B6ED400BC3544 /* GiphySearchQuery.swift in Sources */,
 				B717BEBC292A34A700BC3544 /* GiphyResponse.swift in Sources */,
 				B717BEC2292A4F4B00BC3544 /* GiphyFetchable+Decode.swift in Sources */,
 				B717BE682928D2EF00BC3544 /* HTTPStatusCode+HTTPURLResponse.swift in Sources */,

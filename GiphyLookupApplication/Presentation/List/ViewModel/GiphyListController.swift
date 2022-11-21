@@ -20,7 +20,7 @@ final class GiphyListController: GiphyListViewModelOutput {
     private var giphyFetcherCancellable: Cancellable?
     private var isSearchingActive = false
 
-    private let currentQuerySubject = PassthroughSubject<SearchQuery, Never>()
+    private let currentQuerySubject = PassthroughSubject<GiphySearchQuery, Never>()
     private var currentQuerySubjectCancelable: Cancellable?
 
     init(giphyFetcher: GiphyFetchable) {
@@ -45,7 +45,7 @@ extension GiphyListController: GiphyListViewModelInput {
     }
 
     func updateSearchQuery(_ query: String?) {
-        guard let searchQuery = SearchQuery(query) else {
+        guard let searchQuery = GiphySearchQuery(query) else {
             return
         }
 
@@ -73,7 +73,7 @@ private extension GiphyListController {
         giphyFetcherCancellable = fetch(from: giphyFetcher.fetchTrendingList())
     }
 
-    func fetchList(query: SearchQuery) {
+    func fetchList(query: GiphySearchQuery) {
         giphyFetcherCancellable = fetch(from: giphyFetcher.fetchList(query: query))
     }
 

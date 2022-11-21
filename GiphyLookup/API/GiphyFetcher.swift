@@ -37,7 +37,7 @@ private extension GiphyFetcher {
 // MARK: GiphyFetchable
 
 extension GiphyFetcher: GiphyFetchable {
-    public func fetchList(query: SearchQuery) -> GiphyFetchable.Publisher {
+    public func fetchList(query: GiphySearchQuery) -> GiphyFetchable.Publisher {
         fetch(with: .search(for: query))
     }
 

@@ -10,21 +10,6 @@ import Combine
 public protocol GiphyFetchable {
     typealias Publisher = AnyPublisher<GiphyResponse, GiphyError>
 
-    func fetchList(query: SearchQuery) -> Publisher
+    func fetchList(query: GiphySearchQuery) -> Publisher
     func fetchTrendingList() -> Publisher
-}
-
-
-// MARK: Models
-
-public struct SearchQuery {
-    let value: String
-
-    public init?(_ string: String?) {
-        guard let string, !string.isEmpty else {
-            return nil
-        }
-
-        value = string
-    }
 }
