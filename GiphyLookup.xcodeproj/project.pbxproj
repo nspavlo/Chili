@@ -22,8 +22,6 @@
 		B717BE702928DB6D00BC3544 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE6F2928DB6D00BC3544 /* XCTestCase+MemoryLeakTracking.swift */; };
 		B717BE782928DD2900BC3544 /* URLProtocolStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE772928DD2900BC3544 /* URLProtocolStub.swift */; };
 		B717BE7A2928DF4100BC3544 /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE792928DF4100BC3544 /* URLSessionHTTPClientTests.swift */; };
-		B717BE812929090700BC3544 /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE802929090700BC3544 /* Reusable.swift */; };
-		B717BE832929093500BC3544 /* UICollectionView+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE822929093500BC3544 /* UICollectionView+Reusable.swift */; };
 		B717BE8929290C8400BC3544 /* GiphyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE8829290C8400BC3544 /* GiphyCollectionViewCell.swift */; };
 		B717BE8B29290CA300BC3544 /* GiphyCollectionViewCell+Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE8A29290CA300BC3544 /* GiphyCollectionViewCell+Reusable.swift */; };
 		B717BE8D29290E6200BC3544 /* GiphyCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE8C29290E6200BC3544 /* GiphyCollectionViewController.swift */; };
@@ -55,6 +53,7 @@
 		B717BEF6292B95E700BC3544 /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = B717BEF5292B95E700BC3544 /* Nuke */; };
 		B717BEF8292B95E700BC3544 /* NukeExtensions in Frameworks */ = {isa = PBXBuildFile; productRef = B717BEF7292B95E700BC3544 /* NukeExtensions */; };
 		B717BEFA292B95E700BC3544 /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = B717BEF9292B95E700BC3544 /* NukeUI */; };
+		B7A5F7A2292B972700714330 /* Reusable in Frameworks */ = {isa = PBXBuildFile; productRef = B7A5F7A1292B972700714330 /* Reusable */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,8 +114,6 @@
 		B717BE6F2928DB6D00BC3544 /* XCTestCase+MemoryLeakTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCTestCase+MemoryLeakTracking.swift"; sourceTree = "<group>"; };
 		B717BE772928DD2900BC3544 /* URLProtocolStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLProtocolStub.swift; sourceTree = "<group>"; };
 		B717BE792928DF4100BC3544 /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
-		B717BE802929090700BC3544 /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
-		B717BE822929093500BC3544 /* UICollectionView+Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Reusable.swift"; sourceTree = "<group>"; };
 		B717BE8829290C8400BC3544 /* GiphyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphyCollectionViewCell.swift; sourceTree = "<group>"; };
 		B717BE8A29290CA300BC3544 /* GiphyCollectionViewCell+Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GiphyCollectionViewCell+Reusable.swift"; sourceTree = "<group>"; };
 		B717BE8C29290E6200BC3544 /* GiphyCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphyCollectionViewController.swift; sourceTree = "<group>"; };
@@ -153,6 +150,7 @@
 				B717BEFA292B95E700BC3544 /* NukeUI in Frameworks */,
 				B717BEF6292B95E700BC3544 /* Nuke in Frameworks */,
 				B717BEF8292B95E700BC3544 /* NukeExtensions in Frameworks */,
+				B7A5F7A2292B972700714330 /* Reusable in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,15 +333,6 @@
 			path = Presentation;
 			sourceTree = "<group>";
 		};
-		B717BE7F292908F100BC3544 /* Reusable */ = {
-			isa = PBXGroup;
-			children = (
-				B717BE802929090700BC3544 /* Reusable.swift */,
-				B717BE822929093500BC3544 /* UICollectionView+Reusable.swift */,
-			);
-			path = Reusable;
-			sourceTree = "<group>";
-		};
 		B717BE8529290C2500BC3544 /* List */ = {
 			isa = PBXGroup;
 			children = (
@@ -420,7 +409,6 @@
 		B717BEDE292A91B500BC3544 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				B717BE7F292908F100BC3544 /* Reusable */,
 				B717BEE8292B7AD200BC3544 /* UIEdgeInsets+Inset.swift */,
 				B717BEDF292A91C900BC3544 /* UIViewController+Embed.swift */,
 			);
@@ -482,6 +470,7 @@
 				B717BEF5292B95E700BC3544 /* Nuke */,
 				B717BEF7292B95E700BC3544 /* NukeExtensions */,
 				B717BEF9292B95E700BC3544 /* NukeUI */,
+				B7A5F7A1292B972700714330 /* Reusable */,
 			);
 			productName = GiphyLookup;
 			productReference = B717BE072928022A00BC3544 /* GiphyLookup.framework */;
@@ -584,6 +573,7 @@
 			mainGroup = B717BDFD2928022A00BC3544;
 			packageReferences = (
 				B717BEF4292B95E700BC3544 /* XCRemoteSwiftPackageReference "Nuke" */,
+				B7A5F7A0292B972700714330 /* XCRemoteSwiftPackageReference "Reusable" */,
 			);
 			productRefGroup = B717BE082928022A00BC3544 /* Products */;
 			projectDirPath = "";
@@ -747,12 +737,10 @@
 				B717BED8292A801A00BC3544 /* ErrorViewController.swift in Sources */,
 				B717BEA9292A22F400BC3544 /* GiphyFlowCoordinator.swift in Sources */,
 				B717BEAD292A256D00BC3544 /* GiphyFlowFactory.swift in Sources */,
-				B717BE812929090700BC3544 /* Reusable.swift in Sources */,
 				B717BEE5292B5E0B00BC3544 /* GiphyDetailsViewController.swift in Sources */,
 				B717BEDD292A902400BC3544 /* GiphyListViewModel.swift in Sources */,
 				B717BEE9292B7AD200BC3544 /* UIEdgeInsets+Inset.swift in Sources */,
 				B717BE97292914CC00BC3544 /* PinterestCollectionViewLayout.swift in Sources */,
-				B717BE832929093500BC3544 /* UICollectionView+Reusable.swift in Sources */,
 				B717BED6292A7F1100BC3544 /* GiphySearchContainerViewController.swift in Sources */,
 				B717BEA329294F5200BC3544 /* ActivityIndicatorCollectionReusableView+Reusable.swift in Sources */,
 				B717BEDB292A8CDB00BC3544 /* GiphyListController.swift in Sources */,
@@ -1227,6 +1215,14 @@
 				version = 11.3.1;
 			};
 		};
+		B7A5F7A0292B972700714330 /* XCRemoteSwiftPackageReference "Reusable" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AliSoftware/Reusable";
+			requirement = {
+				kind = exactVersion;
+				version = 4.1.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1244,6 +1240,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B717BEF4292B95E700BC3544 /* XCRemoteSwiftPackageReference "Nuke" */;
 			productName = NukeUI;
+		};
+		B7A5F7A1292B972700714330 /* Reusable */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B7A5F7A0292B972700714330 /* XCRemoteSwiftPackageReference "Reusable" */;
+			productName = Reusable;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
