@@ -9,7 +9,28 @@ import UIKit
 
 // MARK: Initialization
 
-final class GiphyCollectionViewCell: UICollectionViewCell {}
+final class GiphyCollectionViewCell: UICollectionViewCell {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+
+    @available(*, unavailable)
+    required init() {
+        fatalError("init() has not been implemented")
+    }
+
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+// MARK: Setup
+
+private extension GiphyCollectionViewCell {
+    func setup() {}
+}
 
 // MARK: Configuration
 
