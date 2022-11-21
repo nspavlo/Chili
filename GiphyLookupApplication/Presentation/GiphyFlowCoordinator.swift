@@ -38,8 +38,8 @@ extension GiphyFlowCoordinator: Coordinator {
         navigationController.setViewControllers([viewController], animated: false)
     }
 
-    func showGiphyDetails(giphy _: GIF) {
-        let viewController = GiphyDetailsViewController()
+    func showGiphyDetails(giphy: GIF) {
+        let viewController = GiphyDetailsViewController(url: giphy.images.original.url)
         navigationController.pushViewController(viewController, animated: true)
     }
 }

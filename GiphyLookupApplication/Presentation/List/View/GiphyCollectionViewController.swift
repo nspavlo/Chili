@@ -107,13 +107,15 @@ extension GiphyCollectionViewController {
     }
 }
 
+// MARK: UICollectionViewDataSourcePrefetching
+
 extension GiphyCollectionViewController: UICollectionViewDataSourcePrefetching {
-    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+    func collectionView(_: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         let urls = indexPaths.map { viewModels[$0.row].url }
         prefetcher.startPrefetching(with: urls)
     }
 
-    func collectionView(_ collectionView: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
+    func collectionView(_: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
         let urls = indexPaths.map { viewModels[$0.row].url }
         prefetcher.stopPrefetching(with: urls)
     }

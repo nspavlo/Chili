@@ -9,6 +9,7 @@
 
 public struct Images {
     public let fixedWidth: Preview
+    public let original: Preview
 }
 
 // MARK: Decodable
