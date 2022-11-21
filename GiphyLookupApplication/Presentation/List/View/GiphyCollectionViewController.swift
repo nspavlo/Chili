@@ -65,7 +65,6 @@ private extension GiphyCollectionViewController {
     func setupViewBindings() {
         viewModel.onLoadingStateChange = { [weak self] isLoading in
             if isLoading {
-                self?.collectionView.layoutSubviews()
                 self?.collectionView.refreshControl?.beginRefreshing()
             } else {
                 self?.collectionView.refreshControl?.endRefreshing()
@@ -135,6 +134,14 @@ extension GiphyCollectionViewController {
     }
 }
 
+// MARK: UICollectionViewDelegate
+
+extension GiphyCollectionViewController {
+    override func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        viewModel.didSelectItem(at: indexPath.row)
+    }
+}
+
 // MARK: UICollectionViewDataSourcePrefetching
 
 extension GiphyCollectionViewController: UICollectionViewDataSourcePrefetching {
@@ -144,14 +151,6 @@ extension GiphyCollectionViewController: UICollectionViewDataSourcePrefetching {
 
     func collectionView(_: UICollectionView, cancelPrefetchingForItemsAt indexPaths: [IndexPath]) {
         viewModel.stopPrefetch(at: indexPaths.map(\.row))
-    }
-}
-
-// MARK: UICollectionViewDelegate
-
-extension GiphyCollectionViewController {
-    override func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel.didSelectItem(at: indexPath.row)
     }
 }
 
