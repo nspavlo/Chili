@@ -6,11 +6,15 @@
 //
 
 import Foundation
+import GiphyLookup
 
 // MARK: ViewModel Input
 
 protocol GiphyListViewModelInput {
-    func viewDidLoad()
+    func onAppear()
+    func didLoadNextPage()
+    func didSelectItem(at index: Int)
+
     func updateSearchQuery(_ query: String?)
     func dismissSearchQuery()
 }

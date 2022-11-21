@@ -9,6 +9,16 @@ import Combine
 import Foundation
 import GiphyLookup
 
+// MARK: Actions
+
+final class GiphyListViewModelActions {
+    let showGiphyDetails: (GiphyResponse.GIF) -> Void
+
+    init(showGiphyDetails: @escaping (GiphyResponse.GIF) -> Void) {
+        self.showGiphyDetails = showGiphyDetails
+    }
+}
+
 // MARK: Initialization
 
 final class GiphyListController: GiphyListViewModelOutput {
@@ -18,20 +28,23 @@ final class GiphyListController: GiphyListViewModelOutput {
 
     private let giphyFetcher: GiphyFetchable
     private var giphyFetcherCancellable: Cancellable?
+    private let actions: GiphyListViewModelActions
+    private var response: GiphyResponse?
     private var isSearchingActive = false
 
     private let currentQuerySubject = PassthroughSubject<GiphySearchQuery, Never>()
     private var currentQuerySubjectCancelable: Cancellable?
 
-    init(giphyFetcher: GiphyFetchable) {
+    init(giphyFetcher: GiphyFetchable, actions: GiphyListViewModelActions) {
         self.giphyFetcher = giphyFetcher
+        self.actions = actions
     }
 }
 
 // MARK: GiphyListViewModelInput
 
 extension GiphyListController: GiphyListViewModelInput {
-    func viewDidLoad() {
+    func onAppear() {
         onStateChange?(.loading)
         fetchTrendingList()
 
@@ -64,6 +77,8 @@ extension GiphyListController: GiphyListViewModelInput {
             actions.showGiphyDetails(item)
         }
     }
+
+    func didLoadNextPage() {}
 }
 
 // MARK: Private Methods
@@ -88,11 +103,12 @@ private extension GiphyListController {
                     self.onStateChange?(.result(.failure(error)))
                 }
             }
-            receiveValue: { value in
-                let items: GiphyListItemViewModels = value.data.map { data in
+            receiveValue: { response in
+                let items: GiphyListItemViewModels = response.data.map { data in
                     let preview = data.images.preview
                     return .init(title: data.title, width: preview.width, height: preview.height, url: preview.mp4)
                 }
+                self.response = response
                 self.onStateChange?(.result(.success(items)))
             }
     }

@@ -11,4 +11,17 @@ import UIKit
 
 // MARK: Initialization
 
-final class GiphyDetailsViewController: UIViewController {}
+final class GiphyDetailsViewController: UIViewController {
+    // MARK: UIViewController
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setup()
+    }
+}
+
+private extension GiphyDetailsViewController {
+    func setup() {
+        view.backgroundColor = .systemBackground
+    }
+}

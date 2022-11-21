@@ -10,6 +10,9 @@ import UIKit
 // MARK: Initialization
 
 final class GiphyCollectionViewController: UICollectionViewController {
+    var didSelectItem: ((Int) -> Void)?
+    var didLoadNextPage: (() -> Void)?
+
     private let viewModels: GiphyListItemViewModels
 
     init(viewModels: GiphyListItemViewModels, collectionViewLayout: UICollectionViewLayout) {
@@ -60,6 +63,11 @@ extension GiphyCollectionViewController {
         let cell = collectionView.dequeueReusableCell(for: indexPath) as GiphyCollectionViewCell
         let viewModel = viewModels[indexPath.item]
         cell.configure(with: viewModel)
+
+        if indexPath.row == viewModels.count - 1 {
+            didLoadNextPage?()
+        }
+
         return cell
     }
 
@@ -92,6 +100,14 @@ extension GiphyCollectionViewController {
         if let view = view as? ActivityIndicatorCollectionReusableView {
             view.stopAnimating()
         }
+    }
+}
+
+// MARK: UICollectionViewDelegate
+
+extension GiphyCollectionViewController {
+    override func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        didSelectItem?(indexPath.row)
     }
 }
 
