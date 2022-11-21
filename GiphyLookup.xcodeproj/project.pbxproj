@@ -234,9 +234,10 @@
 		B717BE532928035000BC3544 /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				B717BEAE292A261C00BC3544 /* Delegates */,
+				B717BE252928026C00BC3544 /* AppDelegate.swift */,
 				B717BEA6292A1E0D00BC3544 /* AppFlowCoordinator.swift */,
 				B717BEAA292A24ED00BC3544 /* AppFlowFactory.swift */,
+				B717BE272928026C00BC3544 /* AppSceneDelegate.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -372,15 +373,6 @@
 				B717BE98292914ED00BC3544 /* PinterestCollectionViewLayoutDelegate.swift */,
 			);
 			path = Layout;
-			sourceTree = "<group>";
-		};
-		B717BEAE292A261C00BC3544 /* Delegates */ = {
-			isa = PBXGroup;
-			children = (
-				B717BE252928026C00BC3544 /* AppDelegate.swift */,
-				B717BE272928026C00BC3544 /* AppSceneDelegate.swift */,
-			);
-			path = Delegates;
 			sourceTree = "<group>";
 		};
 		B717BEB0292A277300BC3544 /* Frameworks */ = {
