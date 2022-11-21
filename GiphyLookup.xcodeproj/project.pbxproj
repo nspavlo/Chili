@@ -11,6 +11,8 @@
 		B715F377292BDF8C001F91E1 /* GiphySearchContainerViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B715F376292BDF8C001F91E1 /* GiphySearchContainerViewControllerTests.swift */; };
 		B715F378292BF7C8001F91E1 /* XCTestCase+MemoryLeakTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE6F2928DB6D00BC3544 /* XCTestCase+MemoryLeakTracking.swift */; };
 		B715F380292BFE36001F91E1 /* GiphyFetcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B715F37F292BFE36001F91E1 /* GiphyFetcherTests.swift */; };
+		B715F382292C0372001F91E1 /* GiphyResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B715F381292C0372001F91E1 /* GiphyResponseTests.swift */; };
+		B715F384292C0546001F91E1 /* PartlyInvalidImages.json in Resources */ = {isa = PBXBuildFile; fileRef = B715F383292C0546001F91E1 /* PartlyInvalidImages.json */; };
 		B717BE102928022B00BC3544 /* GiphyLookup.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B717BE072928022A00BC3544 /* GiphyLookup.framework */; };
 		B717BE262928026C00BC3544 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE252928026C00BC3544 /* AppDelegate.swift */; };
 		B717BE282928026C00BC3544 /* AppSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE272928026C00BC3544 /* AppSceneDelegate.swift */; };
@@ -107,6 +109,8 @@
 		B715F373292BC746001F91E1 /* GiphySearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphySearchViewModel.swift; sourceTree = "<group>"; };
 		B715F376292BDF8C001F91E1 /* GiphySearchContainerViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphySearchContainerViewControllerTests.swift; sourceTree = "<group>"; };
 		B715F37F292BFE36001F91E1 /* GiphyFetcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphyFetcherTests.swift; sourceTree = "<group>"; };
+		B715F381292C0372001F91E1 /* GiphyResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphyResponseTests.swift; sourceTree = "<group>"; };
+		B715F383292C0546001F91E1 /* PartlyInvalidImages.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PartlyInvalidImages.json; sourceTree = "<group>"; };
 		B717BE072928022A00BC3544 /* GiphyLookup.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GiphyLookup.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B717BE0F2928022B00BC3544 /* GiphyLookupTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GiphyLookupTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B717BE232928026C00BC3544 /* GiphyLookupApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GiphyLookupApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -235,6 +239,8 @@
 				B717BE6E2928DB5A00BC3544 /* Extensions */,
 				B717BE712928DC5E00BC3544 /* Networking */,
 				B715F37F292BFE36001F91E1 /* GiphyFetcherTests.swift */,
+				B715F381292C0372001F91E1 /* GiphyResponseTests.swift */,
+				B715F383292C0546001F91E1 /* PartlyInvalidImages.json */,
 			);
 			path = GiphyLookupTests;
 			sourceTree = "<group>";
@@ -632,6 +638,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B715F384292C0546001F91E1 /* PartlyInvalidImages.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -762,6 +769,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B715F382292C0372001F91E1 /* GiphyResponseTests.swift in Sources */,
 				B717BE702928DB6D00BC3544 /* XCTestCase+MemoryLeakTracking.swift in Sources */,
 				B717BE782928DD2900BC3544 /* URLProtocolStub.swift in Sources */,
 				B717BE7A2928DF4100BC3544 /* URLSessionHTTPClientTests.swift in Sources */,
