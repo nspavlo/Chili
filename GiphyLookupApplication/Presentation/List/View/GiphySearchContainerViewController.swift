@@ -105,8 +105,6 @@ private extension GiphySearchContainerViewController {
 
 extension GiphySearchContainerViewController {
     @objc func test(_ sender: UIRefreshControl) {
-        print("test")
-
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
             sender.endRefreshing()
         }
