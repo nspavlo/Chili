@@ -39,9 +39,7 @@ final class GiphyFetcherTests: XCTestCase {
         XCTAssertEqual(spy.requests.first, url)
     }
 
-    private func makeSystemComponentsUnderTest(
-        childViewController _: UIViewController = UITableViewController()
-    ) -> (GiphyFetcher, HTTPClientSpy) {
+    private func makeSystemComponentsUnderTest() -> (GiphyFetcher, HTTPClientSpy) {
         let spy = HTTPClientSpy()
         let sut = GiphyFetcher(httpClient: spy)
         trackForMemoryLeaks(sut)
