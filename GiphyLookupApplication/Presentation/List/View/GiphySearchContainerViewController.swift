@@ -41,9 +41,9 @@ final class GiphySearchContainerViewController: UIViewController {
 
 private extension GiphySearchContainerViewController {
     func setup() {
-        setupChildViewController()
+        title = viewModel.title
+        embed(childViewController, in: view)
         setupSearchController()
-        setupViewBindings()
     }
 
     func setupSearchController() {
@@ -52,14 +52,6 @@ private extension GiphySearchContainerViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = viewModel.searchBarPlaceholder
         navigationItem.searchController = searchController
-    }
-
-    func setupChildViewController() {
-        embed(childViewController, in: view)
-    }
-
-    func setupViewBindings() {
-        title = viewModel.title
     }
 }
 

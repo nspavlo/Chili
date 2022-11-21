@@ -8,7 +8,6 @@
 import Combine
 import Foundation
 import GiphyLookup
-
 import Nuke
 
 // MARK: Actions
@@ -54,6 +53,20 @@ final class GiphyListController: GiphyListViewModelOutput {
     init(giphyFetcher: GiphyFetchable, actions: GiphyListViewModelActions) {
         self.giphyFetcher = giphyFetcher
         self.actions = actions
+        setup()
+    }
+}
+
+// MARK: Setup
+
+private extension GiphyListController {
+    func setup() {
+        currentQuerySubjectCancelable = currentQuerySubject
+            .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
+            .sink { query in
+                self.onLoadingStateChange?(true)
+                self.fetchList(query: query)
+            }
     }
 }
 
@@ -62,13 +75,6 @@ final class GiphyListController: GiphyListViewModelOutput {
 extension GiphyListController: GiphyListViewModelInput {
     func onAppear() {
         fetchTrendingList()
-
-        currentQuerySubjectCancelable = currentQuerySubject
-            .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
-            .sink { query in
-                self.onLoadingStateChange?(true)
-                self.fetchList(query: query)
-            }
     }
 
     func startPrefetch(at indexes: [Int]) {

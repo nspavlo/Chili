@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B715F374292BC746001F91E1 /* GiphySearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B715F373292BC746001F91E1 /* GiphySearchViewModel.swift */; };
+		B715F377292BDF8C001F91E1 /* GiphySearchContainerViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B715F376292BDF8C001F91E1 /* GiphySearchContainerViewControllerTests.swift */; };
 		B717BE102928022B00BC3544 /* GiphyLookup.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B717BE072928022A00BC3544 /* GiphyLookup.framework */; };
 		B717BE262928026C00BC3544 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE252928026C00BC3544 /* AppDelegate.swift */; };
 		B717BE282928026C00BC3544 /* AppSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE272928026C00BC3544 /* AppSceneDelegate.swift */; };
@@ -102,6 +103,7 @@
 
 /* Begin PBXFileReference section */
 		B715F373292BC746001F91E1 /* GiphySearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphySearchViewModel.swift; sourceTree = "<group>"; };
+		B715F376292BDF8C001F91E1 /* GiphySearchContainerViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphySearchContainerViewControllerTests.swift; sourceTree = "<group>"; };
 		B717BE072928022A00BC3544 /* GiphyLookup.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GiphyLookup.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B717BE0F2928022B00BC3544 /* GiphyLookupTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GiphyLookupTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B717BE232928026C00BC3544 /* GiphyLookupApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GiphyLookupApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -247,6 +249,7 @@
 			isa = PBXGroup;
 			children = (
 				B717BE55292804CE00BC3544 /* Application */,
+				B715F376292BDF8C001F91E1 /* GiphySearchContainerViewControllerTests.swift */,
 			);
 			path = GiphyLookupApplicationTests;
 			sourceTree = "<group>";
@@ -795,6 +798,7 @@
 			files = (
 				B717BE5A2928067400BC3544 /* UIWindowSpy.swift in Sources */,
 				B717BE57292805B300BC3544 /* AppSceneDelegateTests.swift in Sources */,
+				B715F377292BDF8C001F91E1 /* GiphySearchContainerViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
