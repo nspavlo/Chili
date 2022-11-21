@@ -105,8 +105,8 @@ private extension GiphyListController {
             }
             receiveValue: { response in
                 let items: GiphyListItemViewModels = response.data.map { data in
-                    let preview = data.images.preview
-                    return .init(title: data.title, width: preview.width, height: preview.height, url: preview.mp4)
+                    let preview = data.images.fixed_width
+                    return .init(title: data.title, width: preview.width, height: preview.height, url: preview.url)
                 }
                 self.response = response
                 self.onStateChange?(.result(.success(items)))

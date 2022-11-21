@@ -10,7 +10,7 @@ import Foundation
 public struct GiphyResponse: Decodable {
     public struct GIF: Decodable {
         public struct Images: Decodable {
-            public let preview: Preview
+            public let fixed_width: Preview
         }
 
         public let title: String
@@ -27,7 +27,7 @@ public struct GiphyResponse: Decodable {
 }
 
 public struct Preview {
-    public let mp4: URL
+    public let url: URL
     public let width: Int
     public let height: Int
 }
@@ -36,7 +36,7 @@ extension Preview: Decodable {
     struct ConversionError: Error {}
 
     enum CodingKeys: String, CodingKey {
-        case mp4
+        case url
         case width
         case height
     }
@@ -44,7 +44,7 @@ extension Preview: Decodable {
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
 
-        mp4 = try values.decode(URL.self, forKey: .mp4)
+        url = try values.decode(URL.self, forKey: .url)
         if let value = Int(try values.decode(String.self, forKey: .width)) {
             width = value
         } else {
