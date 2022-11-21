@@ -24,15 +24,4 @@ extension UIViewController {
         removeFromParent()
         view.removeFromSuperview()
     }
-
-    func replaceExisting(with child: UIViewController, in container: UIView) {
-        removeAllEmbedded()
-        embed(child, in: container)
-    }
-
-    func removeAllEmbedded() {
-        for child in children {
-            child.remove()
-        }
-    }
 }

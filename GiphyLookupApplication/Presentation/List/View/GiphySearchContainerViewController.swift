@@ -10,10 +10,12 @@ import UIKit
 // MARK: Initialization
 
 final class GiphySearchContainerViewController: UIViewController {
-    private let viewModel: GiphyListViewModel
+    private let viewModel: GiphySearchViewModel
+    private let childViewController: UIViewController
 
-    init(viewModel: GiphyListViewModel) {
+    init(viewModel: GiphySearchViewModel, childViewController: UIViewController) {
         self.viewModel = viewModel
+        self.childViewController = childViewController
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -32,7 +34,6 @@ final class GiphySearchContainerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        viewModel.onAppear()
     }
 }
 
@@ -40,15 +41,9 @@ final class GiphySearchContainerViewController: UIViewController {
 
 private extension GiphySearchContainerViewController {
     func setup() {
-        setupViewBindings()
-        setupSearchController()
-    }
-
-    func setupViewBindings() {
         title = viewModel.title
-        viewModel.onStateChange = { [weak self] state in
-            self?.render(state)
-        }
+        embed(childViewController, in: view)
+        setupSearchController()
     }
 
     func setupSearchController() {
@@ -57,57 +52,6 @@ private extension GiphySearchContainerViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = viewModel.searchBarPlaceholder
         navigationItem.searchController = searchController
-    }
-}
-
-// MARK: Rendering
-
-private extension GiphySearchContainerViewController {
-    func render(_ state: GiphyListViewModelState) {
-        switch state {
-        case .loading:
-            let viewController = GiphyCollectionViewController(
-                viewModels: [],
-                collectionViewLayout: UICollectionViewFlowLayout()
-            )
-
-            let refreshControl = UIRefreshControl()
-            refreshControl.addTarget(self, action: #selector(test(_:)), for: .valueChanged)
-            viewController.collectionView.refreshControl = refreshControl
-
-            DispatchQueue.main.async {
-                refreshControl.beginRefreshing()
-            }
-
-            replaceExisting(with: viewController, in: view)
-
-        case let .result(.success(viewModels)):
-            let collectionViewLayout = PinterestCollectionViewLayout()
-            let viewController = GiphyCollectionViewController(
-                viewModels: viewModels,
-                collectionViewLayout: collectionViewLayout
-            )
-            collectionViewLayout.delegate = viewController
-
-            let refreshControl = UIRefreshControl()
-            refreshControl.addTarget(self, action: #selector(test), for: .valueChanged)
-            viewController.collectionView.refreshControl = refreshControl
-            viewController.didSelectItem = viewModel.didSelectItem(at:)
-            viewController.didLoadNextPage = viewModel.didLoadNextPage
-            replaceExisting(with: viewController, in: view)
-
-        case let .result(.failure(error)):
-            let viewController = ErrorViewController(error: error)
-            replaceExisting(with: viewController, in: view)
-        }
-    }
-}
-
-extension GiphySearchContainerViewController {
-    @objc func test(_ sender: UIRefreshControl) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
-            sender.endRefreshing()
-        }
     }
 }
 

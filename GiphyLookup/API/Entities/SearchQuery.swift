@@ -5,6 +5,8 @@
 //  Created by Jans Pavlovs on 21/11/2022.
 //
 
+// MARK: Initialization
+
 public struct SearchQuery {
     let value: String
 
@@ -16,3 +18,7 @@ public struct SearchQuery {
         value = string
     }
 }
+
+// MARK: Equatable
+
+extension SearchQuery: Equatable {}

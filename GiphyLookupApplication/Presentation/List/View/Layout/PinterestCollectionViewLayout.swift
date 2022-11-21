@@ -33,18 +33,17 @@ final class PinterestCollectionViewLayout: UICollectionViewLayout {
     override func prepare() {
         super.prepare()
 
-        guard
-            let collectionView,
-            let delegate,
-            cellLayoutAttributes.isEmpty,
-            supplementaryViewLayoutAttributes.isEmpty
-        else {
+        guard let collectionView, let delegate else {
             return
         }
 
         guard collectionView.numberOfSections == 1 else {
             preconditionFailure("Current \(self) implementation can't render multi section layout")
         }
+
+        cellLayoutAttributes.removeAll(keepingCapacity: false)
+        supplementaryViewLayoutAttributes.removeAll(keepingCapacity: false)
+        columnHeights.removeAll(keepingCapacity: false)
 
         for _ in 0 ..< columnCount {
             columnHeights.append(0)
