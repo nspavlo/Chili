@@ -106,6 +106,7 @@ final class GiphySearchContainerViewControllerTests: XCTestCase {
             ),
             childViewController: childViewController
         )
+        trackForMemoryLeaks(viewController)
         return (viewController, spy)
     }
 }
