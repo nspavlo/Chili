@@ -11,7 +11,7 @@ import Foundation
 
 protocol GiphyListViewModelInput {
     func viewDidLoad()
-    func searchQueryValueChanged(_ query: String?)
+    func updateSearchQuery(_ query: String?)
     func dismissSearchQuery()
 }
 

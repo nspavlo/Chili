@@ -20,7 +20,7 @@ final class GiphyListController: GiphyListViewModelOutput {
     private var giphyFetcherCancellable: Cancellable?
     private var isSearchingActive = false
 
-    private let currentQuerySubject = PassthroughSubject<String?, Never>()
+    private let currentQuerySubject = PassthroughSubject<SearchQuery, Never>()
     private var currentQuerySubjectCancelable: Cancellable?
 
     init(giphyFetcher: GiphyFetchable) {
@@ -37,23 +37,31 @@ extension GiphyListController: GiphyListViewModelInput {
 
         currentQuerySubjectCancelable = currentQuerySubject
             .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
-            .compactMap { $0 }
-            .filter { !$0.isEmpty }
             .sink { query in
                 self.isSearchingActive = true
                 self.onStateChange?(.loading)
-                self.fetchList(query: query, page: 0)
+                self.fetchList(query: query)
             }
     }
 
-    func searchQueryValueChanged(_ query: String?) {
-        currentQuerySubject.send(query)
+    func updateSearchQuery(_ query: String?) {
+        guard let searchQuery = SearchQuery(query) else {
+            return
+        }
+
+        currentQuerySubject.send(searchQuery)
     }
 
     func dismissSearchQuery() {
         if isSearchingActive {
             isSearchingActive = false
             fetchTrendingList()
+        }
+    }
+
+    func didSelectItem(at index: Int) {
+        if let item = response?.data[index] {
+            actions.showGiphyDetails(item)
         }
     }
 }
@@ -65,8 +73,8 @@ private extension GiphyListController {
         giphyFetcherCancellable = fetch(from: giphyFetcher.fetchTrendingList())
     }
 
-    func fetchList(query: String, page: Int) {
-        giphyFetcherCancellable = fetch(from: giphyFetcher.fetchList(query: query, page: page))
+    func fetchList(query: SearchQuery) {
+        giphyFetcherCancellable = fetch(from: giphyFetcher.fetchList(query: query))
     }
 
     func fetch(from giphyFetcher: GiphyFetchable.Publisher) -> AnyCancellable {

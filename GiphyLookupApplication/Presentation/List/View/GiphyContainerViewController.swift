@@ -92,7 +92,7 @@ extension GiphyContainerViewController: UISearchResultsUpdating {
         if !searchController.isActive {
             viewModel.dismissSearchQuery()
         } else {
-            viewModel.searchQueryValueChanged(searchController.searchBar.text)
+            viewModel.updateSearchQuery(searchController.searchBar.text)
         }
     }
 }
