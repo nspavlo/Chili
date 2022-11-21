@@ -32,7 +32,7 @@ final class GiphyListController: GiphyListViewModelOutput {
     private var response: GiphyResponse?
     private var isSearchingActive = false
 
-    private let currentQuerySubject = PassthroughSubject<GiphySearchQuery, Never>()
+    private let currentQuerySubject = PassthroughSubject<SearchQuery, Never>()
     private var currentQuerySubjectCancelable: Cancellable?
 
     init(giphyFetcher: GiphyFetchable, actions: GiphyListViewModelActions) {
@@ -58,7 +58,7 @@ extension GiphyListController: GiphyListViewModelInput {
     }
 
     func updateSearchQuery(_ query: String?) {
-        guard let searchQuery = GiphySearchQuery(query) else {
+        guard let searchQuery = SearchQuery(query) else {
             return
         }
 
@@ -88,7 +88,7 @@ private extension GiphyListController {
         giphyFetcherCancellable = fetch(from: giphyFetcher.fetchTrendingList())
     }
 
-    func fetchList(query: GiphySearchQuery) {
+    func fetchList(query: SearchQuery) {
         giphyFetcherCancellable = fetch(from: giphyFetcher.fetchList(query: query))
     }
 
@@ -105,8 +105,13 @@ private extension GiphyListController {
             }
             receiveValue: { response in
                 let items: GiphyListItemViewModels = response.data.map { data in
-                    let preview = data.images.fixed_width
-                    return .init(title: data.title, width: preview.width, height: preview.height, url: preview.url)
+                    let preview = data.images.fixedWidth
+                    return .init(
+                        title: data.title,
+                        width: preview.width.rawValue,
+                        height: preview.height.rawValue,
+                        url: preview.url
+                    )
                 }
                 self.response = response
                 self.onStateChange?(.result(.success(items)))

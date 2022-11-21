@@ -1,11 +1,11 @@
 //
-//  GiphySearchQuery.swift
+//  SearchQuery.swift
 //  GiphyLookup
 //
 //  Created by Jans Pavlovs on 21/11/2022.
 //
 
-public struct GiphySearchQuery {
+public struct SearchQuery {
     let value: String
 
     public init?(_ string: String?) {
