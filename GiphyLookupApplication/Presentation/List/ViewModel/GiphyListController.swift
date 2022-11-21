@@ -12,9 +12,9 @@ import GiphyLookup
 // MARK: Actions
 
 final class GiphyListViewModelActions {
-    let showGiphyDetails: (GiphyResponse.GIF) -> Void
+    let showGiphyDetails: (GIF) -> Void
 
-    init(showGiphyDetails: @escaping (GiphyResponse.GIF) -> Void) {
+    init(showGiphyDetails: @escaping (GIF) -> Void) {
         self.showGiphyDetails = showGiphyDetails
     }
 }
