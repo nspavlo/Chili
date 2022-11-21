@@ -17,7 +17,7 @@ struct GiphyEndpoint {
 // MARK: Available Endpoints
 
 extension GiphyEndpoint {
-    private static let key = "D1OIHpdq1qe36SHbpl0hgwQxT1jOluZm"
+    static let key = "D1OIHpdq1qe36SHbpl0hgwQxT1jOluZm"
 
     static var trending: Self {
         GiphyEndpoint(
