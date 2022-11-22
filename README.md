@@ -64,7 +64,3 @@ Please make sure to update tests as appropriate.
 ## Attribution
 
 Powered By GIPHY
-
-## Author
-
-[@JansPavlovs 👨‍💻](https://twitter.com/JansPavlovs)
