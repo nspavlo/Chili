@@ -211,9 +211,9 @@
 			isa = PBXGroup;
 			children = (
 				B717BE092928022A00BC3544 /* GiphyLookup */,
+				B717BE132928022B00BC3544 /* GiphyLookupTests */,
 				B717BE242928026C00BC3544 /* GiphyLookupApplication */,
 				B717BE3B2928026D00BC3544 /* GiphyLookupApplicationTests */,
-				B717BE132928022B00BC3544 /* GiphyLookupTests */,
 				B717BE082928022A00BC3544 /* Products */,
 				B717BEB0292A277300BC3544 /* Frameworks */,
 			);
