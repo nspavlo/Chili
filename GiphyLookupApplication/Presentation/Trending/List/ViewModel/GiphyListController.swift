@@ -59,7 +59,7 @@ private extension GiphyListController {
     func appendNewPage(from response: GiphyResponse) {
         hasMorePages = hasMorePages(with: response.pagination)
         data.append(contentsOf: response.data)
-        items = data.map(GiphyListItemViewModel.init)
+        items = data.map(GiphyListItemViewModel.init).uniqued()
     }
 
     func hasMorePages(with pagination: Pagination) -> Bool {
