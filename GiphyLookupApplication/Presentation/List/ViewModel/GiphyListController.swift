@@ -108,6 +108,10 @@ extension GiphyListController: GiphyListViewModelInput {
     func stopPrefetch(at indexes: [Int]) {
         prefetcher.stopPrefetching(with: urls(for: indexes))
     }
+
+    private func urls(for indexes: [Int]) -> [URL] {
+        indexes.map { items[$0].url }
+    }
 }
 
 // MARK: GiphySearchViewModel
@@ -136,6 +140,14 @@ extension GiphyListController: GiphySearchViewModel {
 // MARK: Private Methods
 
 private extension GiphyListController {
+    func fetchActiveList() {
+        if let currentSearchQuery = currentQuerySubject.value {
+            fetchList(query: currentSearchQuery, offset: offset)
+        } else {
+            fetchTrendingList(offset: offset)
+        }
+    }
+
     func fetchTrendingList(offset: UInt) {
         giphyFetcherCancellable = fetch(from: giphyFetcher.fetchTrendingList(offset: offset))
     }
@@ -161,10 +173,6 @@ private extension GiphyListController {
                 self.appendNewPage(from: response)
                 self.onListChange?()
             }
-    }
-
-    func urls(for indexes: [Int]) -> [URL] {
-        indexes.map { items[$0].url }
     }
 }
 
