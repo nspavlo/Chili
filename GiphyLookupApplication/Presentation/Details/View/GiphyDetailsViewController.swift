@@ -50,6 +50,7 @@ private extension GiphyDetailsViewController {
         lazyImageView.backgroundColor = .secondarySystemBackground
         lazyImageView.placeholderView = UIActivityIndicatorView()
         lazyImageView.url = url
+        lazyImageView.contentMode = .center
         view.addSubview(lazyImageView)
     }
 }
