@@ -263,7 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				B717BE55292804CE00BC3544 /* Application */,
-				B715F376292BDF8C001F91E1 /* GiphySearchContainerViewControllerTests.swift */,
+				B7BF81A5292D70AE00118EC6 /* Presentation */,
 			);
 			path = GiphyLookupApplicationTests;
 			sourceTree = "<group>";
@@ -501,6 +501,30 @@
 				B715F383292C0546001F91E1 /* PartlyInvalidImages.json */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		B7BF81A5292D70AE00118EC6 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				B7BF81A6292D70BA00118EC6 /* Giphy */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		B7BF81A6292D70BA00118EC6 /* Giphy */ = {
+			isa = PBXGroup;
+			children = (
+				B7BF81A7292D70C200118EC6 /* List */,
+			);
+			path = Giphy;
+			sourceTree = "<group>";
+		};
+		B7BF81A7292D70C200118EC6 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				B715F376292BDF8C001F91E1 /* GiphySearchContainerViewControllerTests.swift */,
+			);
+			path = List;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
