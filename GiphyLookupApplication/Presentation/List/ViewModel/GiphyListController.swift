@@ -23,11 +23,10 @@ final class GiphyListController: GiphyListViewModelOutput {
     private var giphyFetcherCancellable: Combine.Cancellable?
     private let actions: GiphyListViewModelActions
 
-    private let currentQuerySubject = PassthroughSubject<SearchQuery, Never>()
+    private let currentQuerySubject = CurrentValueSubject<SearchQuery?, Never>(nil)
     private var currentQuerySubjectCancelable: Combine.Cancellable?
 
     private var offset: UInt = 0
-    private var currentSearchQuery: SearchQuery?
     private var data = [GIF]()
 
     private let prefetcher = ImagePrefetcher()
@@ -44,10 +43,10 @@ final class GiphyListController: GiphyListViewModelOutput {
 private extension GiphyListController {
     func setup() {
         currentQuerySubjectCancelable = currentQuerySubject
+            .compactMap { $0 }
             .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
             .sink { query in
                 self.onLoadingStateChange?(true)
-                self.currentSearchQuery = query
                 self.resetContentPagination()
                 self.fetchList(query: query, offset: self.offset)
             }
@@ -93,7 +92,7 @@ extension GiphyListController: GiphyListViewModelInput {
 
         offset = UInt(data.count)
 
-        if let currentSearchQuery {
+        if let currentSearchQuery = currentQuerySubject.value {
             fetchList(query: currentSearchQuery, offset: offset)
         } else {
             fetchTrendingList(offset: offset)
@@ -101,7 +100,7 @@ extension GiphyListController: GiphyListViewModelInput {
     }
 
     func didRequestListUpdate() {
-        currentSearchQuery = nil
+        currentQuerySubject.send(nil)
         resetContentPagination()
         fetchTrendingList(offset: offset)
     }
@@ -134,7 +133,7 @@ extension GiphyListController: GiphySearchViewModel {
     }
 
     func dismissSearchQuery() {
-        currentSearchQuery = nil
+        currentQuerySubject.send(nil)
         resetContentPagination()
         fetchTrendingList(offset: offset)
     }
