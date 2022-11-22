@@ -135,6 +135,8 @@ extension GiphyListController: GiphySearchViewModel {
     func dismissSearchQuery() {
         currentQuerySubject.send(nil)
         resetContentPagination()
+    
+        onLoadingStateChange?(true)
         fetchTrendingList(offset: offset)
     }
 }

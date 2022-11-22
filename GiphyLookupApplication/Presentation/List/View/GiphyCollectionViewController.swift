@@ -77,6 +77,7 @@ private extension GiphyCollectionViewController {
     func setupViewBindings() {
         viewModel.onLoadingStateChange = { [weak self] isLoading in
             if isLoading {
+                self?.setupInitialScrollViewState()
                 self?.collectionView.refreshControl?.beginRefreshing()
             } else {
                 self?.collectionView.refreshControl?.endRefreshing()
@@ -85,6 +86,12 @@ private extension GiphyCollectionViewController {
 
         viewModel.onListChange = { [weak self] in
             self?.setupDataSourceSnapshot()
+        }
+    }
+
+    func setupInitialScrollViewState() {
+        if viewModel.items.count != 0 {
+            collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         }
     }
 
