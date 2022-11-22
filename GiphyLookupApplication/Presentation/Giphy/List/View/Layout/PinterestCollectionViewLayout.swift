@@ -27,7 +27,7 @@ final class PinterestCollectionViewLayout: UICollectionViewLayout {
     }
 
     override var collectionViewContentSize: CGSize {
-        CGSize(width: contentViewWidth, height: columnHeights[0])
+        CGSize(width: contentViewWidth, height: columnHeights.first ?? 0)
     }
 
     override func prepare() {
