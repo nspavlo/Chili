@@ -87,7 +87,8 @@ extension GiphyListController: GiphyListViewModelInput {
     }
 
     func didRequestListUpdate() {
-        currentQuerySubject.send(nil)
+        guard currentQuerySubject.value == nil else { return }
+
         resetContentPagination()
         fetchTrendingList(offset: offset)
     }
@@ -153,7 +154,7 @@ private extension GiphyListController {
 
     func fetch(from giphyFetcher: GiphyFetchable.Publisher) -> AnyCancellable {
         giphyFetcher
-            .receive(on: RunLoop.main)
+            .receive(on: DispatchQueue.main)
             .sink { completion in
                 self.onLoadingStateChange?(false)
 
