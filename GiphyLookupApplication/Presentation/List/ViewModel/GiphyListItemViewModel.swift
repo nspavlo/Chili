@@ -13,7 +13,7 @@ typealias GiphyListItemViewModels = [GiphyListItemViewModel]
 
 // MARK: Initialization
 
-struct GiphyListItemViewModel: Equatable {
+struct GiphyListItemViewModel: Hashable {
     let title: String
     let width: Int
     let height: Int

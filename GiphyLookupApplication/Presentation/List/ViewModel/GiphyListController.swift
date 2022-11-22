@@ -17,17 +17,16 @@ final class GiphyListController: GiphyListViewModelOutput {
     var onListChange: (() -> Void)?
 
     private(set) var items: GiphyListItemViewModels = []
+    private(set) var hasMorePages = false
 
     private let giphyFetcher: GiphyFetchable
     private var giphyFetcherCancellable: Combine.Cancellable?
     private let actions: GiphyListViewModelActions
 
-    private let currentQuerySubject = PassthroughSubject<SearchQuery, Never>()
+    private let currentQuerySubject = CurrentValueSubject<SearchQuery?, Never>(nil)
     private var currentQuerySubjectCancelable: Combine.Cancellable?
 
     private var offset: UInt = 0
-    private var hasMorePages = false
-    private var currentSearchQuery: SearchQuery?
     private var data = [GIF]()
 
     private let prefetcher = ImagePrefetcher()
@@ -44,10 +43,10 @@ final class GiphyListController: GiphyListViewModelOutput {
 private extension GiphyListController {
     func setup() {
         currentQuerySubjectCancelable = currentQuerySubject
+            .compactMap { $0 }
             .debounce(for: .milliseconds(300), scheduler: RunLoop.main)
             .sink { query in
                 self.onLoadingStateChange?(true)
-                self.currentSearchQuery = query
                 self.resetContentPagination()
                 self.fetchList(query: query, offset: self.offset)
             }
@@ -59,7 +58,6 @@ private extension GiphyListController {
 private extension GiphyListController {
     func appendNewPage(from response: GiphyResponse) {
         hasMorePages = hasMorePages(with: response.pagination)
-        offset = response.pagination.count
         data.append(contentsOf: response.data)
         items = data.map { data in
             let preview = data.images.fixedWidth
@@ -92,7 +90,9 @@ extension GiphyListController: GiphyListViewModelInput {
     func didLoadNextPage() {
         guard hasMorePages else { return }
 
-        if let currentSearchQuery {
+        offset = UInt(data.count)
+
+        if let currentSearchQuery = currentQuerySubject.value {
             fetchList(query: currentSearchQuery, offset: offset)
         } else {
             fetchTrendingList(offset: offset)
@@ -100,7 +100,7 @@ extension GiphyListController: GiphyListViewModelInput {
     }
 
     func didRequestListUpdate() {
-        currentSearchQuery = nil
+        currentQuerySubject.send(nil)
         resetContentPagination()
         fetchTrendingList(offset: offset)
     }
@@ -133,8 +133,10 @@ extension GiphyListController: GiphySearchViewModel {
     }
 
     func dismissSearchQuery() {
-        currentSearchQuery = nil
+        currentQuerySubject.send(nil)
         resetContentPagination()
+    
+        onLoadingStateChange?(true)
         fetchTrendingList(offset: offset)
     }
 }
