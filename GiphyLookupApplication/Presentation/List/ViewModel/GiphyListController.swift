@@ -59,7 +59,6 @@ private extension GiphyListController {
 private extension GiphyListController {
     func appendNewPage(from response: GiphyResponse) {
         hasMorePages = hasMorePages(with: response.pagination)
-        offset = response.pagination.count
         data.append(contentsOf: response.data)
         items = data.map { data in
             let preview = data.images.fixedWidth
@@ -91,6 +90,8 @@ extension GiphyListController: GiphyListViewModelInput {
 
     func didLoadNextPage() {
         guard hasMorePages else { return }
+
+        offset = UInt(data.count)
 
         if let currentSearchQuery {
             fetchList(query: currentSearchQuery, offset: offset)
@@ -164,6 +165,7 @@ private extension GiphyListController {
                 }
             }
             receiveValue: { response in
+                print("didLoadNextPag ->e: \(response.pagination.offset)")
                 self.appendNewPage(from: response)
                 self.onListChange?()
             }

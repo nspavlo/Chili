@@ -10,6 +10,36 @@ import UIKit
 // MARK: Initialization
 
 final class GiphyCollectionViewController: UICollectionViewController {
+    typealias DataSource = UICollectionViewDiffableDataSource<Int, GiphyListItemViewModel>
+    typealias Snapshot = NSDiffableDataSourceSnapshot<Int, GiphyListItemViewModel>
+
+    private lazy var dataSource: DataSource = {
+        let dataSource = DataSource(
+            collectionView: collectionView,
+            cellProvider: { collectionView, indexPath, viewModel -> UICollectionViewCell? in
+                if indexPath.row == self.viewModel.items.count - 1 {
+                    self.viewModel.didLoadNextPage()
+                }
+
+                let cell = collectionView.dequeueReusableCell(for: indexPath) as GiphyCollectionViewCell
+                cell.configure(with: viewModel)
+                return cell
+            }
+        )
+
+        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
+            guard kind == UICollectionView.elementKindSectionFooter else {
+                return nil
+            }
+
+            return collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                for: indexPath
+            ) as ActivityIndicatorCollectionReusableView
+        }
+        return dataSource
+    }()
+
     private let viewModel: GiphyListViewModel
 
     init(viewModel: GiphyListViewModel, collectionViewLayout: UICollectionViewLayout) {
@@ -43,6 +73,7 @@ private extension GiphyCollectionViewController {
         setupCollectionView()
         setupViewBindings()
         viewModel.onAppear()
+        setupDataSourceSnapshot()
     }
 
     func setupRefreshControlForScrollView() {
@@ -72,8 +103,15 @@ private extension GiphyCollectionViewController {
         }
 
         viewModel.onListChange = { [weak self] in
-            self?.collectionView.reloadData()
+            self?.setupDataSourceSnapshot()
         }
+    }
+
+    func setupDataSourceSnapshot() {
+        var snapshot = Snapshot()
+        snapshot.appendSections([0])
+        snapshot.appendItems(viewModel.items)
+        dataSource.apply(snapshot, animatingDifferences: false)
     }
 }
 
@@ -88,33 +126,6 @@ private extension GiphyCollectionViewController {
 // MARK: UICollectionViewDataSource
 
 extension GiphyCollectionViewController {
-    override func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
-        viewModel.items.count
-    }
-
-    override func collectionView(
-        _ collectionView: UICollectionView,
-        cellForItemAt indexPath: IndexPath
-    ) -> UICollectionViewCell {
-        if indexPath.row == viewModel.items.count - 1 {
-            viewModel.didLoadNextPage()
-        }
-
-        let cell = collectionView.dequeueReusableCell(for: indexPath) as GiphyCollectionViewCell
-        let viewModel = viewModel.items[indexPath.item]
-        cell.configure(with: viewModel)
-        return cell
-    }
-
-    override func collectionView(
-        _ collectionView: UICollectionView,
-        viewForSupplementaryElementOfKind kind: String,
-        at indexPath: IndexPath
-    ) -> UICollectionReusableView {
-        collectionView.dequeueReusableSupplementaryView(ofKind: kind, for: indexPath)
-            as ActivityIndicatorCollectionReusableView
-    }
-
     override func collectionView(
         _: UICollectionView,
         willDisplaySupplementaryView view: UICollectionReusableView,

@@ -9,6 +9,7 @@
 
 public struct Pagination {
     public let count: UInt
+    public let offset: UInt
     public let totalCount: UInt
 }
 
