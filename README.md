@@ -15,6 +15,26 @@ Application is separated in two schemes:
 
 This way, bigness logic stays platform agnostic, modular and fast to build and test. On every pull-reuqest, both modules will be built and tested.
 
+## Data
+
+Unfortunately, the data from bakend APIs isn’t always perfect. By default `JSONDecoder` will discard the whole collection when one of the elements are corrupted. To improve on this, application uses generic `LossyArray<T>` wrapper.
+
+Some custom data types are introduced in order to remove assumtions about behaviour.
+```swift
+public struct SearchQuery {
+    let value: String
+
+    public init?(_ string: String?) {
+        guard let string, !string.isEmpty else {
+            return nil
+        }
+
+        value = string
+    }
+}
+```
+For example `SearchQuery` is used instead of plain `String`.
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first
