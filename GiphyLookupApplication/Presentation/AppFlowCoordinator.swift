@@ -7,12 +7,6 @@
 
 import UIKit.UINavigationController
 
-// MARK: Protocol
-
-protocol Coordinator {
-    func start()
-}
-
 // MARK: Initialization
 
 final class AppFlowCoordinator {

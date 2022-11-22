@@ -27,7 +27,7 @@ final class PinterestCollectionViewLayout: UICollectionViewLayout {
     }
 
     override var collectionViewContentSize: CGSize {
-        CGSize(width: contentViewWidth, height: columnHeights[0])
+        CGSize(width: contentViewWidth, height: columnHeights.first ?? 0)
     }
 
     override func prepare() {
@@ -43,11 +43,8 @@ final class PinterestCollectionViewLayout: UICollectionViewLayout {
 
         cellLayoutAttributes.removeAll(keepingCapacity: false)
         supplementaryViewLayoutAttributes.removeAll(keepingCapacity: false)
-        columnHeights.removeAll(keepingCapacity: false)
 
-        for _ in 0 ..< columnCount {
-            columnHeights.append(0)
-        }
+        columnHeights = Array(repeating: 0, count: columnCount)
 
         let columnWidth = contentViewWidth / CGFloat(columnCount)
         var offsets: [CGPoint] = (0 ..< columnCount)

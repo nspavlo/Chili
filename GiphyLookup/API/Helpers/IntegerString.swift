@@ -1,5 +1,5 @@
 //
-//  StringInt.swift
+//  IntegerString.swift
 //  GiphyLookup
 //
 //  Created by Jans Pavlovs on 21/11/2022.
@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: Initialization
 
-public struct StringInt: RawRepresentable {
+public struct IntegerString: RawRepresentable {
     public let rawValue: Int
 
     public init(rawValue: Int) {
@@ -19,7 +19,7 @@ public struct StringInt: RawRepresentable {
 
 // MARK: Decodable
 
-extension StringInt: Decodable {
+extension IntegerString: Decodable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         let stringValue = try container.decode(String.self)

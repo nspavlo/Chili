@@ -59,15 +59,7 @@ private extension GiphyListController {
     func appendNewPage(from response: GiphyResponse) {
         hasMorePages = hasMorePages(with: response.pagination)
         data.append(contentsOf: response.data)
-        items = data.map { data in
-            let preview = data.images.fixedWidth
-            return .init(
-                title: data.title,
-                width: preview.width.rawValue,
-                height: preview.height.rawValue,
-                url: preview.url
-            )
-        }
+        items = data.map(GiphyListItemViewModel.init).uniqued()
     }
 
     func hasMorePages(with pagination: Pagination) -> Bool {
@@ -88,19 +80,15 @@ extension GiphyListController: GiphyListViewModelInput {
     }
 
     func didLoadNextPage() {
-        guard hasMorePages else { return }
+        guard hasMorePages, offset != UInt(data.count) else { return }
 
         offset = UInt(data.count)
-
-        if let currentSearchQuery = currentQuerySubject.value {
-            fetchList(query: currentSearchQuery, offset: offset)
-        } else {
-            fetchTrendingList(offset: offset)
-        }
+        fetchNextPageForActiveList()
     }
 
     func didRequestListUpdate() {
-        currentQuerySubject.send(nil)
+        guard currentQuerySubject.value == nil else { return }
+
         resetContentPagination()
         fetchTrendingList(offset: offset)
     }
@@ -115,6 +103,10 @@ extension GiphyListController: GiphyListViewModelInput {
 
     func stopPrefetch(at indexes: [Int]) {
         prefetcher.stopPrefetching(with: urls(for: indexes))
+    }
+
+    private func urls(for indexes: [Int]) -> [URL] {
+        indexes.map { items[$0].url }
     }
 }
 
@@ -135,7 +127,7 @@ extension GiphyListController: GiphySearchViewModel {
     func dismissSearchQuery() {
         currentQuerySubject.send(nil)
         resetContentPagination()
-    
+
         onLoadingStateChange?(true)
         fetchTrendingList(offset: offset)
     }
@@ -144,6 +136,14 @@ extension GiphyListController: GiphySearchViewModel {
 // MARK: Private Methods
 
 private extension GiphyListController {
+    func fetchNextPageForActiveList() {
+        if let currentSearchQuery = currentQuerySubject.value {
+            fetchList(query: currentSearchQuery, offset: offset)
+        } else {
+            fetchTrendingList(offset: offset)
+        }
+    }
+
     func fetchTrendingList(offset: UInt) {
         giphyFetcherCancellable = fetch(from: giphyFetcher.fetchTrendingList(offset: offset))
     }
@@ -154,7 +154,7 @@ private extension GiphyListController {
 
     func fetch(from giphyFetcher: GiphyFetchable.Publisher) -> AnyCancellable {
         giphyFetcher
-            .receive(on: RunLoop.main)
+            .receive(on: DispatchQueue.main)
             .sink { completion in
                 self.onLoadingStateChange?(false)
 
@@ -170,9 +170,23 @@ private extension GiphyListController {
                 self.onListChange?()
             }
     }
+}
 
-    func urls(for indexes: [Int]) -> [URL] {
-        indexes.map { items[$0].url }
+// MARK: Adapter
+
+private extension GiphyListItemViewModel {
+    init(_ data: GIF) {
+        let preview = data.images.fixedWidth
+        self.init(title: data.title, width: preview.width.rawValue, height: preview.height.rawValue, url: preview.url)
+    }
+}
+
+// MARK: Helpers
+
+extension Sequence where Element: Hashable {
+    func uniqued() -> [Element] {
+        var set = Set<Element>()
+        return filter { set.insert($0).inserted }
     }
 }
 
