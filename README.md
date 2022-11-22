@@ -53,6 +53,11 @@ Please make sure to update tests as appropriate.
 - [Assignment](https://github.com/ChiliLabs/test-tasks/blob/master/ios_developer.md)
 - [API Documentation](https://developers.giphy.com/docs/api/endpoint/)
 
+## Dependencies
+
+- [Nuke](https://github.com/kean/Nuke)
+- [Reusable](https://github.com/AliSoftware/Reusable)
+
 ## Build Tools
 - Xcode 14.1 (14B47b)
 
