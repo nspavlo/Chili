@@ -242,11 +242,9 @@
 		B717BE132928022B00BC3544 /* GiphyLookupTests */ = {
 			isa = PBXGroup;
 			children = (
+				B7BF81A4292D6FE600118EC6 /* API */,
 				B717BE6E2928DB5A00BC3544 /* Extensions */,
 				B717BE712928DC5E00BC3544 /* Networking */,
-				B715F37F292BFE36001F91E1 /* GiphyFetcherTests.swift */,
-				B715F381292C0372001F91E1 /* GiphyResponseTests.swift */,
-				B715F383292C0546001F91E1 /* PartlyInvalidImages.json */,
 			);
 			path = GiphyLookupTests;
 			sourceTree = "<group>";
@@ -493,6 +491,16 @@
 				B717BEAC292A256D00BC3544 /* GiphyFlowFactory.swift */,
 			);
 			path = Giphy;
+			sourceTree = "<group>";
+		};
+		B7BF81A4292D6FE600118EC6 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				B715F37F292BFE36001F91E1 /* GiphyFetcherTests.swift */,
+				B715F381292C0372001F91E1 /* GiphyResponseTests.swift */,
+				B715F383292C0546001F91E1 /* PartlyInvalidImages.json */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
