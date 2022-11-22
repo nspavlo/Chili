@@ -8,6 +8,13 @@
 ## Installation
 Launch `GiphyLookup.xcodeproj` and run the `GiphyLookupApplication` scheme on a simulator or iOS device.
 
+## Main Modules
+Application is separated in two schemes:
+-  GiphyLookup
+-  GiphyLookupApplication 
+
+This way, bigness logic stays platform agnostic, modular and fast to build and test. On every pull-reuqest, both modules will be built and tested.
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first
