@@ -130,14 +130,14 @@ final class GiphyFetchableSpy {
 // MARK: GiphyFetchable
 
 extension GiphyFetchableSpy: GiphyFetchable {
-    func fetchList(query: GiphyLookup.SearchQuery) -> GiphyFetchable.Publisher {
+    func fetchList(offset _: UInt, query: GiphyLookup.SearchQuery) -> GiphyFetchable.Publisher {
         events.append(.search(query))
         fetchListCompletion?()
         return PassthroughSubject<GiphyResponse, GiphyError>()
             .eraseToAnyPublisher()
     }
 
-    func fetchTrendingList() -> GiphyFetchable.Publisher {
+    func fetchTrendingList(offset _: UInt) -> GiphyFetchable.Publisher {
         events.append(.trending)
         fetchTrendingListCompletion?()
         return PassthroughSubject<GiphyResponse, GiphyError>()

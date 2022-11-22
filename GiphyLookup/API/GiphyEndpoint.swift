@@ -19,20 +19,22 @@ struct GiphyEndpoint {
 extension GiphyEndpoint {
     static let key = "D1OIHpdq1qe36SHbpl0hgwQxT1jOluZm"
 
-    static var trending: Self {
+    static func trending(offset: UInt) -> Self {
         GiphyEndpoint(
             path: "/trending",
             queryItems: [
+                URLQueryItem(name: "offset", value: "\(offset)"),
                 URLQueryItem(name: "api_key", value: GiphyEndpoint.key),
             ]
         )
     }
 
-    static func search(for query: SearchQuery) -> Self {
+    static func search(offset: UInt, for query: SearchQuery) -> Self {
         GiphyEndpoint(
             path: "/search",
             queryItems: [
                 URLQueryItem(name: "q", value: query.value),
+                URLQueryItem(name: "offset", value: "\(offset)"),
                 URLQueryItem(name: "api_key", value: GiphyEndpoint.key),
             ]
         )

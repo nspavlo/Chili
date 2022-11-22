@@ -81,7 +81,7 @@ private extension GiphyCollectionViewController {
 
 private extension GiphyCollectionViewController {
     @objc func handleControlValueChanged(_: UIRefreshControl) {
-        viewModel.didRequestDataUpdate()
+        viewModel.didRequestListUpdate()
     }
 }
 
@@ -96,6 +96,10 @@ extension GiphyCollectionViewController {
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
+        if indexPath.row == viewModel.items.count - 1 {
+            viewModel.didLoadNextPage()
+        }
+
         let cell = collectionView.dequeueReusableCell(for: indexPath) as GiphyCollectionViewCell
         let viewModel = viewModel.items[indexPath.item]
         cell.configure(with: viewModel)

@@ -37,11 +37,11 @@ private extension GiphyFetcher {
 // MARK: GiphyFetchable
 
 extension GiphyFetcher: GiphyFetchable {
-    public func fetchList(query: SearchQuery) -> GiphyFetchable.Publisher {
-        fetch(with: .search(for: query))
+    public func fetchList(offset: UInt, query: SearchQuery) -> GiphyFetchable.Publisher {
+        fetch(with: .search(offset: offset, for: query))
     }
 
-    public func fetchTrendingList() -> GiphyFetchable.Publisher {
-        fetch(with: .trending)
+    public func fetchTrendingList(offset: UInt) -> GiphyFetchable.Publisher {
+        fetch(with: .trending(offset: offset))
     }
 }
