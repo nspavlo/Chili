@@ -90,8 +90,9 @@ private extension GiphyCollectionViewController {
     }
 
     func setupInitialScrollViewState() {
-        if viewModel.items.count != 0 {
-            collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
+        let indexPath = IndexPath(row: 0, section: 0)
+        if !viewModel.items.isEmpty, !collectionView.indexPathsForVisibleItems.contains(indexPath) {
+            collectionView.scrollToItem(at: indexPath, at: .top, animated: false)
         }
     }
 
