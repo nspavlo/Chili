@@ -200,7 +200,9 @@ extension GiphyCollectionViewController {
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard scrollView.isDragging else { return }
 
-        if scrollView.contentOffset.y > scrollView.contentSize.height - scrollView.frame.height {
+        let currentPosition = scrollView.contentOffset.y
+        let maximumPosition = scrollView.contentSize.height - scrollView.frame.height
+        if currentPosition >= maximumPosition - scrollView.frame.height {
             viewModel.didLoadNextPage()
         }
     }
