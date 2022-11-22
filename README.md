@@ -19,6 +19,9 @@ Please make sure to update tests as appropriate.
 - [Assignment](https://github.com/ChiliLabs/test-tasks/blob/master/ios_developer.md)
 - [API Documentation](https://developers.giphy.com/docs/api/endpoint/)
 
+## Build Tools
+- Xcode 14.1 (14B47b)
+
 ## Author
 
 [@JansPavlovs 👨‍💻](https://twitter.com/JansPavlovs)
