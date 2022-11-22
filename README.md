@@ -61,6 +61,10 @@ Please make sure to update tests as appropriate.
 ## Build Tools
 - Xcode 14.1 (14B47b)
 
+## Attribution
+
+Powered By GIPHY
+
 ## Author
 
 [@JansPavlovs 👨‍💻](https://twitter.com/JansPavlovs)
