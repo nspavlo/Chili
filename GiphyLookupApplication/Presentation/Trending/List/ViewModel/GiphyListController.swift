@@ -80,10 +80,10 @@ extension GiphyListController: GiphyListViewModelInput {
     }
 
     func didLoadNextPage() {
-        guard hasMorePages else { return }
+        guard hasMorePages, offset != UInt(data.count) else { return }
 
         offset = UInt(data.count)
-        fetchActiveList()
+        fetchNextPageForActiveList()
     }
 
     func didRequestListUpdate() {
@@ -135,7 +135,7 @@ extension GiphyListController: GiphySearchViewModel {
 // MARK: Private Methods
 
 private extension GiphyListController {
-    func fetchActiveList() {
+    func fetchNextPageForActiveList() {
         if let currentSearchQuery = currentQuerySubject.value {
             fetchList(query: currentSearchQuery, offset: offset)
         } else {
@@ -177,6 +177,15 @@ private extension GiphyListItemViewModel {
     init(_ data: GIF) {
         let preview = data.images.fixedWidth
         self.init(title: data.title, width: preview.width.rawValue, height: preview.height.rawValue, url: preview.url)
+    }
+}
+
+// MARK: Helpers
+
+extension Sequence where Element: Hashable {
+    func uniqued() -> [Element] {
+        var set = Set<Element>()
+        return filter { set.insert($0).inserted }
     }
 }
 

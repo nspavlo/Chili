@@ -119,10 +119,6 @@ extension GiphyCollectionViewController {
         let dataSource = DataSource(
             collectionView: collectionView,
             cellProvider: { collectionView, indexPath, viewModel -> UICollectionViewCell? in
-                if indexPath.row == self.viewModel.items.count - 1 {
-                    self.viewModel.didLoadNextPage()
-                }
-
                 let cell = collectionView.dequeueReusableCell(for: indexPath) as GiphyCollectionViewCell
                 cell.configure(with: viewModel)
                 return cell
@@ -195,5 +191,17 @@ extension GiphyCollectionViewController: PinterestCollectionViewLayoutDelegate {
 
     func collectionView(_: UICollectionView, heightForFooterAtIndexPath _: IndexPath) -> CGFloat {
         44.0
+    }
+}
+
+// MARK: UIScrollViewDelegate
+
+extension GiphyCollectionViewController {
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard scrollView.isDragging else { return }
+
+        if scrollView.contentOffset.y > scrollView.contentSize.height - scrollView.frame.height {
+            viewModel.didLoadNextPage()
+        }
     }
 }
