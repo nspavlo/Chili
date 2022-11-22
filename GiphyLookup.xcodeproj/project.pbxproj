@@ -215,7 +215,6 @@
 				B717BE242928026C00BC3544 /* GiphyLookupApplication */,
 				B717BE3B2928026D00BC3544 /* GiphyLookupApplicationTests */,
 				B717BE082928022A00BC3544 /* Products */,
-				B717BEB0292A277300BC3544 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -404,13 +403,6 @@
 				B717BE98292914ED00BC3544 /* PinterestCollectionViewLayoutDelegate.swift */,
 			);
 			path = Layout;
-			sourceTree = "<group>";
-		};
-		B717BEB0292A277300BC3544 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		B717BEB6292A2C3300BC3544 /* API */ = {
