@@ -374,8 +374,9 @@
 			isa = PBXGroup;
 			children = (
 				B717BEDE292A91B500BC3544 /* Extensions */,
-				B717BED9292A870E00BC3544 /* Common */,
 				B717BE95292914BB00BC3544 /* Layout */,
+				B717BEA029294F3500BC3544 /* ActivityIndicatorCollectionReusableView.swift */,
+				B717BEA229294F5200BC3544 /* ActivityIndicatorCollectionReusableView+Reusable.swift */,
 				B717BE8829290C8400BC3544 /* GiphyCollectionViewCell.swift */,
 				B717BE8A29290CA300BC3544 /* GiphyCollectionViewCell+Reusable.swift */,
 				B717BE8C29290E6200BC3544 /* GiphyCollectionViewController.swift */,
@@ -425,15 +426,6 @@
 				B717BEBB292A34A700BC3544 /* GiphyResponse.swift */,
 			);
 			path = API;
-			sourceTree = "<group>";
-		};
-		B717BED9292A870E00BC3544 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				B717BEA029294F3500BC3544 /* ActivityIndicatorCollectionReusableView.swift */,
-				B717BEA229294F5200BC3544 /* ActivityIndicatorCollectionReusableView+Reusable.swift */,
-			);
-			path = Common;
 			sourceTree = "<group>";
 		};
 		B717BEDE292A91B500BC3544 /* Extensions */ = {
