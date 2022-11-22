@@ -7,7 +7,10 @@
 
 // MARK: Initialization
 
-public struct Pagination {}
+public struct Pagination {
+    public let count: UInt
+    public let totalCount: UInt
+}
 
 // MARK: Decodable
 

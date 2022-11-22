@@ -10,6 +10,6 @@ import Combine
 public protocol GiphyFetchable {
     typealias Publisher = AnyPublisher<GiphyResponse, GiphyError>
 
-    func fetchList(query: SearchQuery) -> Publisher
-    func fetchTrendingList() -> Publisher
+    func fetchList(offset: UInt, query: SearchQuery) -> Publisher
+    func fetchTrendingList(offset: UInt) -> Publisher
 }

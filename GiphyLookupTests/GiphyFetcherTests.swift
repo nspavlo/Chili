@@ -20,20 +20,20 @@ final class GiphyFetcherTests: XCTestCase {
     }
 
     func test_search_shouldExecuteSearchRequest() {
-        let url = URL(string: "https://api.giphy.com/v1/gifs/search?q=hey&api_key=\(GiphyEndpoint.key)")
+        let url = URL(string: "https://api.giphy.com/v1/gifs/search?q=hey&offset=1&api_key=\(GiphyEndpoint.key)")
         let (sut, spy) = makeSystemComponentsUnderTest()
 
-        _ = sut.fetchList(query: SearchQuery("hey")!)
+        _ = sut.fetchList(offset: 1, query: SearchQuery("hey")!)
             .sink(receiveCompletion: { _ in }, receiveValue: { _ in })
 
         XCTAssertEqual(spy.requests.first, url)
     }
 
     func test_trending_shouldExecuteTrendingRequest() {
-        let url = URL(string: "https://api.giphy.com/v1/gifs/trending?api_key=\(GiphyEndpoint.key)")
+        let url = URL(string: "https://api.giphy.com/v1/gifs/trending?offset=1&api_key=\(GiphyEndpoint.key)")
         let (sut, spy) = makeSystemComponentsUnderTest()
 
-        _ = sut.fetchTrendingList()
+        _ = sut.fetchTrendingList(offset: 1)
             .sink(receiveCompletion: { _ in }, receiveValue: { _ in })
 
         XCTAssertEqual(spy.requests.first, url)

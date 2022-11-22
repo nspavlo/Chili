@@ -10,6 +10,7 @@
 protocol GiphyListViewModelInput {
     func onAppear()
     func didRequestListUpdate()
+    func didLoadNextPage()
     func didSelectItem(at index: Int)
 
     func startPrefetch(at indexes: [Int])
