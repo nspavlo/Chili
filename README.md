@@ -5,7 +5,7 @@
 🧙 Welcome Traveler!
 
 ## Getting Started
-**GiphyLookup** uses [Swift Package Manager](https://www.swift.org/package-manager/) to manage build dependencies and [MINT](https://github.com/yonaskolb/Mint) to install and run [Swift Lint](https://github.com/realm/SwiftLint) and [Swift Format](https://github.com/nicklockwood/SwiftFormat).
+**GiphyLookup** uses [Swift Package Manager](https://www.swift.org/package-manager/) to manage build dependencies and [Mint](https://github.com/yonaskolb/Mint) 🌱 to install and run [Swift Lint](https://github.com/realm/SwiftLint) and [Swift Format](https://github.com/nicklockwood/SwiftFormat).
 
 ## Installation
 Launch `GiphyLookup.xcodeproj` and run the `GiphyLookupApplication` scheme on a simulator or iOS device.
