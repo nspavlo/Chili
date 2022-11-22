@@ -36,8 +36,7 @@ final class GiphySearchContainerViewControllerTests: XCTestCase {
 
         sut.loadViewIfNeeded()
 
-        XCTAssertEqual(sut.children.count, 1)
-        XCTAssertEqual(sut.children.first, childViewController)
+        XCTAssertEqual(sut.children, [childViewController])
     }
 
     func test_search_whenInputContainsEmptyValue_shouldNotExecuteSearch() {
