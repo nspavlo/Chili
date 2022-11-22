@@ -83,12 +83,7 @@ extension GiphyListController: GiphyListViewModelInput {
         guard hasMorePages else { return }
 
         offset = UInt(data.count)
-
-        if let currentSearchQuery = currentQuerySubject.value {
-            fetchList(query: currentSearchQuery, offset: offset)
-        } else {
-            fetchTrendingList(offset: offset)
-        }
+        fetchActiveList()
     }
 
     func didRequestListUpdate() {
