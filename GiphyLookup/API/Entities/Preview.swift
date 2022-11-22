@@ -11,8 +11,8 @@ import Foundation
 
 public struct Preview {
     public let url: URL
-    public let width: StringInt
-    public let height: StringInt
+    public let width: IntegerString
+    public let height: IntegerString
 }
 
 // MARK: Decodable
