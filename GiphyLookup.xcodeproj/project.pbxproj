@@ -352,7 +352,7 @@
 		B717BE7D2929089400BC3544 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				B7BF81A1292D6A9900118EC6 /* Giphy */,
+				B7BF81A1292D6A9900118EC6 /* Trending */,
 				B717BEA6292A1E0D00BC3544 /* AppFlowCoordinator.swift */,
 				B717BEAA292A24ED00BC3544 /* AppFlowFactory.swift */,
 				B7BF819F292D6A0800118EC6 /* Coordinator.swift */,
@@ -466,7 +466,7 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		B7BF81A1292D6A9900118EC6 /* Giphy */ = {
+		B7BF81A1292D6A9900118EC6 /* Trending */ = {
 			isa = PBXGroup;
 			children = (
 				B717BEE1292B5D9100BC3544 /* Details */,
@@ -474,7 +474,7 @@
 				B717BEA8292A22F400BC3544 /* GiphyFlowCoordinator.swift */,
 				B717BEAC292A256D00BC3544 /* GiphyFlowFactory.swift */,
 			);
-			path = Giphy;
+			path = Trending;
 			sourceTree = "<group>";
 		};
 		B7BF81A4292D6FE600118EC6 /* API */ = {
@@ -490,17 +490,17 @@
 		B7BF81A5292D70AE00118EC6 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				B7BF81A6292D70BA00118EC6 /* Giphy */,
+				B7BF81A6292D70BA00118EC6 /* Trending */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
 		};
-		B7BF81A6292D70BA00118EC6 /* Giphy */ = {
+		B7BF81A6292D70BA00118EC6 /* Trending */ = {
 			isa = PBXGroup;
 			children = (
 				B7BF81A7292D70C200118EC6 /* List */,
 			);
-			path = Giphy;
+			path = Trending;
 			sourceTree = "<group>";
 		};
 		B7BF81A7292D70C200118EC6 /* List */ = {
