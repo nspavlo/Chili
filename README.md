@@ -2,11 +2,15 @@
 
 ![main workflow](https://github.com/nspavlo/Chili/actions/workflows/main.yml/badge.svg)
 
+🧙 Welcome Traveler!
+
 ## Getting Started
 **GiphyLookup** uses [Swift Package Manager](https://www.swift.org/package-manager/) to manage build dependencies and [MINT](https://github.com/yonaskolb/Mint) to install and run [Swift Lint](https://github.com/realm/SwiftLint) and [Swift Format](https://github.com/nicklockwood/SwiftFormat).
 
 ## Installation
 Launch `GiphyLookup.xcodeproj` and run the `GiphyLookupApplication` scheme on a simulator or iOS device.
+
+> 🚨 Usually I would create a separate `Secrets.xcconfig` that's added to `.gitignore` to store secrets w/o exposing them to the internet. For this assignment `api_key` is included in the source. My ⚽ was to reduce any additional steps needed to build and run the project.
 
 ## Main Modules
 Application is separated in two schemes:
