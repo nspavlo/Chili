@@ -17,6 +17,7 @@ final class GiphyListController: GiphyListViewModelOutput {
     var onListChange: (() -> Void)?
 
     private(set) var items: GiphyListItemViewModels = []
+    private(set) var hasMorePages = false
 
     private let giphyFetcher: GiphyFetchable
     private var giphyFetcherCancellable: Combine.Cancellable?
@@ -26,7 +27,6 @@ final class GiphyListController: GiphyListViewModelOutput {
     private var currentQuerySubjectCancelable: Combine.Cancellable?
 
     private var offset: UInt = 0
-    private var hasMorePages = false
     private var currentSearchQuery: SearchQuery?
     private var data = [GIF]()
 
@@ -165,7 +165,6 @@ private extension GiphyListController {
                 }
             }
             receiveValue: { response in
-                print("didLoadNextPag ->e: \(response.pagination.offset)")
                 self.appendNewPage(from: response)
                 self.onListChange?()
             }

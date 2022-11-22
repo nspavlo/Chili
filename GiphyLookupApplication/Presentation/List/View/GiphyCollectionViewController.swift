@@ -10,36 +10,6 @@ import UIKit
 // MARK: Initialization
 
 final class GiphyCollectionViewController: UICollectionViewController {
-    typealias DataSource = UICollectionViewDiffableDataSource<Int, GiphyListItemViewModel>
-    typealias Snapshot = NSDiffableDataSourceSnapshot<Int, GiphyListItemViewModel>
-
-    private lazy var dataSource: DataSource = {
-        let dataSource = DataSource(
-            collectionView: collectionView,
-            cellProvider: { collectionView, indexPath, viewModel -> UICollectionViewCell? in
-                if indexPath.row == self.viewModel.items.count - 1 {
-                    self.viewModel.didLoadNextPage()
-                }
-
-                let cell = collectionView.dequeueReusableCell(for: indexPath) as GiphyCollectionViewCell
-                cell.configure(with: viewModel)
-                return cell
-            }
-        )
-
-        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
-            guard kind == UICollectionView.elementKindSectionFooter else {
-                return nil
-            }
-
-            return collectionView.dequeueReusableSupplementaryView(
-                ofKind: kind,
-                for: indexPath
-            ) as ActivityIndicatorCollectionReusableView
-        }
-        return dataSource
-    }()
-
     private let viewModel: GiphyListViewModel
 
     init(viewModel: GiphyListViewModel, collectionViewLayout: UICollectionViewLayout) {
@@ -63,6 +33,17 @@ final class GiphyCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
         setup()
     }
+
+    // MARK: Data Source
+
+    private enum Sections: Hashable {
+        case list
+    }
+
+    private typealias DataSource = UICollectionViewDiffableDataSource<Sections, GiphyListItemViewModel>
+    private typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<Sections, GiphyListItemViewModel>
+
+    private lazy var dataSource: DataSource = makeListDataSource()
 }
 
 // MARK: Setup
@@ -72,8 +53,8 @@ private extension GiphyCollectionViewController {
         setupRefreshControlForScrollView()
         setupCollectionView()
         setupViewBindings()
-        viewModel.onAppear()
         setupDataSourceSnapshot()
+        viewModel.onAppear()
     }
 
     func setupRefreshControlForScrollView() {
@@ -108,8 +89,8 @@ private extension GiphyCollectionViewController {
     }
 
     func setupDataSourceSnapshot() {
-        var snapshot = Snapshot()
-        snapshot.appendSections([0])
+        var snapshot = DataSourceSnapshot()
+        snapshot.appendSections([.list])
         snapshot.appendItems(viewModel.items)
         dataSource.apply(snapshot, animatingDifferences: false)
     }
@@ -126,13 +107,40 @@ private extension GiphyCollectionViewController {
 // MARK: UICollectionViewDataSource
 
 extension GiphyCollectionViewController {
+    private func makeListDataSource() -> DataSource {
+        let dataSource = DataSource(
+            collectionView: collectionView,
+            cellProvider: { collectionView, indexPath, viewModel -> UICollectionViewCell? in
+                if indexPath.row == self.viewModel.items.count - 1 {
+                    self.viewModel.didLoadNextPage()
+                }
+
+                let cell = collectionView.dequeueReusableCell(for: indexPath) as GiphyCollectionViewCell
+                cell.configure(with: viewModel)
+                return cell
+            }
+        )
+
+        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
+            guard kind == UICollectionView.elementKindSectionFooter else {
+                return nil
+            }
+
+            return collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                for: indexPath
+            ) as ActivityIndicatorCollectionReusableView
+        }
+        return dataSource
+    }
+
     override func collectionView(
         _: UICollectionView,
         willDisplaySupplementaryView view: UICollectionReusableView,
         forElementKind _: String,
         at _: IndexPath
     ) {
-        if let view = view as? ActivityIndicatorCollectionReusableView {
+        if let view = view as? ActivityIndicatorCollectionReusableView, viewModel.hasMorePages {
             view.startAnimating()
         }
     }

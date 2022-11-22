@@ -24,6 +24,7 @@ protocol GiphyListViewModelOutput: AnyObject {
     var onListChange: (() -> Void)? { get set }
 
     var items: GiphyListItemViewModels { get }
+    var hasMorePages: Bool { get }
 }
 
 typealias GiphyListViewModel = GiphyListViewModelInput & GiphyListViewModelOutput
