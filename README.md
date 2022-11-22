@@ -17,7 +17,7 @@ Application is separated in two schemes:
 -  GiphyLookup
 -  GiphyLookupApplication 
 
-This way, bigness logic stays platform agnostic, modular and fast to build and test. On every pull-reuqest, both modules will be built and tested.
+> This way, bigness logic stays platform agnostic, modular and fast to build and test. On every pull-reuqest, both modules will be built and tested.
 
 ## Data
 
