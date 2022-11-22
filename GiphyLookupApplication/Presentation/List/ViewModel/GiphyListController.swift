@@ -59,15 +59,7 @@ private extension GiphyListController {
     func appendNewPage(from response: GiphyResponse) {
         hasMorePages = hasMorePages(with: response.pagination)
         data.append(contentsOf: response.data)
-        items = data.map { data in
-            let preview = data.images.fixedWidth
-            return .init(
-                title: data.title,
-                width: preview.width.rawValue,
-                height: preview.height.rawValue,
-                url: preview.url
-            )
-        }
+        items = data.map(GiphyListItemViewModel.init)
     }
 
     func hasMorePages(with pagination: Pagination) -> Bool {
@@ -173,6 +165,15 @@ private extension GiphyListController {
 
     func urls(for indexes: [Int]) -> [URL] {
         indexes.map { items[$0].url }
+    }
+}
+
+// MARK: Adapter
+
+private extension GiphyListItemViewModel {
+    init(_ data: GIF) {
+        let preview = data.images.fixedWidth
+        self.init(title: data.title, width: preview.width.rawValue, height: preview.height.rawValue, url: preview.url)
     }
 }
 
