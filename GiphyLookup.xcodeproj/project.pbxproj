@@ -13,6 +13,7 @@
 		B715F380292BFE36001F91E1 /* GiphyFetcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B715F37F292BFE36001F91E1 /* GiphyFetcherTests.swift */; };
 		B715F382292C0372001F91E1 /* GiphyResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B715F381292C0372001F91E1 /* GiphyResponseTests.swift */; };
 		B715F384292C0546001F91E1 /* PartlyInvalidImages.json in Resources */ = {isa = PBXBuildFile; fileRef = B715F383292C0546001F91E1 /* PartlyInvalidImages.json */; };
+		B715F386292D097A001F91E1 /* GiphyListViewModelActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B715F385292D097A001F91E1 /* GiphyListViewModelActions.swift */; };
 		B717BE102928022B00BC3544 /* GiphyLookup.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B717BE072928022A00BC3544 /* GiphyLookup.framework */; };
 		B717BE262928026C00BC3544 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE252928026C00BC3544 /* AppDelegate.swift */; };
 		B717BE282928026C00BC3544 /* AppSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B717BE272928026C00BC3544 /* AppSceneDelegate.swift */; };
@@ -111,6 +112,7 @@
 		B715F37F292BFE36001F91E1 /* GiphyFetcherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphyFetcherTests.swift; sourceTree = "<group>"; };
 		B715F381292C0372001F91E1 /* GiphyResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphyResponseTests.swift; sourceTree = "<group>"; };
 		B715F383292C0546001F91E1 /* PartlyInvalidImages.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = PartlyInvalidImages.json; sourceTree = "<group>"; };
+		B715F385292D097A001F91E1 /* GiphyListViewModelActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphyListViewModelActions.swift; sourceTree = "<group>"; };
 		B717BE072928022A00BC3544 /* GiphyLookup.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GiphyLookup.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B717BE0F2928022B00BC3544 /* GiphyLookupTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GiphyLookupTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B717BE232928026C00BC3544 /* GiphyLookupApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GiphyLookupApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -387,6 +389,7 @@
 				B717BEDA292A8CDB00BC3544 /* GiphyListController.swift */,
 				B717BE912929123700BC3544 /* GiphyListItemViewModel.swift */,
 				B717BEDC292A902400BC3544 /* GiphyListViewModel.swift */,
+				B715F385292D097A001F91E1 /* GiphyListViewModelActions.swift */,
 				B715F373292BC746001F91E1 /* GiphySearchViewModel.swift */,
 			);
 			path = ViewModel;
@@ -791,6 +794,7 @@
 				B717BE97292914CC00BC3544 /* PinterestCollectionViewLayout.swift in Sources */,
 				B717BED6292A7F1100BC3544 /* GiphySearchContainerViewController.swift in Sources */,
 				B717BEA329294F5200BC3544 /* ActivityIndicatorCollectionReusableView+Reusable.swift in Sources */,
+				B715F386292D097A001F91E1 /* GiphyListViewModelActions.swift in Sources */,
 				B717BEDB292A8CDB00BC3544 /* GiphyListController.swift in Sources */,
 				B717BE262928026C00BC3544 /* AppDelegate.swift in Sources */,
 				B717BE8D29290E6200BC3544 /* GiphyCollectionViewController.swift in Sources */,

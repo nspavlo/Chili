@@ -81,7 +81,7 @@ private extension GiphyCollectionViewController {
 
 private extension GiphyCollectionViewController {
     @objc func handleControlValueChanged(_: UIRefreshControl) {
-        viewModel.didRequestDataUpdate()
+        viewModel.didRequestListUpdate()
     }
 }
 

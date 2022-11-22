@@ -9,10 +9,11 @@
 
 protocol GiphyListViewModelInput {
     func onAppear()
+    func didRequestListUpdate()
+    func didSelectItem(at index: Int)
+
     func startPrefetch(at indexes: [Int])
     func stopPrefetch(at indexes: [Int])
-    func didRequestDataUpdate()
-    func didSelectItem(at index: Int)
 }
 
 // MARK: Output

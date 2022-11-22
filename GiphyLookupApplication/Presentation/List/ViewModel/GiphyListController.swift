@@ -10,43 +10,22 @@ import Foundation
 import GiphyLookup
 import Nuke
 
-// MARK: Actions
-
-final class GiphyListViewModelActions {
-    let showDetails: (GIF) -> Void
-    let showError: (Error) -> Void
-
-    init(showDetails: @escaping (GIF) -> Void, showError: @escaping (Error) -> Void) {
-        self.showDetails = showDetails
-        self.showError = showError
-    }
-}
-
 // MARK: Initialization
 
 final class GiphyListController: GiphyListViewModelOutput {
     var onLoadingStateChange: ((Bool) -> Void)?
     var onListChange: (() -> Void)?
 
-    var items: GiphyListItemViewModels {
-        response?.data.map { data in
-            let preview = data.images.fixedWidth
-            return .init(
-                title: data.title,
-                width: preview.width.rawValue,
-                height: preview.height.rawValue,
-                url: preview.url
-            )
-        } ?? []
-    }
+    private(set) var items: GiphyListItemViewModels = []
 
     private let giphyFetcher: GiphyFetchable
     private var giphyFetcherCancellable: Combine.Cancellable?
     private let actions: GiphyListViewModelActions
-    private var response: GiphyResponse?
 
     private let currentQuerySubject = PassthroughSubject<SearchQuery, Never>()
     private var currentQuerySubjectCancelable: Combine.Cancellable?
+
+    private var response: GiphyResponse?
 
     private let prefetcher = ImagePrefetcher()
 
@@ -77,24 +56,44 @@ extension GiphyListController: GiphyListViewModelInput {
         fetchTrendingList()
     }
 
-    func startPrefetch(at indexes: [Int]) {
-        let urls = indexes.map { items[$0].url }
-        prefetcher.startPrefetching(with: urls)
-    }
-
-    func stopPrefetch(at indexes: [Int]) {
-        let urls = indexes.map { items[$0].url }
-        prefetcher.stopPrefetching(with: urls)
-    }
-
-    func didRequestDataUpdate() {
+    func didRequestListUpdate() {
         fetchTrendingList()
     }
 
     func didSelectItem(at index: Int) {
-        if let item = response?.data[index] {
-            actions.showDetails(item)
+        guard let response else {
+            fatalError("Can't select non loaded item")
         }
+
+        let item = response.data[index]
+        actions.showDetails(item)
+    }
+
+    func startPrefetch(at indexes: [Int]) {
+        prefetcher.startPrefetching(with: urls(for: indexes))
+    }
+
+    func stopPrefetch(at indexes: [Int]) {
+        prefetcher.stopPrefetching(with: urls(for: indexes))
+    }
+}
+
+// MARK: GiphySearchViewModel
+
+extension GiphyListController: GiphySearchViewModel {
+    var title: String { .trendingListTitle }
+    var searchBarPlaceholder: String { .searchBarPlaceholder }
+
+    func updateSearchQuery(_ query: String?) {
+        guard let query = SearchQuery(query) else {
+            return
+        }
+
+        currentQuerySubject.send(query)
+    }
+
+    func dismissSearchQuery() {
+        fetchTrendingList()
     }
 }
 
@@ -123,28 +122,22 @@ private extension GiphyListController {
                 }
             }
             receiveValue: { response in
+                self.items = response.data.map { data in
+                    let preview = data.images.fixedWidth
+                    return .init(
+                        title: data.title,
+                        width: preview.width.rawValue,
+                        height: preview.height.rawValue,
+                        url: preview.url
+                    )
+                }
                 self.response = response
                 self.onListChange?()
             }
     }
-}
 
-// MARK: GiphySearchViewModel
-
-extension GiphyListController: GiphySearchViewModel {
-    var title: String { .trendingListTitle }
-    var searchBarPlaceholder: String { .searchBarPlaceholder }
-
-    func updateSearchQuery(_ query: String?) {
-        guard let query = SearchQuery(query) else {
-            return
-        }
-
-        currentQuerySubject.send(query)
-    }
-
-    func dismissSearchQuery() {
-        fetchTrendingList()
+    func urls(for indexes: [Int]) -> [URL] {
+        indexes.map { items[$0].url }
     }
 }
 
