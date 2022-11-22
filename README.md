@@ -41,6 +41,8 @@ For example `SearchQuery` is used instead of plain `String`.
 
 ## Contributing
 
+We can’t always see our own blind spots, and it’s a gift to have them pointed out by another perspective. 
+
 Pull requests are welcome. For major changes, please open an issue first
 to discuss what you would like to change.
 
