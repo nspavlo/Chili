@@ -43,11 +43,8 @@ final class PinterestCollectionViewLayout: UICollectionViewLayout {
 
         cellLayoutAttributes.removeAll(keepingCapacity: false)
         supplementaryViewLayoutAttributes.removeAll(keepingCapacity: false)
-        columnHeights.removeAll(keepingCapacity: false)
 
-        for _ in 0 ..< columnCount {
-            columnHeights.append(0)
-        }
+        columnHeights = Array(repeating: 0, count: columnCount)
 
         let columnWidth = contentViewWidth / CGFloat(columnCount)
         var offsets: [CGPoint] = (0 ..< columnCount)
