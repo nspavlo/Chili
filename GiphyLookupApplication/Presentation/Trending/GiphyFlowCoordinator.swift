@@ -34,6 +34,7 @@ private extension GiphyFlowCoordinator {
     func showTrendingSearchList() {
         let viewModel = GiphyListController(
             giphyFetcher: giphyFlowFactory.createGiphyFetcher(),
+            imagePrefetcher: giphyFlowFactory.createImagePrefetcher(),
             actions: GiphyListViewModelActions(showDetails: showDetails(for:), showError: showErrorAlert(_:))
         )
 

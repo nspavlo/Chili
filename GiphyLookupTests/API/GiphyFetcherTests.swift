@@ -13,7 +13,7 @@ import XCTest
 // MARK: XCTestCase
 
 final class GiphyFetcherTests: XCTestCase {
-    func test_init_shouldNotExecuteAnyRequests() {
+    func test_requests_whenInitialized_shouldNotExecuteAnyRequests() {
         let (_, spy) = makeSystemComponentsUnderTest()
 
         XCTAssertEqual(spy.requests.count, 0)

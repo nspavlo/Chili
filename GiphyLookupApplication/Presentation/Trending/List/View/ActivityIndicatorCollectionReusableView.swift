@@ -33,6 +33,10 @@ final class ActivityIndicatorCollectionReusableView: UICollectionReusableView {
 // MARK: Public Methods
 
 extension ActivityIndicatorCollectionReusableView {
+    var isAnimating: Bool {
+        activityIndicatorView.isAnimating
+    }
+
     func startAnimating() {
         activityIndicatorView.startAnimating()
     }

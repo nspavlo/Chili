@@ -59,13 +59,12 @@ private extension GiphyCollectionViewController {
 
     func setupRefreshControlForScrollView() {
         let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(handleControlValueChanged(_:)), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(handleControlValueChanged), for: .valueChanged)
         collectionView.refreshControl = refreshControl
     }
 
     func setupCollectionView() {
         collectionView.contentInset = UIEdgeInsets(inset: 2)
-        collectionView.isPrefetchingEnabled = true
         collectionView.prefetchDataSource = self
         collectionView.register(cellType: GiphyCollectionViewCell.self)
         collectionView.register(
@@ -107,7 +106,7 @@ private extension GiphyCollectionViewController {
 // MARK: Actions
 
 private extension GiphyCollectionViewController {
-    @objc func handleControlValueChanged(_: UIRefreshControl) {
+    @objc func handleControlValueChanged() {
         viewModel.didRequestListUpdate()
     }
 }

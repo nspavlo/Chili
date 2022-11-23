@@ -8,11 +8,17 @@
 import Combine
 import Foundation
 import GiphyLookup
-import Nuke
+
+// MARK: Protocol
+
+protocol ImagePrefetchable {
+    func startPrefetching(with urls: [URL])
+    func stopPrefetching(with urls: [URL])
+}
 
 // MARK: Initialization
 
-final class GiphyListController: GiphyListViewModelOutput {
+final class GiphyListController<S: Scheduler>: GiphyListViewModelOutput {
     var onLoadingStateChange: ((Bool) -> Void)?
     var onListChange: (() -> Void)?
 
@@ -21,19 +27,27 @@ final class GiphyListController: GiphyListViewModelOutput {
 
     private let giphyFetcher: GiphyFetchable
     private var giphyFetcherCancellable: Combine.Cancellable?
-    private let actions: GiphyListViewModelActions
 
     private let currentQuerySubject = CurrentValueSubject<SearchQuery?, Never>(nil)
     private var currentQuerySubjectCancelable: Combine.Cancellable?
 
+    private let imagePrefetcher: ImagePrefetchable
+    private let actions: GiphyListViewModelActions
+    private let scheduler: S
+
     private var offset: UInt = 0
     private var data = [GIF]()
 
-    private let prefetcher = ImagePrefetcher()
-
-    init(giphyFetcher: GiphyFetchable, actions: GiphyListViewModelActions) {
+    init(
+        giphyFetcher: GiphyFetchable,
+        imagePrefetcher: ImagePrefetchable,
+        actions: GiphyListViewModelActions,
+        scheduler: S = DispatchQueue.main
+    ) {
         self.giphyFetcher = giphyFetcher
+        self.imagePrefetcher = imagePrefetcher
         self.actions = actions
+        self.scheduler = scheduler
         setup()
     }
 }
@@ -87,8 +101,11 @@ extension GiphyListController: GiphyListViewModelInput {
     }
 
     func didRequestListUpdate() {
-        guard currentQuerySubject.value == nil else { return }
+        guard currentQuerySubject.value == nil else {
+            return
+        }
 
+        onLoadingStateChange?(true)
         resetContentPagination()
         fetchTrendingList(offset: offset)
     }
@@ -98,11 +115,11 @@ extension GiphyListController: GiphyListViewModelInput {
     }
 
     func startPrefetch(at indexes: [Int]) {
-        prefetcher.startPrefetching(with: urls(for: indexes))
+        imagePrefetcher.startPrefetching(with: urls(for: indexes))
     }
 
     func stopPrefetch(at indexes: [Int]) {
-        prefetcher.stopPrefetching(with: urls(for: indexes))
+        imagePrefetcher.stopPrefetching(with: urls(for: indexes))
     }
 
     private func urls(for indexes: [Int]) -> [URL] {
@@ -154,7 +171,7 @@ private extension GiphyListController {
 
     func fetch(from giphyFetcher: GiphyFetchable.Publisher) -> AnyCancellable {
         giphyFetcher
-            .receive(on: DispatchQueue.main)
+            .receive(on: scheduler)
             .sink { completion in
                 self.onLoadingStateChange?(false)
 
