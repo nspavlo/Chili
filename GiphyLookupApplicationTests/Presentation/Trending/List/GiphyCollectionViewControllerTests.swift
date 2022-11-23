@@ -182,6 +182,7 @@ private extension GiphyCollectionViewControllerTests {
         let sut = GiphyCollectionViewController(
             viewModel: GiphyListController(
                 giphyFetcher: spy,
+                imagePrefetcher: spy,
                 actions: GiphyListViewModelActions(
                     showDetails: { _ in },
                     showError: { _ in }

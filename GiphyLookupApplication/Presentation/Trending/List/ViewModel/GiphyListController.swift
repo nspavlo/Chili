@@ -8,7 +8,13 @@
 import Combine
 import Foundation
 import GiphyLookup
-import Nuke
+
+// MARK: Protocol
+
+protocol ImagePrefetchable {
+    func startPrefetching(with urls: [URL])
+    func stopPrefetching(with urls: [URL])
+}
 
 // MARK: Initialization
 
@@ -21,22 +27,25 @@ final class GiphyListController<S: Scheduler>: GiphyListViewModelOutput {
 
     private let giphyFetcher: GiphyFetchable
     private var giphyFetcherCancellable: Combine.Cancellable?
-    private let actions: GiphyListViewModelActions
-    private let scheduler: S
 
     private let currentQuerySubject = CurrentValueSubject<SearchQuery?, Never>(nil)
     private var currentQuerySubjectCancelable: Combine.Cancellable?
 
+    private let imagePrefetcher: ImagePrefetchable
+    private let actions: GiphyListViewModelActions
+    private let scheduler: S
+
     private var offset: UInt = 0
     private var data = [GIF]()
 
-    private let prefetcher = ImagePrefetcher()
-
     init(
         giphyFetcher: GiphyFetchable,
-        actions: GiphyListViewModelActions, scheduler: S = DispatchQueue.main
+        imagePrefetcher: ImagePrefetchable,
+        actions: GiphyListViewModelActions,
+        scheduler: S = DispatchQueue.main
     ) {
         self.giphyFetcher = giphyFetcher
+        self.imagePrefetcher = imagePrefetcher
         self.actions = actions
         self.scheduler = scheduler
         setup()
@@ -106,11 +115,11 @@ extension GiphyListController: GiphyListViewModelInput {
     }
 
     func startPrefetch(at indexes: [Int]) {
-        prefetcher.startPrefetching(with: urls(for: indexes))
+        imagePrefetcher.startPrefetching(with: urls(for: indexes))
     }
 
     func stopPrefetch(at indexes: [Int]) {
-        prefetcher.stopPrefetching(with: urls(for: indexes))
+        imagePrefetcher.stopPrefetching(with: urls(for: indexes))
     }
 
     private func urls(for indexes: [Int]) -> [URL] {

@@ -9,6 +9,7 @@ import Combine
 import Foundation
 
 @testable import GiphyLookup
+@testable import GiphyLookupApplication
 
 // MARK: Initialization
 
@@ -42,6 +43,13 @@ extension GiphyFetchableSpy: GiphyFetchable {
         return fetchTrendingListPassthroughSubject
             .eraseToAnyPublisher()
     }
+}
+
+// MARK: ImagePrefetchable
+
+extension GiphyFetchableSpy: ImagePrefetchable {
+    func startPrefetching(with _: [URL]) {}
+    func stopPrefetching(with _: [URL]) {}
 }
 
 // MARK: Fake Behaviour

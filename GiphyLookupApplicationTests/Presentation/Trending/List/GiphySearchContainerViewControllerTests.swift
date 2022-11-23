@@ -98,6 +98,7 @@ final class GiphySearchContainerViewControllerTests: XCTestCase {
         let viewController = GiphySearchContainerViewController(
             viewModel: GiphyListController(
                 giphyFetcher: spy,
+                imagePrefetcher: spy,
                 actions: GiphyListViewModelActions(
                     showDetails: { _ in },
                     showError: { _ in }

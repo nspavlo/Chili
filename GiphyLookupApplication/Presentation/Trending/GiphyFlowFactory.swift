@@ -6,6 +6,7 @@
 //
 
 import GiphyLookup
+import Nuke
 import UIKit.UINavigationController
 
 // MARK: Initialization
@@ -28,4 +29,12 @@ extension GiphyFlowFactory {
     func createGiphyFetcher() -> GiphyFetchable {
         GiphyFetcher(httpClient: httpClient)
     }
+
+    func createImagePrefetcher() -> ImagePrefetchable {
+        ImagePrefetcher()
+    }
 }
+
+// MARK: Adapter
+
+extension ImagePrefetcher: ImagePrefetchable {}
