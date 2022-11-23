@@ -29,6 +29,16 @@ final class AppSceneDelegateTests: XCTestCase {
 
         XCTAssertEqual(sut.window?.rootViewController, navigationController)
     }
+
+    func test_scene_whenStartingUpApplicationFlowCoordinator_shouldSetupInitialViewController() {
+        let navigationController = UINavigationController()
+        let sut = makeSystemComponentsUnderTest(with: UIWindow())
+
+        sut.setupMainWindow(with: navigationController)
+        sut.setupAppFlowCoordinator(with: navigationController)
+
+        XCTAssertTrue(sut.window?.rootViewController?.children.first is GiphySearchContainerViewController)
+    }
 }
 
 // MARK: -
