@@ -21,7 +21,10 @@ final class GiphyFetchableSpy {
 
     private(set) var fetchListPassthroughSubject = PassthroughSubject<GiphyResponse, GiphyError>()
     private(set) var fetchTrendingListPassthroughSubject = PassthroughSubject<GiphyResponse, GiphyError>()
+
     private(set) var requests = [Request]()
+    private(set) var imageRequests = [URL]()
+    private(set) var canceledImageRequests = [URL]()
 
     var fetchListCompletion: (() -> Void)?
     var fetchTrendingListCompletion: (() -> Void)?
@@ -48,8 +51,13 @@ extension GiphyFetchableSpy: GiphyFetchable {
 // MARK: ImagePrefetchable
 
 extension GiphyFetchableSpy: ImagePrefetchable {
-    func startPrefetching(with _: [URL]) {}
-    func stopPrefetching(with _: [URL]) {}
+    func startPrefetching(with url: [URL]) {
+        imageRequests.append(contentsOf: url)
+    }
+
+    func stopPrefetching(with url: [URL]) {
+        canceledImageRequests.append(contentsOf: url)
+    }
 }
 
 // MARK: Fake Behaviour

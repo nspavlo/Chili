@@ -139,6 +139,45 @@ extension GiphyCollectionViewControllerTests {
     }
 }
 
+// MARK: Image Prefetch
+
+extension GiphyCollectionViewControllerTests {
+    func test_imageLoading_whenImageNearVisible_shouldPreloadImage() {
+        let urls = [
+            URL(string: "http://a-url.com")!,
+            URL(string: "http://b-url.com")!,
+        ]
+
+        let (sut, spy) = makeSystemComponentsUnderTest()
+        sut.loadViewIfNeeded()
+
+        spy.completeTrendingFetch(withEntries: makeEntries(with: urls))
+        XCTAssertEqual(spy.imageRequests, [])
+
+        let index = 0
+        sut.simulateEntryCellPrefetch(at: index)
+        XCTAssertEqual(spy.imageRequests, [urls[index]])
+    }
+
+    func test_imageLoading_whenImageLeavesNearVisible_shouldCancelImagePreload() {
+        let urls = [
+            URL(string: "http://a-url.com")!,
+            URL(string: "http://b-url.com")!,
+        ]
+
+        let (sut, spy) = makeSystemComponentsUnderTest()
+        sut.loadViewIfNeeded()
+
+        spy.completeTrendingFetch(withEntries: makeEntries(with: urls))
+        XCTAssertEqual(spy.canceledImageRequests, [])
+
+        let index = 0
+        sut.simulateEntryCellPrefetch(at: index)
+        sut.simulateEntryCellPrefetchCancelation(at: index)
+        XCTAssertEqual(spy.canceledImageRequests, [urls[index]])
+    }
+}
+
 // MARK: Expectations
 
 private extension GiphyCollectionViewControllerTests {
@@ -207,8 +246,18 @@ private extension GiphyCollectionViewControllerTests {
         GIF(title: title, images: Images(fixedWidth: makeAnyPreview(), original: makeAnyPreview()))
     }
 
+    func makePreview(withURL url: URL) -> Preview {
+        Preview(url: url, width: .init(rawValue: 100), height: .init(rawValue: 100))
+    }
+
     func makeAnyPreview() -> Preview {
-        Preview(url: URL(string: "http://any-url.com")!, width: .init(rawValue: 100), height: .init(rawValue: 100))
+        makePreview(withURL: URL(string: "http://any-url.com")!)
+    }
+
+    func makeEntries(with urls: [URL]) -> [GIF] {
+        urls.map {
+            GIF(title: "", images: .init(fixedWidth: makePreview(withURL: $0), original: makePreview(withURL: $0)))
+        }
     }
 }
 
@@ -265,6 +314,18 @@ private extension UICollectionViewController {
     func renderedItemCell(at row: Int) -> UICollectionViewCell {
         let indexPath = IndexPath(row: row, section: renderedItemsSection)
         return collectionView.dataSource!.collectionView(collectionView, cellForItemAt: indexPath)
+    }
+}
+
+extension UICollectionViewController {
+    func simulateEntryCellPrefetch(at index: Int) {
+        let indexPath = IndexPath(row: index, section: renderedItemsSection)
+        collectionView.prefetchDataSource?.collectionView(collectionView, prefetchItemsAt: [indexPath])
+    }
+
+    func simulateEntryCellPrefetchCancelation(at index: Int) {
+        let indexPath = IndexPath(row: index, section: renderedItemsSection)
+        collectionView.prefetchDataSource?.collectionView?(collectionView, cancelPrefetchingForItemsAt: [indexPath])
     }
 }
 
