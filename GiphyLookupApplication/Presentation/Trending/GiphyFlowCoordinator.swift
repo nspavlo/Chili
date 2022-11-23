@@ -65,6 +65,7 @@ private extension GiphyFlowCoordinator {
             message: error.localizedDescription,
             preferredStyle: .alert
         )
+        viewController.addAction(UIAlertAction(title: "Dismiss", style: .cancel))
         navigationController.present(viewController, animated: true)
     }
 }
