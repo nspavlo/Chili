@@ -12,7 +12,7 @@ import Nuke
 
 // MARK: Initialization
 
-final class GiphyListController: GiphyListViewModelOutput {
+final class GiphyListController<S: Scheduler>: GiphyListViewModelOutput {
     var onLoadingStateChange: ((Bool) -> Void)?
     var onListChange: (() -> Void)?
 
@@ -22,6 +22,7 @@ final class GiphyListController: GiphyListViewModelOutput {
     private let giphyFetcher: GiphyFetchable
     private var giphyFetcherCancellable: Combine.Cancellable?
     private let actions: GiphyListViewModelActions
+    private let scheduler: S
 
     private let currentQuerySubject = CurrentValueSubject<SearchQuery?, Never>(nil)
     private var currentQuerySubjectCancelable: Combine.Cancellable?
@@ -31,9 +32,13 @@ final class GiphyListController: GiphyListViewModelOutput {
 
     private let prefetcher = ImagePrefetcher()
 
-    init(giphyFetcher: GiphyFetchable, actions: GiphyListViewModelActions) {
+    init(
+        giphyFetcher: GiphyFetchable,
+        actions: GiphyListViewModelActions, scheduler: S = DispatchQueue.main
+    ) {
         self.giphyFetcher = giphyFetcher
         self.actions = actions
+        self.scheduler = scheduler
         setup()
     }
 }
@@ -87,8 +92,11 @@ extension GiphyListController: GiphyListViewModelInput {
     }
 
     func didRequestListUpdate() {
-        guard currentQuerySubject.value == nil else { return }
+        guard currentQuerySubject.value == nil else {
+            return
+        }
 
+        onLoadingStateChange?(true)
         resetContentPagination()
         fetchTrendingList(offset: offset)
     }
@@ -154,7 +162,7 @@ private extension GiphyListController {
 
     func fetch(from giphyFetcher: GiphyFetchable.Publisher) -> AnyCancellable {
         giphyFetcher
-            .receive(on: DispatchQueue.main)
+            .receive(on: scheduler)
             .sink { completion in
                 self.onLoadingStateChange?(false)
 

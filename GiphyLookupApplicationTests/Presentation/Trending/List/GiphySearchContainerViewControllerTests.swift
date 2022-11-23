@@ -47,7 +47,7 @@ final class GiphySearchContainerViewControllerTests: XCTestCase {
         searchController.searchBar.text = nil
         sut.updateSearchResults(for: searchController)
 
-        XCTAssertEqual(spy.events.count, 0)
+        XCTAssertEqual(spy.requests.count, 0)
     }
 
     func test_search_whenInputContainsNonEmptyValue_shouldExecuteSearchWithGivenValue() {
@@ -60,7 +60,7 @@ final class GiphySearchContainerViewControllerTests: XCTestCase {
         sut.simulateActiveSearchBarTextInput("Hello")
         wait(for: [expectation], timeout: 0.5)
 
-        XCTAssertEqual(spy.events, [.search(.init("Hello")!)])
+        XCTAssertEqual(spy.requests, [.search(.init("Hello")!)])
     }
 
     func test_search_whenInputChangedMultipleTimes_shouldExecuteSearchDebauncingLastValue() {
@@ -75,7 +75,7 @@ final class GiphySearchContainerViewControllerTests: XCTestCase {
         sut.simulateActiveSearchBarTextInput("Hello")
         wait(for: [expectation], timeout: 0.5)
 
-        XCTAssertEqual(spy.events, [.search(.init("Hello")!)])
+        XCTAssertEqual(spy.requests, [.search(.init("Hello")!)])
     }
 
     func test_search_whenClosed_shouldExecuteTrendingListEndpoint() {
@@ -88,7 +88,7 @@ final class GiphySearchContainerViewControllerTests: XCTestCase {
         sut.simulateInactiveSearchBarTextInput("Hello")
         wait(for: [expectation], timeout: 0.5)
 
-        XCTAssertEqual(spy.events, [.trending])
+        XCTAssertEqual(spy.requests, [.trending(offset: 0)])
     }
 
     private func makeSystemComponentsUnderTest(
@@ -101,46 +101,13 @@ final class GiphySearchContainerViewControllerTests: XCTestCase {
                 actions: GiphyListViewModelActions(
                     showDetails: { _ in },
                     showError: { _ in }
-                )
+                ),
+                scheduler: DispatchQueue.main
             ),
             childViewController: childViewController
         )
         trackForMemoryLeaks(viewController)
         return (viewController, spy)
-    }
-}
-
-// MARK: -
-
-// MARK: Initialization
-
-final class GiphyFetchableSpy {
-    enum EventType: Equatable {
-        case search(GiphyLookup.SearchQuery)
-        case trending
-    }
-
-    private(set) var events = [EventType]()
-
-    var fetchListCompletion: (() -> Void)?
-    var fetchTrendingListCompletion: (() -> Void)?
-}
-
-// MARK: GiphyFetchable
-
-extension GiphyFetchableSpy: GiphyFetchable {
-    func fetchList(offset _: UInt, query: GiphyLookup.SearchQuery) -> GiphyFetchable.Publisher {
-        events.append(.search(query))
-        fetchListCompletion?()
-        return PassthroughSubject<GiphyResponse, GiphyError>()
-            .eraseToAnyPublisher()
-    }
-
-    func fetchTrendingList(offset _: UInt) -> GiphyFetchable.Publisher {
-        events.append(.trending)
-        fetchTrendingListCompletion?()
-        return PassthroughSubject<GiphyResponse, GiphyError>()
-            .eraseToAnyPublisher()
     }
 }
 
