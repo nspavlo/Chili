@@ -7,6 +7,8 @@
 ## Getting Started
 **GiphyLookup** uses [Swift Package Manager](https://www.swift.org/package-manager/) to manage build dependencies and [Mint](https://github.com/yonaskolb/Mint) 🌱 to install and run [Swift Lint](https://github.com/realm/SwiftLint) and [Swift Format](https://github.com/nicklockwood/SwiftFormat).
 
+> **Note**
+> Mint is optional and not required to build and run the application.
 ## Installation
 Launch `GiphyLookup.xcodeproj` and run the `GiphyLookupApplication` scheme on a simulator or iOS device.
 
