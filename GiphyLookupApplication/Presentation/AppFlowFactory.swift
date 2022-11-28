@@ -5,9 +5,8 @@
 //  Created by Jans Pavlovs on 20/11/2022.
 //
 
-import GiphyLookup
-
 import Foundation
+import GiphyLookup
 
 // MARK: Initialization
 
