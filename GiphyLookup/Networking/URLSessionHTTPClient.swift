@@ -31,7 +31,7 @@ extension URLSessionHTTPClient: HTTPClient {
 
     /// - Parameter completion:
     /// The completion handler to call when the insert request is complete.
-    /// This  handler is executed on the background queue.
+    /// This handler is executed on the background queue.
     public func fetch(from url: URL, completion: @escaping CompletionHandler) -> HTTPClientTask {
         let task = session.dataTask(with: url) { data, response, error in
             if let data, let response = response as? HTTPURLResponse {
