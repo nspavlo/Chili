@@ -33,7 +33,7 @@ extension AppSceneDelegate {
             navigationController: navigationController,
             appFlowFactory: AppFlowFactory()
         )
-        coordinator?.start()
+        coordinator!.start()
     }
 }
 
