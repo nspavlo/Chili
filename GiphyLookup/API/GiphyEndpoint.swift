@@ -20,7 +20,7 @@ extension GiphyEndpoint {
     static let key = "D1OIHpdq1qe36SHbpl0hgwQxT1jOluZm"
 
     static func trending(offset: UInt) -> Self {
-      .init(
+        .init(
             path: "/trending",
             queryItems: [
                 URLQueryItem(name: "offset", value: "\(offset)"),
@@ -30,7 +30,7 @@ extension GiphyEndpoint {
     }
 
     static func search(offset: UInt, for query: SearchQuery) -> Self {
-      .init(
+        .init(
             path: "/search",
             queryItems: [
                 URLQueryItem(name: "q", value: query.value),
