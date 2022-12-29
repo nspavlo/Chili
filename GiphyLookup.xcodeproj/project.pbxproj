@@ -171,6 +171,7 @@
 		B7BF81A2292D6CA400118EC6 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		B7BF81A9292D974F00118EC6 /* GiphyCollectionViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphyCollectionViewControllerTests.swift; sourceTree = "<group>"; };
 		B7BF81AC292E099800118EC6 /* GiphyFetchableSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphyFetchableSpy.swift; sourceTree = "<group>"; };
+		B7D35A11295DA3BE00AB9415 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,6 +215,7 @@
 		B717BDFD2928022A00BC3544 = {
 			isa = PBXGroup;
 			children = (
+				B7D35A11295DA3BE00AB9415 /* README.md */,
 				B717BE092928022A00BC3544 /* GiphyLookup */,
 				B717BE132928022B00BC3544 /* GiphyLookupTests */,
 				B717BE242928026C00BC3544 /* GiphyLookupApplication */,
