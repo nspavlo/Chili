@@ -19,13 +19,13 @@ Application is separated in two schemes:
 -  GiphyLookup
 -  GiphyLookupApplication 
 
-> This way, bigness logic stays platform agnostic, modular and fast to build and test. On every pull-reuqest, both modules will be built and tested.
+> This way, bigness logic stays platform agnostic, modular and fast to build and test. On every pull-request, both modules will be built and tested.
 
 ## Data
 
-Unfortunately, the data from bakend APIs isn’t always perfect. By default `JSONDecoder` will discard the whole collection when one of the elements are corrupted. To improve on this, application uses generic `LossyArray<T>` wrapper.
+Unfortunately, the data from backend APIs isn’t always perfect. By default `JSONDecoder` will discard the whole collection when one of the elements are corrupted. To improve on this, application uses generic `LossyArray<T>` wrapper.
 
-Some custom data types are introduced in order to remove assumtions about behaviour.
+Some custom data types are introduced in order to remove assumptions about behaviour.
 ```swift
 public struct SearchQuery {
     let value: String
