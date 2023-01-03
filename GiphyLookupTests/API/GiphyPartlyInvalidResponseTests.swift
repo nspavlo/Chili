@@ -1,5 +1,5 @@
 //
-//  GiphyResponseTests.swift
+//  GiphyPartlyInvalidResponseTests.swift
 //  GiphyLookupTests
 //
 //  Created by Jans Pavlovs on 21/11/2022.
@@ -10,7 +10,7 @@ import XCTest
 
 // MARK: XCTestCase
 
-final class GiphyResponseTests: XCTestCase {
+final class GiphyPartlyInvalidResponseTests: XCTestCase {
     func test_decodingArray_whenOneElementIsInvalid_shouldReturnArrayWithoutInvalidElement() throws {
         let bundle = Bundle(for: type(of: self))
 
